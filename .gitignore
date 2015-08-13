@@ -25,7 +25,10 @@ bld/
 # Visual Studo 2015 cache/options directory
 .vs/
 
-# Web.Release.Config folder
+# Publish
+WebPublish
+
+# Web.Release.Config
 Web.Release.config
 
 # MSTest test Results
