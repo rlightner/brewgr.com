@@ -9,3 +9,4 @@ Steps to Create Database
 3. Run the "YYYYMMDD_initial.sql" file to create all of the tables, views, etc necessary to run the application.
 4. If there are any "YYYYMMDD_update.sql" files in the Build folder, run each of them in order by date.  This will apply any updates that have been made since the initial build was created.
 5. You will need to create a database user, either SQL Auth, or Windows Auth, depending upon what works best for your setup.  (Personally, I recommend running SQL Server Express locally and using Windows Auth)
+6. Make sure your new DB user has read/write/execute access on the database ... for dev purposes, granting them dbowner is easiest. 
