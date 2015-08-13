@@ -1,0 +1,180 @@
+﻿
+@model BrewSessionWaterInfusionViewModel
+
+
+<div id="view-waterInfusion">
+
+    <div class="leftside">
+
+        <h3>Brew Session Specific</h3>
+
+        <div class="form-field">
+            <label for="Grain">
+                Grain (lbs)
+			    <span class="helptip" original-title="The amount of grain in pounds that will be added to the mash. Do not include sugars, honey, molasess, etc. as they do not absorb any liquid.">&nbsp;</span>
+            </label>
+            @Html.DropDownListFor(m => m.Grain, new SelectList(ViewBag.GrainOptions, "Value", "DisplayText", Model.Grain != null ? Model.Grain : null))
+        </div>
+
+        <div class="form-field">
+            <label for="GrainTemperature">
+                Grain Temperature
+			    <span class="helptip" original-title="The temperature of the crushed grain.">&nbsp;</span>
+            </label>
+            @Html.TextBoxFor(m => m.GrainTemperature, new { @class = "TempVal" })
+            @Html.DropDownListFor(m => m.GrainTemperatureUnitId, new SelectList(ViewBag.TempUnitOptions, "Value", "DisplayText", Model.GrainTemperatureUnitId != null ? Model.GrainTemperatureUnitId : null), new { @class = "TempUnit" })
+        </div>
+
+        <div class="form-field">
+            <label for="TotalBoilTime">
+                Total Boil Time (min)
+			    <span class="helptip" original-title="The time the wort will be boiled.">&nbsp;</span>
+            </label>
+            @Html.DropDownListFor(m => m.TotalBoilTime, new SelectList(ViewBag.BoilTimeOptions, "Value", "DisplayText", Model.TotalBoilTime != null ? Model.TotalBoilTime : null))
+        </div>
+
+        <div class="form-field">
+            <label for="WortIntoFermenter">
+                Wort Into Fermenter (gal)
+			    <span class="helptip" original-title="The final amount of wort that will be collected in the fermenter.">&nbsp;</span>
+            </label>
+            @Html.DropDownListFor(m => m.WortIntoFermenter, new SelectList(ViewBag.WortIntoFermenterOptions, "Value", "DisplayText", Model.WortIntoFermenter != null ? Model.WortIntoFermenter : null))
+        </div>
+
+            <div class="form-field">
+            <label for="TargetMashTemperature">
+                Target Mash Temperature
+			    <span class="helptip" original-title="The target teperature for the mash in the mash tun.">&nbsp;</span>
+            </label>
+            @Html.TextBoxFor(m => m.TargetMashTemperature, new { @class = "TempVal" })
+            @Html.DropDownListFor(m => m.TargetMashTemperatureUnitId, new SelectList(ViewBag.TempUnitOptions, "Value", "DisplayText", Model.TargetMashTemperatureUnitId != null ? Model.TargetMashTemperatureUnitId : null), new { @class = "TempUnit" })
+        </div>
+
+        <div class="form-field">
+            <label for="MashThickness">
+                Mash Thickness (qt/lb)
+			    <span class="helptip" original-title="The thickness of the mash, the water to grain ratio in the mash tun. A thick mash would be a low number (i.e. 1.2) and a thin mash would be a high number (i.e. 1.6). An average is 1.33 qt/lb. ">&nbsp;</span>
+            </label>
+            @Html.DropDownListFor(m => m.MashThickness, new SelectList(ViewBag.MashThicknessOptions, "Value", "DisplayText", Model.MashThickness != null ? Model.MashThickness : null))
+        </div>
+        
+        <h3 class="optional-equipment-expand">Equipment (Optional)<img src="/img/less-up-arrow.png" /></h3>
+
+        <div class="optional-equipment">
+
+            <div class="form-field">
+                <label for="BrewKettleTrubLoss">
+                    Brew Kettle Trub Loss (gal)
+				    <span class="helptip" original-title="The amount of dead space in your brew kettle after boil.">&nbsp;</span>
+                </label>
+                @Html.DropDownListFor(m => m.BrewKettleTrubLoss, new SelectList(ViewBag.GallonOptionsSmall, "Value", "DisplayText"))
+            </div>
+
+            <div class="form-field">
+                <label for="WortShrinkage">
+                    Wort Shrinkage (gal)
+				    <span class="helptip" original-title="The amount the boiled wort will shrink when cooling. Average is .2 gallons for a 5 gallon batch.">&nbsp;</span>
+                </label>
+                @Html.DropDownListFor(m => m.WortShrinkage, new SelectList(ViewBag.GallonOptionsSmall, "Value", "DisplayText"))
+            </div>
+
+            <div class="form-field">
+                <label for="MashTunEquipmentLoss">
+                    Mash Tun Equipment Loss (gal)
+				    <span class="helptip" original-title="Amount of dead space in your mash tun and any liquid that doesn't get into the brew kettle.">&nbsp;</span>
+                </label>
+                @Html.DropDownListFor(m => m.MashTunEquipmentLoss, new SelectList(ViewBag.GallonOptionsSmall, "Value", "DisplayText"))
+            </div>
+
+            <div class="form-field">
+                <label for="BoilLoss">
+                    Boil Loss (gal/hour)
+				    <span class="helptip" original-title="Number of gallons that are evaporated during the boil. Average is 1 gallon per hour.">&nbsp;</span>
+                </label>
+                @Html.DropDownListFor(m => m.BoilLoss, new SelectList(ViewBag.GallonOptionsSmall, "Value", "DisplayText"))
+            </div>
+
+            <div class="form-field">
+                <label for="GrainAbsorption">
+                    Grain Absorption (gal/lb)
+				    <span class="helptip" original-title="The amount of water that is absorbed into the grain. Average is .1 to .2 gal/lb.">&nbsp;</span>
+                </label>
+                @Html.DropDownListFor(m => m.GrainAbsorption, new SelectList(ViewBag.GallonOptionsSmall, "Value", "DisplayText"))
+            </div>
+
+            <div class="form-field">
+                <label for="SpargeGrainAbsorption">
+                    Sparge Grain Absorption (gal/lb)
+				    <span class="helptip" original-title="Sometimes you will get some absorption when sparging the grain. Average is .01.">&nbsp;</span>
+                </label>
+                @Html.DropDownListFor(m => m.SpargeGrainAbsorption, new SelectList(ViewBag.GallonOptionsSmall, "Value", "DisplayText"))
+            </div>
+
+        </div>
+
+
+    </div>
+        <div class="rightside">
+
+        <h3>Calculated Totals</h3>
+
+        <div class="form-field">
+            <label for="RunoffVolume">
+                Runoff Volume (gal)
+			    <span class="helptip" original-title=".">&nbsp;</span>
+            </label>
+            <span id="RunoffVolumeLabel">0 Gallons</span>
+        </div>
+
+        <div class="form-field">
+            <label for="TotalWaterNeeded">
+                Total Water Needed (gal)
+			    <span class="helptip" original-title=".">&nbsp;</span>
+            </label>
+            <span id="TotalWaterNeededLabel">0 Gallons</span>
+        </div>
+
+        <div class="form-field">
+            <label for="MashStrikeVolume">
+                Mash/Strike Volume  (gal)
+			    <span class="helptip" original-title=".">&nbsp;</span>
+            </label>
+            <span id="MashStrikeVolumeLabel">0 Gallons</span>
+        </div>
+
+        <div class="form-field">
+            <label for="FirstRunnings">
+                1st Runnings  (gal)
+			    <span class="helptip" original-title=".">&nbsp;</span>
+            </label>
+            <span id="FirstRunningsLabel">0 Gallons</span>
+        </div>
+
+        <div class="form-field">
+            <label for="SpargeVolume">
+                Sparge Volume  (gal)
+			    <span class="helptip" original-title=".">&nbsp;</span>
+            </label>
+            <span id="SpargeVolumeLabel">0 Gallons</span>
+        </div>
+
+        <div class="form-field">
+            <label for="StrikeTemperature">
+                Strike Temperature
+			    <span class="helptip" original-title=".">&nbsp;</span>
+            </label>
+            <span id="StrikeTemperatureLabel">0&deg;</span>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="clearall"></div>
+
+@Html.HiddenFor(m => m.RunOffVolume)
+@Html.HiddenFor(m => m.TotalWaterNeeded)
+@Html.HiddenFor(m => m.MashStrikeVolume)
+@Html.HiddenFor(m => m.FirstRunnings)
+@Html.HiddenFor(m => m.SpargeVolume)
+@Html.HiddenFor(m => m.StrikeTemperature)

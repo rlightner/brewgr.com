@@ -1,0 +1,62 @@
+﻿@using ctorx.Core.Conversion
+@using ctorx.Core.Primitives
+@model RecipeHopViewModel
+
+<tr data-datarow="1">
+    <td>
+        <input type="hidden" data-name="h_Id" data-track="1" value="@Model.Id.WhenNull("{{=Id}}")"  />
+        <input type="hidden" data-name="h_IngId" data-track="1" value="@Model.IngId.WhenNull("{{=IngId}}")"  />
+        <input type="hidden" data-name="h_Rank" data-track="1" value="@Model.Rank.WhenNull("{{=Rank}}")" />
+        <input type="text" data-name="h_Amt" data-track="1" data-scale="1"  data-filter="positiveFloat" value="@Model.Amt.WhenNull("{{=Amt}}")" data-validate="1" />
+    </td>
+    <td>
+        <span data-name="h_Name" class="ingName @(Model.IsCustom() ? "hidden" : "")">@Model.Name.WhenNull("{{=Name}}")</span>
+        <input type="text" data-name="h_CustomName" data-track="1" placeholder="Enter Hop Name" class="@(!Model.IsCustom() ? "hidden" : "") customname" data-validate="1" value="@Model.CustomName" />    
+    </td>
+    <td>
+        <select data-name="h_Type" data-track="1">
+            <option value="Leaf" @(Model.Type == "Leaf" ? " selected=\"selected\"" : "")>Leaf</option>
+            <option value="Pellet" @(Model.Type == "Pellet" ? " selected=\"selected\"" : "")>Pellet</option>
+            <option value="Plug" @(Model.Type == "Plug" ? " selected=\"selected\"" : "")>Plug</option>
+        </select>
+    </td>
+    <td>
+        <select data-name="h_Use" data-track="1">
+            <option value="FirstWort" @(Model.Use == "FirstWort" ? " selected=\"selected\"" : "")>First Wort</option>
+            <option value="Mash" @(Model.Use == "Mash" ? " selected=\"selected\"" : "")>Mash</option>
+            <option value="Boil" @(Model.Use == "Boil" ? " selected=\"selected\"" : "")>Boil</option>
+            <option value="FlameOut" @(Model.Use == "FlameOut" ? " selected=\"selected\"" : "")>Flame Out</option>
+            <option value="DryHop" @(Model.Use == "DryHop" ? " selected=\"selected\"" : "")>Dry Hop</option>
+        </select>
+    </td>
+    <td>
+        <select data-name="h_Min" data-track="1" class="@(Model.Use == "DryHop" ? "hidden" : null)" @(Model.Use == "FirstWort" || Model.Use == "FlameOut" ? " disabled=\"disabled\"" : "")>
+            @for(var i = 0; i <= 180; i++)
+            {
+                <option value="@i" @(Model.Min == i.ToString() ? " selected=\"selected\"" : "")>@i min</option>
+            }
+        </select>
+        <select data-name="h_Day" data-track="1" class="@(Model.Use != "DryHop" ? "hidden" : null)">
+            @for(var i = 0; i <= 60; i++)
+            {
+                <option value="@i" @(Model.Day == i.ToString() ? " selected=\"selected\"" : "")>@i days</option>
+            }
+        </select>
+    </td>
+    <td>
+        <select data-name="h_AA" data-track="1">
+            @for(var i = 0; i <= 250; i++)
+            {
+                var isSelected = Model != null && Model.AA != null && Converter.Convert<decimal>(Model.AA).IsEqualTo((i * .1), .1m);
+                <option value="@((i * .1).ToString("F1"))" @(isSelected ? " selected=selected" : "")>@((i * .1).ToString("F1"))</option>
+            }
+        </select>
+    </td>
+    <td>
+            <span data-name="h_Ibu">@(Model != null && !string.IsNullOrWhiteSpace(Model.Ibu) ? Converter.Convert<double>(Model.Ibu).ToString("F1") : "0")</span>    
+    </td>
+    <td>
+        <img src="@Url.Content("~/img/icons/arrow_ns.png")" data-name="sort" tabindex="-1" alt="" title="Drag to Sort" />
+        <img src="@Url.Content("~/img/icons/delete.png")" data-name="remove" title="Remove" />
+    </td>
+</tr>

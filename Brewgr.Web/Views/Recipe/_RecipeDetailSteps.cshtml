@@ -1,0 +1,22 @@
+﻿@model RecipeViewModel
+
+<div id="instructions" class="groupbox">
+	<span><h3 class="floatleft">Special Instructions</h3></span>
+	<div>
+		@if (Model.Steps.Any())
+		{
+			<ol class="instructions">
+				@foreach (var step in Model.Steps)
+				{
+					<li itemprop="recipeInstructions">@step.Text</li>
+				}
+			</ol>
+		}
+		else
+		{	
+            <div class="content">
+                <b>This recipe does not have any special instructions.</b>
+            </div>
+		}
+	</div>
+</div>

@@ -1,0 +1,50 @@
+﻿@using ctorx.Core.Primitives
+@model RecipeFermentableViewModel
+
+<tr data-datarow="1">
+    <td>
+        <input type="hidden" data-name="f_Id" data-track="1" value="@Model.Id.WhenNull("{{=Id}}")"  />
+        <input type="hidden" data-name="f_IngId" data-track="1" value="@Model.IngId.WhenNull("{{=IngId}}")"  />
+        <input type="hidden" data-name="f_Rank" data-track="1" value="@Model.Rank.WhenNull("{{=Rank}}")" />
+        <span data-name="f_Per">@Model.Per%</span>
+    </td>
+    <td>
+        <input type="text" data-name="f_Amt" data-track="1" data-scale="1" data-filter="positiveFloat" value="@Model.Amt.WhenNull("{{=Amt}}")" data-validate="1" />
+    </td>
+    <td>
+        <span data-name="f_Name" class="ingName @(Model.IsCustom() ? "hidden" : "")">@Model.Name.WhenNull("{{=Name}}")</span>
+        <input type="text" data-name="f_CustomName" data-track="1" placeholder="Enter Fermentable Name" class="@(!Model.IsCustom() ? "hidden" : "") customname" data-validate="1" value="@Model.CustomName" />    
+    </td>
+    <td>
+        <select data-name="f_Ppg" data-track="1">
+            <option value="0">0</option>
+            @for(var i = 1; i <= 50; i++)
+            {
+                <option value="@i" @(Model.Ppg == i.ToString() ? " selected=\"selected\"" : "")>@i</option>
+            }
+        </select>
+        @*<select data-name="f_Ppg" data-track="1" data-range="0,50,1" data-rangeval="@Model.Ppg" />*@
+    </td>
+    <td>
+        <select data-name="f_L" data-track="1">
+            <option value="0">0</option>
+            @for(var i = 1; i <= 550; i++)
+            {
+                <option value="@i" @(Model.L == i.ToString() ? " selected=\"selected\"" : "")>@i</option>
+            }
+        </select>
+        @*<select data-name="f_L" data-track="1" data-range="0,550,1" data-rangeval="@Model.L" />*@
+    </td>
+    <td>
+        <select data-name="f_Use" data-track="1">
+            <option value="Mash" @(Model.Use == "Mash" ? " selected=\"selected\"" : "")>Mash</option>
+            <option value="Extract" @(Model.Use == "Extract" ? " selected=\"selected\"" : "")>Extract</option>
+            <option value="Steep" @(Model.Use == "Steep" ? " selected=\"selected\"" : "")>Steep</option>
+            <option value="Late" @(Model.Use == "Late" ? " selected=\"selected\"" : "")>Late</option>
+        </select>
+    </td>
+    <td>
+        <img src="@Url.Content("~/img/icons/arrow_ns.png")" data-name="sort" tabindex="-1" alt="" title="Drag to Sort" />
+        <img src="@Url.Content("~/img/icons/delete.png")" data-name="remove" title="Remove" />
+    </td>
+</tr>

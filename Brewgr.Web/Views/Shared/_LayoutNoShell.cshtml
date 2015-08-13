@@ -1,0 +1,16 @@
+@using ctorx.Core.Messaging
+@{
+	Layout = "~/Views/Shared/_CoreLayout.cshtml";
+}
+
+<style type="text/css">body{ background: none; }</style>
+
+@*  Middle Part Start *@
+<div id="middle-wrapper">
+	@Html.Partial("_SiteMessages", ViewBag.Messages as IList<IMessage>)
+	@RenderBody()
+    @section Scripts
+    {
+        @RenderSection("Scripts", false)
+    }
+</div>

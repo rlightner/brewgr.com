@@ -1,0 +1,23 @@
+﻿@model LoginViewModel
+
+<div class="form-field">
+    @Html.LabelFor(m => m.EmailAddress, "Email Address") 
+    <div class="clearall"></div>
+    <span>@Html.TextBoxFor(m => m.EmailAddress) </span>
+</div>
+<div class="form-field">
+	@Html.LabelFor(m => m.Password, "Password") 
+	<div class="clearall"></div>
+	<span>@Html.TextBoxFor(m => m.Password, new {type = "password"}) </span>
+</div>
+
+<input type="submit" class="button button_green" value="Login" />
+
+@if (ViewBag.LoginViaDialog == true)
+{
+    <a href="@Url.Action("reset-password", "Auth", new {LoginViaDialog = true})">Forgot your password?</a>
+}
+else
+{
+    <a href="@Url.Action("reset-password", "Auth")">Forgot your password?</a>
+}

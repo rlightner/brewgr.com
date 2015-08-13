@@ -1,0 +1,20 @@
+﻿@model BrewSessionWaterInfusionViewModel
+
+<script type="text/javascript">
+    $(function() {
+        WaterCalculator.initialize();
+
+        $("#Grain").val("@String.Format("{0:0.0}", Model.Grain)");
+        $("#WortIntoFermenter").val("@String.Format("{0:0.00}", Model.WortIntoFermenter)");
+        $("#MashThickness").val("@String.Format("{0:0.00}", Model.MashThickness)");
+
+        $("#BrewKettleTrubLoss").val("@String.Format("{0:0.00}", Model.BrewKettleTrubLoss)");
+        $("#WortShrinkage").val("@String.Format("{0:0.00}", Model.WortShrinkage)");
+        $("#MashTunEquipmentLoss").val("@String.Format("{0:0.00}", Model.MashTunEquipmentLoss)");
+        $("#BoilLoss").val("@String.Format("{0:0.00}", Model.BoilLoss)");
+        $("#GrainAbsorption").val("@String.Format("{0:0.00}", Model.GrainAbsorption)");
+        $("#SpargeGrainAbsorption").val("@String.Format("{0:0.00}", Model.SpargeGrainAbsorption)");
+
+        WaterCalculator.calculate();
+    });
+</script>

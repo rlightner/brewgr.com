@@ -1,0 +1,46 @@
+﻿@model RecipeViewModel
+
+<div class="groupbox">
+	<span><h3 class="floatleft">Yeast</h3></span>
+	<div class="nopadding">
+		<table>
+			@if (Model.Yeasts != null && Model.Yeasts.Any())
+			{
+				<thead>
+					<tr>
+						<td>name</td>
+						<td class="aligncenter">attenuation <span class="helptip" original-title="Apparent attenuation is the percentage of sugars that the yeast will convert into alcohol and carbon dioxide during fermentation">&nbsp;</span> </td>
+					</tr>
+				</thead>
+			}
+			<tbody>
+				@if (Model.Yeasts == null || !Model.Yeasts.Any())
+				{
+					<tr>
+						<td colspan="2">
+							<div class="content">No yeast in this recipe</div>
+						</td>
+					</tr>
+				}
+				else
+				{
+					foreach (var recipeYeast in Model.Yeasts)
+					{	
+						<tr>
+							<td><span class="bold" itemprop="ingredients">@recipeYeast.Name</span></td>
+							<td class="aligncenter">@recipeYeast.GetAttenuationPercent()%</td>
+						</tr>
+					}
+				}
+			</tbody>
+			@if (Model.Yeasts != null && Model.Yeasts.Any())
+			{
+				<tfoot>
+					<tr>
+						<td colspan="2">&nbsp; </td>
+					</tr>
+				</tfoot>
+			}
+		</table>
+	</div>
+</div>

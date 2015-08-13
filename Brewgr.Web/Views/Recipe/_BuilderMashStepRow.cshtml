@@ -1,0 +1,35 @@
+﻿@using ctorx.Core.Primitives
+
+@model RecipeMashStepViewModel
+
+<tr data-datarow="1">
+    <td>
+        <input type="hidden" data-name="m_Id" data-track="1" value="@Model.Id.WhenNull("{{=Id}}")" />
+        <input type="hidden" data-name="m_IngId" data-track="1" value="@Model.IngId.WhenNull("{{=IngId}}")" />
+        <input type="hidden" data-name="m_Rank" data-track="1" value="@Model.Rank.WhenNull("{{=RankId}}")" />
+        <span data-name="m_Name" class="ingName @(Model.IsCustom() ? "hidden" : "")">@Model.Name.WhenNull("{{=Name}}")</span>
+        <input type="text" data-name="m_CustomName" data-track="1" placeholder="Enter Mash Step" class="customname @(!Model.IsCustom() ? "hidden" : "")" data-validate="1" value="@Model.CustomName" />
+    </td>
+    <td>
+        <select data-name="m_Heat" data-track="1">
+            <option value="Decoction" @(Model.Heat == "Decoction" ? " selected=\"selected\"" : "")>Decoction</option>
+            <option value="Direct Heat" @(Model.Heat == "Direct Heat" ? " selected=\"selected\"" : "")>Direct Heat</option>
+            <option value="Infusion" @(Model.Heat == "Infusion" ? " selected=\"selected\"" : "")>Infusion</option>
+        </select>
+    </td>
+    <td>
+        <input type="text" data-name="m_Temp" data-track="1" data-validate="1" data-filter="positiveFloat" value="@Model.Temp.WhenNull("{{=Temp}}")" />
+    </td>
+    <td>
+        <select data-name="m_Time" data-track="1">
+            @for(var i = 0; i <= 180; i++)
+            {
+                <option value="@i" @(Model.Time == i.ToString() ? " selected=\"selected\"" : "")>@i min</option>
+            }
+        </select>
+    </td>
+    <td>
+        <img src="@Url.Content("~/img/icons/arrow_ns.png")" data-name="sort" tabindex="-1" alt="" title="Drag to Sort" />
+        <img src="@Url.Content("~/img/icons/delete.png")" data-name="remove" title="Remove" />
+    </td>
+</tr>

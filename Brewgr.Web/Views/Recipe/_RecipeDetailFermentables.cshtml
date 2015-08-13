@@ -1,0 +1,62 @@
+﻿@using ctorx.Core.Conversion
+@using ctorx.Core.Formatting
+@model RecipeViewModel
+           
+@{
+    var totalAmount = Model.Fermentables.Sum(x => Converter.Convert<double>(x.Amt));
+}
+
+<div class="groupbox">
+	<span><h3 class="floatleft">Fermentables</h3></span>
+	<div class="nopadding">
+		<table>
+			@if (Model.Fermentables != null && Model.Fermentables.Any())
+			{
+				<thead>
+					<tr>
+						<td class="aligncenter">%</td>
+						<td class="aligncenter">@(Model.UnitType == "s" ? "lb" : "kg")</td>
+						<td>fermentable</td>
+						<td class="aligncenter">ppg <span class="helptip" original-title="PPG: Points per pound per gallon - This is the gravity points that you would get if you extracted 100% of the sugars from a pound of this malt into a gallon of water">&nbsp;</span></td>
+						<td class="paddingleft40">L <span class="helptip" original-title="Degrees Lovibond is a measurement of the color that a malt or sugar will contribute to a batch of homebrew beer">&nbsp;</span></td>
+						<td class="aligncenter">usage <span class="helptip" original-title="Indicates how the fermentable is used.  All grain brewers will typically select mash while extract brewers will typically select extract or steep.  For fermentables added late in the boil such as sugar, select late (late addition).">&nbsp;</span></td>
+					</tr>
+				</thead>
+			}
+			<tbody>
+				@if (Model.Fermentables == null || !Model.Fermentables.Any())
+				{
+					<tr>
+						<td colspan="6">
+							<div class="content">No fermentables in this recipe</div>
+						</td>
+					</tr>
+				}
+				else
+				{
+					foreach (var recipeFermentable in Model.Fermentables)
+					{
+						<tr>
+							<td class="aligncenter"><span data-name="f-percent">@recipeFermentable.Per%</span></td>
+							<td class="aligncenter">@(recipeFermentable.Amt.Trim().Length > 0 ? recipeFermentable.Amt : "0")</td>
+							<td><span class="bold" itemprop="ingredients">@recipeFermentable.Name</span></td>
+							<td class="aligncenter">@recipeFermentable.Ppg</td>
+							<td class="paddingleft40"><div class="srm-circ srm@(Converter.Convert<int>(recipeFermentable.L) > 40 ? "Black" : Converter.Convert<int>(recipeFermentable.L) == 1 ? "White" : recipeFermentable.L)" ></div>   @recipeFermentable.L&deg;</td>
+							<td class="aligncenter">@HumanReadableFormatter.AddSpacesToPascalCaseString(recipeFermentable.Use)</td>
+						</tr>
+					}
+				}
+			</tbody>
+			@if (Model.Fermentables != null && Model.Fermentables.Any())
+			{
+				<tfoot>
+					<tr>
+						<td id="f-percent"></td>
+						<td id="f-pound-total" class="aligncenter">@totalAmount.ToString().TrimEnd('0') @(Model.UnitType == "s" ? "lb" : "kg")</td>
+						<td colspan="4"></td>
+					</tr>
+				</tfoot>
+			}
+		</table>
+	</div>
+</div>

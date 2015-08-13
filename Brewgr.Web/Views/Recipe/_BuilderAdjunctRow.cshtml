@@ -1,0 +1,49 @@
+﻿@using ctorx.Core.Primitives
+
+@model RecipeOtherViewModel
+
+<tr data-datarow="1">
+    <td>
+        <input type="hidden" data-name="o_Id" data-track="1" value="@Model.Id.WhenNull("{{=Id}}")" />
+        <input type="hidden" data-name="o_IngId" data-track="1" value="@Model.IngId.WhenNull("{{=IngId}}")" />
+        <input type="hidden" data-name="o_Rank" data-track="1" value="@Model.Rank.WhenNull("{{=RankId}}")" />
+        <input type="text" value="@Model.Amt.WhenNull("{{=Amt}}")" data-name="o_Amt" data-scale="1" data-track="1" data-filter="positiveFloat" data-validate="1" />
+    </td>
+    <td>
+        <select data-name="o_Unit" @(ViewData["UnitType"] == "s" ? " data-track=1" : "") data-unit="s">
+            <option value="each" data-aunit="each">each</option>
+            <option value="lb" data-aunit="kg" @(Model.Unit == "lb" ? " selected=\"selected\"" : "")>lb</option>
+            <option value="oz" data-aunit="kg" @(Model.Unit == "oz" ? " selected=\"selected\"" : "")>oz</option>
+            <option value="floz" data-aunit="ml" @(Model.Unit == "floz" ? " selected=\"selected\"" : "")>floz</option>
+            <option value="gal" data-aunit="l" @(Model.Unit == "gal" ? " selected=\"selected\"" : "")>gal</option>
+            <option value="pt" data-aunit="l" @(Model.Unit == "pt" ? " selected=\"selected\"" : "")>pt</option>
+            <option value="qt" data-aunit="l" @(Model.Unit == "qt" ? " selected=\"selected\"" : "")>qt</option>
+            <option value="tbsp" data-aunit="ml" @(Model.Unit == "tbsp" ? " selected=\"selected\"" : "")>tbsp</option>
+            <option value="tsp" data-aunit="ml" @(Model.Unit == "tsp" ? " selected=\"selected\"" : "")>tsp</option>
+        </select>
+        <select data-name="o_Unit" @(ViewData["UnitType"] == "m" ? " data-track=1" : "") data-unit="m">
+            <option value="each" data-aunit="each">each</option>
+            <option value="kg" data-aunit="oz" @(Model.Unit == "kg" ? " selected=\"selected\"" : "")>kg</option>
+            <option value="l" data-aunit="gal" @(Model.Unit == "l" ? " selected=\"selected\"" : "")>L</option>
+            <option value="ml" data-aunit="tsp" @(Model.Unit == "ml" ? " selected=\"selected\"" : "")>ml</option>
+        </select>
+    </td>
+    <td>
+        <span data-name="o_Name" class="ingName @(Model.IsCustom() ? "hidden" : "")">@Model.Name.WhenNull("{{=Name}}")</span>
+        <input type="text" data-name="o_CustomName" data-track="1" placeholder="Enter Ingredient Name" class="customname @(!Model.IsCustom() ? "hidden" : "")" data-validate="1" value="@Model.CustomName" />
+    </td>
+    <td>
+        <select data-name="o_Use" data-track="1">
+            <option value="Mash" @(Model.Use == "Mash" ? " selected=\"selected\"" : "")>Mash</option>
+            <option value="Boil" @(Model.Use == "Boil" ? " selected=\"selected\"" : "")>Boil</option>
+            <option value="FlameOut" @(Model.Use == "FlameOut" ? " selected=\"selected\"" : "")>Flame Out</option>
+            <option value="Primary" @(Model.Use == "Primary" ? " selected=\"selected\"" : "")>Primary</option>
+            <option value="Secondary" @(Model.Use == "Secondary" ? " selected=\"selected\"" : "")>Secondary</option>
+            <option value="Bottle" @(Model.Use == "Bottle" ? " selected=\"selected\"" : "")>Bottle/Keg</option>
+        </select>
+    </td>
+    <td>
+        <img src="@Url.Content("~/img/icons/arrow_ns.png")" data-name="sort" tabindex="-1" alt="" title="Drag to Sort" />
+        <img src="@Url.Content("~/img/icons/delete.png")" data-name="remove" title="Remove" />
+    </td>
+</tr>

@@ -1,0 +1,9 @@
+﻿@model IList<ctorx.Core.Messaging.IMessage>
+<div class="messages @(!Model.Any() ? "hidden" : "")">
+	<ul>
+		@foreach(var message in Model)
+		{
+		    <li class="@message.Type.ToString().ToLower()">@Html.Raw(message.Text)</li>
+		}
+	</ul>
+</div>

@@ -1,0 +1,52 @@
+﻿@using ctorx.Core.Conversion
+@using ctorx.Core.Formatting
+@model RecipeViewModel
+
+<div class="groupbox">
+	<span><h3 class="floatleft">Mash Steps</h3></span>
+	<div class="nopadding">
+		<table>
+			@if (Model.MashSteps != null && Model.MashSteps.Any())
+			{
+				<thead>
+					<tr>
+						<td>type</td>
+						<td class="aligncenter">heat</td>
+						<td class="aligncenter">temp &deg;@(Model.UnitType == "s" ? "F" : "C")</td>
+						<td class="aligncenter">time</td>
+					</tr>
+				</thead>
+			}
+			<tbody>
+				@if (Model.MashSteps == null || !Model.MashSteps.Any())
+				{
+					<tr>
+						<td colspan="4">
+							<div class="content">No Mash Steps in this Recipe</div>
+						</td>
+					</tr>
+					}
+				else
+				{
+                    foreach (var mashStep in Model.MashSteps)
+					{
+						<tr>
+							<td class="bold">@mashStep.Name</td>
+							<td class="aligncenter">@mashStep.Heat</td>
+							<td class="aligncenter">@mashStep.Temp</td>
+							<td class="aligncenter">@mashStep.Time minutes</td>
+						</tr>
+					}
+				}
+			</tbody>
+			@if (Model.MashSteps != null && Model.MashSteps.Any())
+			{
+				<tfoot>
+					<tr>
+						<td colspan="4">&nbsp; </td>
+					</tr>
+				</tfoot>
+			}
+		</table>
+	</div>
+</div>

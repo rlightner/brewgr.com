@@ -1,0 +1,16 @@
+﻿@model bool
+@{
+    Layout = "~/Views/Shared/_LayoutNoShell.cshtml";
+
+    var title = Model ? "Thank You!" : "Uh Oh, You've Sent Too Much Feedback";
+    var message = Model ? "We appreciate you taking the time to let us know your thoughts.  Happy Brewing!"
+        : "We've received too many submissions from your IP Address in too short of a time.  Please try again later.";
+}
+           
+<div id="view-feedbackreceived" class="modal">
+    <h2>@title</h2>
+    <p>@message</p>
+    
+    <a href="#" id="FeedbackClose" class="button button_green">Close Window</a>
+
+</div>

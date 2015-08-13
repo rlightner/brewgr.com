@@ -1,0 +1,26 @@
+﻿@model PageableViewModel
+
+@if(Model.Pager.PageCount > 1)
+{
+    <div class="pager">
+        @if(Model.Pager.PageCount > 1)
+        {
+            <div class="links">
+                @if (!Model.Pager.IsFirstPage())
+                {
+                    <a href="@Model.GetPreviousPageUrl()" class="previous button button_black" rel="prev"><< Back</a>
+                }
+
+                @if(!Model.Pager.IsFirstPage() && !Model.Pager.IsLastPage())
+                {
+                    <div class="width200 inline-block">&nbsp;</div>
+                }
+
+                @if(!Model.Pager.IsLastPage())
+				{
+				    <a href="@Model.GetNextPageUrl()" class="next button button_black" rel="next">Next >></a>
+				}
+            </div>
+        }
+    </div>
+}

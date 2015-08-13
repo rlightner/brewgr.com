@@ -1,0 +1,26 @@
+﻿@using ctorx.Core.Conversion
+@using ctorx.Core.Primitives
+@model RecipeYeastViewModel
+
+<tr data-datarow="1">
+    <td>
+        <input type="hidden" data-name="y_Id" data-track="1" value="@Model.Id.WhenNull("{{=Id}}")"  />
+        <input type="hidden" data-name="y_IngId" data-track="1" value="@Model.IngId.WhenNull("{{=IngId}}")"  />
+        <input type="hidden" data-name="y_Rank" data-track="1" value="@Model.Rank.WhenNull("{{=Rank}}")" />
+        <span data-name="y_Name" class="ingName @(Model.IsCustom() ? "hidden" : "")">@Model.Name.WhenNull("{{=Name}}")</span>
+        <input type="text" data-name="y_CustomName" data-track="1" placeholder="Enter Yeast Name" class="@(!Model.IsCustom() ? "hidden" : "") customname" data-validate="1" value="@Model.CustomName" />
+    </td>
+    <td>
+        <select data-name="y_Atten" data-track="1">
+            @for(var i = 30; i <= 90; i++)
+            {
+                var isSelected = Model != null && Model.Atten != null && (Converter.Convert<double>(Model.Atten) * 100).IsEqualTo(i, .01);
+                <option value="0.@i" @(isSelected ? " selected=\"selected\"" : "")>@i%</option>
+            }
+        </select>
+    </td>
+    <td>
+        <img src="@Url.Content("~/img/icons/arrow_ns.png")" data-name="sort" tabindex="-1" alt="" title="Drag to Sort" />
+        <img src="@Url.Content("~/img/icons/delete.png")" data-name="remove" title="Remove" />
+    </td>
+</tr>

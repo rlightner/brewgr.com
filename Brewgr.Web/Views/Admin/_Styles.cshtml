@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "_Styles";
+}
+
+<h3>Styles</h3>
+
+<div>
+
+    @using (Html.BeginForm("UploadStyle", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    { 
+        <label for="stylefile">XML Style File:</label><input type="file" id="stylefile" name="stylefile" /><br /><br />
+        <input type="submit" name="Upload" value="Upload" /><br /><br />
+    }
+
+    @if (TempData["StyleJSON"] != null)
+    { 
+        <text>@TempData["StyleJSON"]</text>
+    }
+
+</div>

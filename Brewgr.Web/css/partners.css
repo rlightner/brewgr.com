@@ -1,0 +1,49 @@
+﻿/* ---- [ Layout Overrides ] ------------------------------------ */
+    #middle-wrapper { background-color: #fff; padding: 10px; width: 940px; border-right: solid 1px #eee; border-left: solid 1px #eee; }
+    #footer { margin-top: 0; }
+
+/* ---- [ General ] ------------------------------------ */
+	#partner-wrapper .primary { width: 545px; font-size: 14px; }
+	#partner-wrapper .compliment { width: 336px; }
+	#partner-wrapper span p { margin-top: 4px; margin-left: 4px; font-size: 11px; line-height: 14px; color: #999; }
+	#partner-wrapper span p.inline { display: inline-block !important; vertical-align: middle; margin-top: 2px; width: 230px !important;}
+	#partner-wrapper select { font-size: 14px; }
+	#partner-wrapper textarea { width: 345px; height: 100px; font-size: 12px; }
+
+/* ---- [ Dashboard ] ------------------------------------ */
+	#view-partnerdashboard #partner-info ul li { margin-bottom: 4px; }
+	#view-partnerdashboard #partner-info ul li span { display: inline-block; width: 100px; font-weight: bold; }
+	#view-partnerdashboard #partner-info .settings-link { color: #666; }
+	#view-partnerdashboard #partner-info .settings-link:link span { text-decoration: underline; }
+	#view-partnerdashboard #partner-info .settings-link:hover span { text-decoration: none; }
+
+	#view-partnerdashboard ul li a.service-link { color: #666; text-decoration: underline; }
+	#view-partnerdashboard ul li a.service-link:hover { text-decoration: none; }
+
+	#view-partnerdashboard ul.services { list-style-image: url(../img/icons/bricks.png); margin-left: 24px; }
+	#view-partnerdashboard ul.services li { padding-left: 4px; margin: 4px 0; color: #333; }
+	#view-partnerdashboard ul.services li a { text-decoration: underline; color: #666; font-size: 12px; }
+	#view-partnerdashboard ul.services li a:hover { text-decoration: none; }
+
+/* ---- [ Partner Settings ] ------------------------------------ */
+	#view-partnersettings .form-field label { width: 145px; padding-top: 6px; vertical-align: top; }
+	#view-partnersettings .form-field span p { width: 270px; }
+
+	#view-partnersettings .message-wrapper {  }
+	#view-partnersettings #Name { width: 275px; }
+	#view-partnersettings #ContactName { width: 275px; }	
+	#view-partnersettings #ContactPostalCode, #view-partnersettings #ContactPhone, #view-partnersettings #ContactFax  { width: 100px; }
+	#view-partnersettings #ContactStateProvince, #view-partnersettings #ContactCity { width: 150px; }
+
+/* ---- [ Send To Shop Settings ] ------------------------------------ */
+	#view-sendtoshopsettings .form-field label { width: 160px; margin-right: 25px; padding-top: 6px; vertical-align: top; }
+	#view-sendtoshopsettings .form-field span p { width: 270px; }
+	#view-sendtoshopsettings #DeliveryEmailAddress { width: 275px; }
+	#view-sendtoshopsettings select { width: 110px; }
+	#view-sendtoshopsettings .form-field span p.wide { width: 320px; }
+
+/* ---- [ Send To Shop Settings ] ------------------------------------ */
+	#view-sendtoshopings { }
+	#view-sendtoshopings .ingGroup { margin-bottom: 18px; }
+	#view-sendtoshopings .ingList { width: 890px; padding: 4px 0 12px 12px; border: solid 1px #aaa; height: 150px; overflow-y: scroll; }
+	#view-sendtoshopings .selector { margin-top: 5px; }

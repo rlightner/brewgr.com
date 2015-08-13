@@ -1,0 +1,48 @@
+﻿  
+@model IList<RecipeStepViewModel>
+
+<div class="groupbox">
+	<span>
+		<h3>Special Instructions</h3>
+	</span>
+    <div>        
+        <table data-name="s_table" class="dataTable">
+            <thead>
+                <tr>
+                    <td colspan="3">
+                        <p class="groupheading">Enter any specific brewing steps needed to reproduce this recipe.</p>
+		                <span>Examples: steep specialty grains at 168F for 20 minutes, Ferment at 68F for 14 days, etc.</span>
+                    </td>
+                </tr>        
+            </thead>
+            <tbody>
+                @if(Model.Any())
+                {
+                    foreach(var step in Model)
+                    {
+                        @Html.Partial("_BuilderStepRow", step)
+                    }   
+                }
+                @if(Model.Count < 3)
+                {
+                    for(var i = Model.Count + 1; i <= 3; i++)
+                    {
+                        @Html.Partial("_BuilderStepRow", new RecipeStepViewModel { Id = "0", Rank = i.ToString() })
+                    }
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <div class="margintop5">
+                            <a href="#" data-name="s_add"><img src="@Url.Content("~/img/icons/add.png")" /> Add Another Step</a>
+                        </div>
+                        <div class="margintop10">
+                            <span class="fine-print">NOTE: You can also press TAB from the last step in the list to create a new step quickly</span>
+                        </div>                    
+                    </td>
+                </tr>                
+            </tfoot>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+﻿@model RecipeViewModel
+
+<div id="comments">
+    @if (Model.CommentWrapperViewModel.CommentViewModels.Count > 0 || ViewBag.ActiveUser != null)
+    {
+        <h3 class="commentheader">Comments</h3>
+        @Html.Partial("_Comments", Model.CommentWrapperViewModel)
+    }
+</div>

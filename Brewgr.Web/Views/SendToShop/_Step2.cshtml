@@ -1,0 +1,27 @@
+﻿@model SendToShopOrderViewModel
+
+<div id="step-2" class="step hidden">
+    <h2 class="marginbottom5">Tell us a how we can contact you.</h2>
+    <p>We may have questions about your order.  Please tell us the best way to reach you.</p>
+
+    <div class="marginleft10 marginbottom20">
+        <div class="form-field">
+            @Html.LabelFor(m => m.Name, "Your Name")          
+            <span>
+                @Html.TextBoxFor(m => m.Name)
+            </span>
+        </div>
+        <div class="form-field">
+            @Html.LabelFor(m => m.EmailAddress, "Email Address")
+            @Html.TextBoxFor(m => m.EmailAddress)
+        </div>
+        <div class="form-field">
+            @Html.LabelFor(m => m.PhoneNumber, "Phone Number")
+            @Html.TextBoxFor(m => m.PhoneNumber)
+        </div>
+
+    </div>
+
+    <a href="#step-1" data-nav="true" class="button button_gray"><< Back</a>
+    <a href="#step-3" data-nav="true" class="button button_green floatright">Next >></a>
+</div>

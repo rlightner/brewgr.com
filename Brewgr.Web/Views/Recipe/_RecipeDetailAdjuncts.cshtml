@@ -1,0 +1,52 @@
+﻿@using ctorx.Core.Conversion
+@using ctorx.Core.Formatting
+@model RecipeViewModel
+
+<div class="groupbox">
+	<span><h3 class="floatleft">Other Stuff</h3></span>
+	<div class="nopadding">
+		<table>
+			@if (Model.Others != null && Model.Others.Any())
+			{
+				<thead>
+					<tr>
+						<td class="aligncenter">amount </td>
+						<td class="aligncenter">unit</td>
+						<td>name</td>
+						<td class="aligncenter">usage</td>
+					</tr>
+				</thead>
+			}
+			<tbody>
+				@if (Model.Others == null || !Model.Others.Any())
+				{
+					<tr>
+						<td colspan="4">
+							<div class="content">No Other Stuff in this Recipe</div>
+						</td>
+					</tr>
+					}
+				else
+				{
+                    foreach (var recipeAdjunct in Model.Others)
+					{
+						<tr>
+							<td class="aligncenter">@recipeAdjunct.Amt</td>
+							<td class="aligncenter">@recipeAdjunct.Unit</td>
+							<td><span class="bold" itemprop="ingredients">@recipeAdjunct.Name</span></td>
+							<td class="aligncenter">@HumanReadableFormatter.AddSpacesToPascalCaseString(recipeAdjunct.Use)</td>
+						</tr>
+					}
+				}
+			</tbody>
+			@if (Model.Others != null && Model.Others.Any())
+			{
+				<tfoot>
+					<tr>
+						<td colspan="4">&nbsp; </td>
+					</tr>
+				</tfoot>
+			}
+		</table>
+	</div>
+</div>

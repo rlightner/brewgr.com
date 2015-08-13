@@ -1,0 +1,192 @@
+﻿@model BrewSessionViewModel
+
+    <div class="padding18">
+        <div class="floatleft" id="s_waterIn">
+            <div class="summary marginbottom20">
+                <h3>Brew Session Specific</h3>
+                <div class="item">
+                    <label>
+                        Grain Weight
+                        <span class="helptip" original-title="The amount of grain in that will be added to the mash. Do not include sugars, honey, molasess, etc. as they do not absorb any liquid">&nbsp;</span>
+                    </label>
+                    <span>
+                        <input type="text" data-name="s_GrainWeight" value="@Model.GrainWeight" class="wc_trig wc_grain" data-filter="positiveFloat" />
+                        <span data-unit="s">lb</span>
+                        <span data-unit="m">kg</span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>
+                        Grain Temp
+                        <span class="helptip" original-title="The temperature of the crushed grain that will be mashed">&nbsp;</span>
+                    </label>
+                    <span>
+                        <input type="text" data-name="s_GrainTemp" value="@Model.GrainTemp" class="wc_trig wc_grainTemp" data-filter="positiveFloat" />
+                        <span>@Html.Raw("&deg;")<span data-unit="s">F</span><span data-unit="m">C</span></span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>
+                        Total Boil Time
+                        <span class="helptip" original-title="The total amount of time that the wort will be boiled">&nbsp;</span>
+                    </label>
+                    <span>
+                        <input type="text" data-name="s_BoilTime" value="@Model.BoilTime" class="wc_trig wc_boilTime" data-filter="positiveInt" /> <span>minutes</span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>
+                        Wort Into Fermenter
+                        <span class="helptip" original-title="The total volume of wort that will be collected in the fermenter">&nbsp;</span>
+                    </label>
+                    <span>
+                        <input type="text" data-name="s_FermentVolume" value="@Model.FermentVolumeEst" class="wc_trig wc_fermentVol" data-filter="positiveFloat" />
+                        <span data-unit="s">gallons</span>
+                        <span data-unit="m">liters</span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>
+                        Target Mash Temp
+                        <span class="helptip" original-title="The target temperature for the mash in the mash tun">&nbsp;</span>
+                    </label>
+                    <span>
+                        <input type="text" data-name="s_TargetMashTemp" value="@Model.TargetMashTemp" class="wc_trig wc_targetMashTemp" data-filter="positiveFloat" />
+                        <span>@Html.Raw("&deg;")<span data-unit="s">F</span><span data-unit="m">C</span></span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>
+                        Mash Thickness
+                        <span class="helptip" original-title="The thickness of the mash, the water to grain ratio in the mash tun. A thick mash would be a low number (i.e. 1.2) and a thin mash would be a high number (i.e. 1.6). An average is 1.33 qt/lb">&nbsp;</span>
+                    </label>
+                    <span>
+                        <input type="text" data-name="s_MashThickness" value="@Model.MashThickness" class="wc_trig wc_mashThickness" data-filter="positiveFloat" />
+                        <span data-unit="s">qt/lb</span><span data-unit="m">l/kg</span>
+                    </span>
+                </div>
+            </div>
+            <div class="summary marginbottom20">
+                <h3>Equipment Profile</h3>
+                <div class="item">
+                    <label>
+                        Brew Kettle Trub Loss
+                        <span class="helptip" original-title="The amount of dead space in your brew kettle after boil">&nbsp;</span>
+                    </label>
+                    <span>
+                        <input type="text" data-name="s_BrewKettleLoss" value="@Model.BrewKettleLoss" class="wc_trig wc_kettleLoss" data-filter="positiveFloat" />
+                        <span data-unit="s">gallons</span>
+                        <span data-unit="m">liters</span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>
+                        Wort Shrinkage
+                        <span class="helptip" original-title="The amount the boiled wort will shrink when cooled.  Average is .2 gallons for a 5 gallon batch">&nbsp;</span>
+                    </label>
+                    <span>
+                        <input type="text" data-name="s_WortShrinkage" value="@Model.WortShrinkage" class="wc_trig wc_wortShrinkage" data-filter="positiveFloat" />
+                        <span data-unit="s">gallons</span>
+                        <span data-unit="m">liters</span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>
+                        Mash Tun Loss
+                        <span class="helptip" original-title="Amount of dead space in your mash tun and any liquid that doesn't get into your brew kettle">&nbsp;</span>
+                    </label>
+                    <span>
+                        <input type="text" data-name="s_MashTunLoss" value="@Model.MashTunLoss" class="wc_trig wc_mashTunLoss" data-filter="positiveFloat" />
+                        <span data-unit="s">gallons</span>
+                        <span data-unit="m">liters</span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>
+                        Boil Loss
+                        <span class="helptip" original-title="The amount of wort lost to evaporation per hour when boiling.  Average is 1 gallon per hour">&nbsp;</span>
+                    </label>
+                    <span>
+                        <input type="text" data-name="s_BoilLoss" value="@Model.BoilLoss" class="wc_trig wc_boilLoss" data-filter="positiveFloat" />
+                        <span data-unit="s">gallons/hour</span>
+                        <span data-unit="m">liters/hour</span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>
+                        Grain Absorption
+                        <span class="helptip" original-title="The amount of water that is absorbed into the grain during the mash. Average is .1 to .2 gal/lb">&nbsp;</span>
+                    </label>
+                    <span>
+                        <input type="text" data-name="s_MashGrainAbsorption" value="@Model.MashGrainAbsorption" class="wc_trig wc_grainAbsorption" data-filter="positiveFloat" />
+                        <span data-unit="s">gallons/lb</span>
+                        <span data-unit="m">liters/kg</span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>
+                        Sparge Grain Absorption
+                        <span class="helptip" original-title="The amount of water that is absorbed into the grain when sparging. Average is .01">&nbsp;</span>
+                    </label>
+                    <span>
+                        <input type="text" data-name="s_SpargeGrainAbsorption" value="@Model.SpargeGrainAbsorption" class="wc_trig wc_spargeGrainAbsorption" data-filter="positiveFloat" />
+                        <span data-unit="s">gallons/lb</span>
+                        <span data-unit="m">liters/kg</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="floatright" id="s_waterOut">
+            <div class="summary marginbottom20">
+                <h3>Calculated Totals</h3>
+                <div class="item">
+                    <label>Runoff Volume</label>
+                    <span>
+                        <input type="text" data-name="s_BoilVolumeEst" value="@Model.BoilVolumeEst" disabled="disabled" class="wc_runoff" />
+                        <span data-unit="s">gallons</span>
+                        <span data-unit="m">liters</span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>Total Water Needed</label>
+                    <span>
+                        <input type="text" data-name="s_TotalWaterNeeded" value="@Model.TotalWaterNeeded" disabled="disabled" class="wc_totalWater" />
+                        <span data-unit="s">gallons</span>
+                        <span data-unit="m">liters</span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>Mash/Strike Volume</label>
+                    <span>
+                        <input type="text" data-name="s_StrikeWaterVolume" value="@Model.StrikeWaterVolume" disabled="disabled" class="wc_strikeVol" />
+                        <span data-unit="s">gallons</span>
+                        <span data-unit="m">liters</span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>1st Runnings</label>
+                    <span>
+                        <input type="text" data-name="s_FirstRunningsVolume" value="@Model.FirstRunningsVolume" disabled="disabled" class="wc_firstRunnings" />
+                        <span data-unit="s">gallons</span>
+                        <span data-unit="m">liters</span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>Sparge Volume</label>
+                    <span>
+                        <input type="text" data-name="s_SpargeWaterVolume" value="@Model.SpargeWaterVolume" disabled="disabled" class="wc_spargeVol" />
+                        <span data-unit="s">gallons</span>
+                        <span data-unit="m">liters</span>
+                    </span>
+                </div>
+                <div class="item">
+                    <label>Strike Temperature</label>
+                    <span>
+                        <input type="text" data-name="s_StrikeWaterTemp" value="@Model.StrikeWaterTemp" disabled="disabled" class="wc_strikeTemp" />
+                        <span>@Html.Raw("&deg;")<span data-unit="s">F</span><span data-unit="m">C</span></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="clearall"></div>
+    </div>

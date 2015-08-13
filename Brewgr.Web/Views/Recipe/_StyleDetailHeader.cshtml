@@ -1,0 +1,55 @@
+﻿@using System.Web.Configuration
+@model StyleDetailViewModel
+
+@switch (Model.BjcpStyle.SubCategoryId.ToLower())
+{
+    @*case "14b":
+
+        <div class="hero">
+            <div class="intro">
+                <h2>
+                    The Imperial IPA or Double IPA is an American style of beer
+                    which takes the American IPA style and cranks it up a notch
+                </h2>
+                <p>
+                    The addition of more hops is key in an Imperial IPA which leads
+                    to increased bitterness, super hoppy aromas and unique flavors.  The added
+                    bitterness from the hops is balanced through the use of more malts causing these beers
+                    to be much stronger and higher in alcohol content.  The Imperial IPA style continues to
+                    be one of the most popular styles for homebrewers with Imperial IPA recipes that continue
+                    to push the limits of the style.
+                </p>
+            </div>
+            <div class="image">
+                <img src="/img/baby-hop-cones.jpg" alt="Hop Cones">
+            </div>
+            <div class="clearall"></div>
+        </div>
+
+        break;*@
+
+    case "14c":
+
+        <div class="hero">
+            <div class="intro">
+                <h2>
+                    The Imperial IPA or Double IPA is an American style of beer
+                    which takes the American IPA style and cranks it up a notch
+                </h2>
+                <p>
+                    The addition of more hops is key in an Imperial IPA which leads 
+                    to increased bitterness, super hoppy aromas and unique flavors.  The added
+                    bitterness from the hops is balanced through the use of more malts causing these beers
+                    to be much stronger and higher in alcohol content.  The Imperial IPA style continues to
+                    be one of the most popular styles for homebrewers with beer recipes that continue 
+                    to push the limits of this style.
+                </p>
+            </div>
+            <div class="image">
+                <img src="/img/baby-hop-cones.jpg" alt="Hop Cones">
+            </div>
+            <div class="clearall"></div>
+        </div>
+
+        break;
+}

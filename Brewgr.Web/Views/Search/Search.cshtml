@@ -1,0 +1,66 @@
+﻿@model SearchViewModel
+@{
+	var title = "Search results for \"" + Model.SearchTerm + "\"";
+	ViewBag.Title = title;	
+}
+<div id="searchresults-view" class="content">
+	@if (Model.HasResults())
+	{
+		<div id="result-tabs" class="tabs">
+			<div class="tab-inner">
+				<ul class="nav clearfix">
+					<li data-count="@Model.RecipeSummaries.Count"><a href="#tab-tab-1">Recipes (@Model.RecipeSummaries.Count)</a></li>
+					<li data-count="@Model.UserSummaries.Count"><a href="#tab-tab-2">Brewers (@Model.UserSummaries.Count)</a></li>
+					<li data-count="@Model.BlogPosts.Count"><a href="#tab-tab-3">Blog Posts (@Model.BlogPosts.Count)</a></li>
+				</ul>
+				<div id="tab-tab-1" class="tab">
+					@if (Model.RecipeSummaries.Any())
+					{
+						@Html.Partial("_RecipeList", Model.RecipeSummaries)
+					}
+					else
+					{
+						<p>We couldn't find any recipes that match your search terms</p>
+					}
+				</div>
+			    <div id="tab-tab-2" class="tab">
+			        @if (Model.UserSummaries.Any())
+			        {
+                        @Html.Partial("_UserList", Model.UserSummaries)
+			        }
+			        else
+			        {
+			            <p>We couldn't find any brewers that match your search terms</p>
+			        }
+			    </div>
+                <div id="tab-tab-3" class="tab">
+					@if (Model.BlogPosts.Any())
+					{
+						foreach (var blogPost in Model.BlogPosts)
+						{
+							<div class="blogpost@(Model.BlogPosts.IndexOf(blogPost) == Model.BlogPosts.Count - 1 ? " last" : "")">
+								<h4><a href="@blogPost.Url">@blogPost.Title</a></h4>
+								<span class="author">by <a href="@blogPost.AuthorUrl" class="standout">@blogPost.Author</a></span> on @blogPost.DateCreated.ToShortDateString()
+								<div class="preview">
+									@Html.Raw(blogPost.PostContent) ... <a href="@blogPost.Url" class="standout">more</a>
+								</div>
+							</div>
+						}
+					}
+					else
+					{
+						<p>We couldn't find any blog posts that match your search terms</p>
+					}
+				</div>
+			</div>
+		</div>
+	}
+	else
+	{
+		<h2>Sorry, we couldn't find what you were searching for</h2>
+	 
+		<p>
+			Please check that your search term was spelled correctly or try searching using different words. 
+		</p>
+	}
+</div>

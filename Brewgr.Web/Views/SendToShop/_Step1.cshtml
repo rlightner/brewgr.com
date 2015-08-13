@@ -1,0 +1,21 @@
+﻿@model SendToShopOrderViewModel
+
+<div id="step-1" class="step">
+    <h2 class="marginbottom5">How It Works</h2>
+    <p style="font-size: 14px;">
+        You're about to send your recipe <span class="bold">@Model.Recipe.RecipeName</span> to <span class="bold">@Model.Partner.Name</span>.
+    </p>
+            
+    <p>                
+        Over the next few pages we're going to ask a you few questions.  We'll send your information
+        to @Model.Partner.Name so that they can prepare the ingredients for your recipe.  You'll receive a notification once your
+        ingredients are ready for pickup.  You'll need to arrive at the store prepared to pay for your order.
+    </p>
+
+    <div class="marginleft10 marginbottom20">
+
+    </div>
+            
+    <a href="#step-2" data-nav="true" class="button button_green">Start >></a>
+
+</div>
