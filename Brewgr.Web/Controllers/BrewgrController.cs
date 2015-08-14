@@ -70,12 +70,12 @@ namespace Brewgr.Web.Controllers
 					this.AuthenticationService.SignOut();
 					Session.Abandon();
 				}
-
-				// TODO: RE-Enable this at a later date
-				//ViewBag.UserReputation = this.UserService.GetUserReputationScore(this.ActiveUser.UserId);
 			}
 
-			return base.BeginExecuteCore(callback, state);
+            // Site Announcement
+            ViewBag.SiteAnnouncement = "Brewgr is now open source software!  <a href=\"" + @Url.Action("OpenSourceSoftware") + "\">Learn more</a>";
+            
+            return base.BeginExecuteCore(callback, state);
 		}
 
 		/// <summary>

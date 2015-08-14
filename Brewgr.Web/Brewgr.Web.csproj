@@ -349,6 +349,7 @@
     <Content Include="img\features\Sorting.jpg" />
     <Content Include="img\features\Sticky-Facts.jpg" />
     <Content Include="img\features\units.jpg" />
+    <Content Include="img\github.png" />
     <Content Include="img\h-loader.gif" />
     <Content Include="img\hop-cone.jpg" />
     <Content Include="img\irish-moss.jpg" />
@@ -2530,6 +2531,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\RecipeSearch\RecipeFinderResults.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_SiteAnnouncement.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Root\OpenSourceSoftware.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

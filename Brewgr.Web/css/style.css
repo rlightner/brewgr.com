@@ -74,6 +74,12 @@ p{line-height:20px}
 .viewPro a:hover{color:#e1ff7b}
 
 /*------------------------- HEADER -------------------------*/
+#announcement { padding: 12px; width: 100%; font-size: 20px; color: #fff; text-align: center; background-color: #f79646; }
+#announcement a { color: #fff; text-decoration: underline; }
+#announcement a:hover { text-decoration: none; }
+
+
+/*------------------------- HEADER -------------------------*/
 .header-wrapper, .header-wrapper-light{height:462px; width:auto; background:url(../img/top-bg.png) repeat-x}
 .header-wrapper1, .header-wrapper-lightInner{height:173px; width:auto; background:url(../img/top-bg1.png) repeat-x}
 .header-wrapper-light{background:url(../img/top-bg-light.png) repeat-x}

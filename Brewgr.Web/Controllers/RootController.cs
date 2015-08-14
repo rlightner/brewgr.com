@@ -183,6 +183,12 @@ namespace Brewgr.Web.Controllers
             return View();
         }
 
+        [Route("open-source-homebrew-software")]
+	    public ViewResult OpenSourceSoftware()
+        {
+            return View();
+        }
+
 		/// <summary>
 		/// Executes the View for Sitemap
 		/// </summary>
