@@ -485,13 +485,13 @@
 	 .recipe-list .recipe.last, .brewsession-list .brewsession.last { border-bottom: 0px;  } 
 	 .recipe-list .recipe h3, .brewsession-list .brewsession h3 { font-size: 18px; display: inline; margin-bottom: 0; float: none; width: auto; line-height: 18px; background-image: none;}
 	 .recipe-list .recipe h3 a, .brewsession-list .brewsession h3 a { color: #666 !important; }
-	 .recipe-list .recipe .details, .brewsession-list .brewsession .details { padding-top: 2px; }
+	 .recipe-list .recipe .details, .brewsession-list .brewsession .details { padding-top: 2px; margin-left: 100px; }
 	 .recipe-list .recipe .data, .brewsession-list .brewsession .data { margin-top: 4px; font-size: 14px; }
 	 .recipe-list .recipe .actions, .brewsession-list .brewsession .actions { margin-top: 12px; font-size: 14px; }
 	 .recipe-list .recipe .actions .button_small, .brewsession-list .brewsession .actions .button_small { margin-right: 4px; }
 	 .recipe-list .recipe .image, .brewsession-list .brewsession .image { float: left; margin-right: 18px; }
 	 .recipe-list .recipe .image img, .brewsession-list .brewsession .image img { border: solid 1px #ddd; }
-	 .recipe-list .recipe .description, .brewsession-list .brewsession .description { clear: both; font-size: 14px; padding: 12px; }
+	 .recipe-list .recipe .description, .brewsession-list .brewsession .description { clear: both; font-size: 14px; padding: 12px 12px 12px 0px; margin-left: 100px; }
 	 .brewsession-list .brewsession .data .datapoint { margin-right: 5px; vertical-align: middle; }
 	 .brewsession-list .brewsession .data .datapoint * { vertical-align: middle; }
 	
