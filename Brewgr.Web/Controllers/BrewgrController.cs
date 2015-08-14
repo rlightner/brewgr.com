@@ -73,7 +73,7 @@ namespace Brewgr.Web.Controllers
 			}
 
             // Site Announcement
-            ViewBag.SiteAnnouncement = "Brewgr is now open source software!  <a href=\"" + @Url.Action("OpenSourceSoftware") + "\">Learn more</a>";
+            ViewBag.SiteAnnouncement = "Brewgr is now open source software!  <a href=\"/open-source-homebrew-software\">Learn more</a>";
             
             return base.BeginExecuteCore(callback, state);
 		}
