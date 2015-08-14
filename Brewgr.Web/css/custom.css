@@ -121,8 +121,6 @@
 /* ---- [ layout ] ---------------------------------------------> */
 	.title h1, .title h2 { float: left; font-size: 24px; font-weight: normal; width: 600px; vertical-align: middle; max-height: 60px; overflow: hidden;}
 	
-	
-	
 	#middle-wrapper a:link, #middle-wrapper a:active, #middle-wrapper a:visited { color: #888; }
 	#middle-wrapper a:hover { color: #333; text-decoration: underline; }
 	tast
@@ -134,6 +132,9 @@
 	.top-search { position: relative; }
 	.top-search input[type=text] { padding-top: 9px; color: #888; }
 	.top-search input[type=image] { position: absolute; width: 24px; height: 24px; top: -4px; left: 248px; }
+    a.finder-link { position: absolute; top: 45px; right: 20px; font-size: 11px !important; color: #aaa; text-decoration: underline; }
+    a.finder-link:hover { color: #666; text-decoration: none; }
+    #view-home a.finder-link { display: none; }
 	#other-stuff a { color: #fff; display: block; margin-bottom: 4px; margin-left: 4px; }
 	#other-stuff { width: 150px; }
 	#photo-stream { width: 250px; }
