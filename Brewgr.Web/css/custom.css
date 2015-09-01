@@ -142,7 +142,7 @@
 	.auth-choice a#login { color: #ccc; font-size: 12px; font-family: Tahoma, Arial; font-size: 14px; padding-left: 12px; }
 	.auth-choice a#login:hover { color: #eee; text-decoration: underline; }
 	#Dialogs { display: none; }
-    #buildinfo { color: #666; margin-left: 135px; font-size: 11px; }
+    #buildinfo { color: #666; margin-left: 12px; font-size: 11px; }
     #buildinfo:hover { text-decoration: underline; }
 
 /* ---- [ SRM Colors ] ---------------------------------------------> */
