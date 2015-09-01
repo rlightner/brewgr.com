@@ -222,6 +222,7 @@
     <Compile Include="Email\DefaultEmailMessageFactory.cs" />
     <Compile Include="Email\EmailMessageType.cs" />
     <Compile Include="Email\IEmailMessageFactory.cs" />
+    <Compile Include="Email\NewAccountEmailMessage.cs" />
     <Compile Include="Email\PasswordResetEmailMessage.cs" />
     <Compile Include="Email\RecipeCommentEmailMessage.cs" />
     <Compile Include="Global.asax.cs">

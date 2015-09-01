@@ -136,9 +136,13 @@ namespace Brewgr.Web.Controllers
 				var user = this.UserService.RegisterNewUser(signUpViewModel.NewUserFullName, signUpViewModel.NewUserEmailAddress, signUpViewModel.NewUserPassword);
 				unitOfWork.Commit();
 
-				// TODO: We need to send a welcome email
+                // Send the Email Message
+                var newAccountEmailMessage = (NewAccountEmailMessage)this.EmailMessageFactory.Make(EmailMessageType.NewAccount);
 
-				return Mapper.Map(user, new UserSummary());				
+                newAccountEmailMessage.ToRecipients.Add(signUpViewModel.NewUserEmailAddress);
+                this.EmailSender.Send(newAccountEmailMessage);
+
+                return Mapper.Map(user, new UserSummary());				
 			}
 		}
 
@@ -517,8 +521,14 @@ namespace Brewgr.Web.Controllers
 
 					userId = newUser.UserId;
 
-					// Track the Login
-					using (var unitOfWork = this.UnitOfWorkFactory.NewUnitOfWork())
+                    // Send the Email Message
+                    var newAccountEmailMessage = (NewAccountEmailMessage)this.EmailMessageFactory.Make(EmailMessageType.NewAccount);
+
+                    newAccountEmailMessage.ToRecipients.Add(oAuthUserInfo.EmailAddress);
+                    this.EmailSender.Send(newAccountEmailMessage);
+
+                    // Track the Login
+                    using (var unitOfWork = this.UnitOfWorkFactory.NewUnitOfWork())
 					{
 						this.UserLoginService.TrackLogin(userId.Value);
 						unitOfWork.Commit();
