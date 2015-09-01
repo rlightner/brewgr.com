@@ -32,6 +32,9 @@ namespace Brewgr.Web.Email
 				case EmailMessageType.ContactForm:
 					return new ContactFormEmailMessage(this.WebSettings, this.UserHostAddressResolver);
 
+                case EmailMessageType.NewAccount:
+                    return new NewAccountEmailMessage(this.WebSettings);
+
 				default:
 					throw new InvalidOperationException("Dear compiler, please check yo self so I don't have to default");
 			}
