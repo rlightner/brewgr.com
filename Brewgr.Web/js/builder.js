@@ -641,13 +641,30 @@ var Builder =
             total += isNaN($(this).val()) ? 0 : Number($(this).val());
         });
 
-        $('[data-name=f_Amt]').each(function(i, e) {
-            var val = isNaN($(this).val()) ? 0 : Number($(this).val());
-            var perEle = $(this).parents('tr').find('[data-name=f_Per]');
-            var perVal = val > 0 ? Math.round((Number($(this).val() / total) * 100)) : 0;
-            perEle.text((isNaN(perVal) ? '0' : perVal) + '%');
+        var values = [];
+        var percent = [];
+
+        $('[data-name=f_Amt]').each(function () {
+            values.push(isNaN($(this).val()) ? 0 : Number($(this).val()));
         });
-        
+
+        var sum = 0;
+        $.each(values, function () { sum += parseFloat(this) || 0; });
+        var totalPercent = 100;
+        for (var i = 0; i < values.length; i++) {
+            var rawPercent = sum == 0 ? 0 : values[i] / sum * totalPercent;
+            sum -= values[i];
+            var roundedPercent = Math.round(rawPercent);
+            totalPercent -= roundedPercent;
+            percent.push(roundedPercent);
+        }
+        var index = 0;
+
+        $('[data-name=f_Per]').each(function () {
+            $(this).text((isNaN(percent[index]) ? '0' : percent[index]) + '%');
+            index++;
+        });
+
         $('[data-name=f_Total]').text(util.safeRound(total));
     },
 
