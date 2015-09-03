@@ -829,7 +829,11 @@ namespace Brewgr.Web.Controllers
 		public ActionResult RecipePrint(int recipeId)
 		{
 			var recipe = this.RecipeService.GetRecipeById(recipeId);
-			var recipeViewModel = Mapper.Map(recipe, new RecipeViewModel());
+
+            if (recipe == null)
+                return this.Issue404();
+
+            var recipeViewModel = Mapper.Map(recipe, new RecipeViewModel());
 			recipeViewModel.CommentWrapperViewModel = new CommentWrapperViewModel { CommentViewModels = new List<CommentViewModel>() };
 
 			// Get Additional Data
