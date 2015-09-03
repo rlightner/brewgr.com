@@ -60,15 +60,13 @@ namespace Brewgr.Web.Controllers
 			// Check Email Address
 			if (this.UserService.EmailAddressIsInUse(userSettingsViewModel.EmailAddress, this.ActiveUser.UserId))
 			{
-				this.AppendMessage(new ErrorMessage { Text = "The email address you entered is already in use." });
-				return View(userSettingsViewModel);
+			    return Json(new { Success = false, Message = "The email address you entered is already in use." });
 			}
 
 			// Check Username Uniqueness
 			if (this.UserService.UsernameIsInUse(this.ActiveUser.UserId, userSettingsViewModel.Username))
 			{
-				this.AppendMessage(new ErrorMessage { Text = "The requested username is already in use" });
-				return View(userSettingsViewModel);
+                return Json(new { Success = false, Message = "The requested username is already in use" });
 			}
 
 			using(var unitOfWork = this.UnitOfWorkFactory.NewUnitOfWork())
@@ -94,8 +92,8 @@ namespace Brewgr.Web.Controllers
 
 					this.UserResolver.Update(Mapper.Map(user, new UserSummary()));
 
-					return new EmptyResult();
-				}
+                    return Json(new { Success = true, Message = "Your settings have been saved" });
+                }
 				catch (Exception ex)
 				{
 					unitOfWork.Rollback();
@@ -198,7 +196,7 @@ namespace Brewgr.Web.Controllers
 
 					unitOfWork.Commit();
 
-					return new EmptyResult();
+				    return Json(new { Success = true, Message = "Your notification settings have been saved" });
 				}
 				catch (Exception ex)
 				{

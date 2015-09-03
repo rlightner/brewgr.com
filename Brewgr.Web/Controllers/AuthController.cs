@@ -402,25 +402,22 @@ namespace Brewgr.Web.Controllers
 				{
 					if(!this.UserLoginService.VerifyUserPassword(this.ActiveUser.UserId, changePasswordViewModel.CurrentPassword))
 					{
-						this.ForwardMessage(new ErrorMessage { Text = "The current password you provided is not correct" });
-						return RedirectToAction("settings", "user");
+                        return Json(new { Success = false, Message = "The current password you provided is not correct" });
 					}
 
 					this.UserLoginService.SetUserPassword(this.ActiveUser.UserId, changePasswordViewModel.NewPassword);
 					unitOfWork.Commit();
-
-					this.ForwardMessage(new SuccessMessage { Text = "Your password has been changed" });
 				}
 				catch (Exception ex)
 				{
 					this.LogHandledException(ex);
 					unitOfWork.Rollback();
-
-					this.ForwardMessage(new ErrorMessage { Text = GenericMessages.ErrorMessage });
+           
+                    return Json(new { Success = false, Message = GenericMessages.ErrorMessage });
 				}
 			}
 
-			return RedirectToAction("settings", "user");
+		    return Json(new { Success = true, Message = "Your password has been changed" });
 		}
 
 		#endregion

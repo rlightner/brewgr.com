@@ -494,7 +494,12 @@ function settings_onReady() {
                 Message.clear();                
             },
             successCallback: function (theForm, data) {
-                Message.success("Your changes have been saved");
+                if(!data.Success && data.Message) {
+                    Message.error(data.Message);
+                } else {
+                    Message.success(data.Message);
+                }
+
                 window.scrollTo(0, 0);
             },
             errorCallback: function (theForm) {
