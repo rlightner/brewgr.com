@@ -819,7 +819,13 @@ function comment_onReady() {
                 data: { CommentText: $('<div/>').text(self.prev('.CommentText').val()).html(), GenericId: $(this).attr('data-genericid'), CommentType: $(this).attr('data-commenttype') },
                 success: function (response) {
                     self.closest('.comments-wrapper').find('.actual-comments').append(response);
-                    self.prev('.CommentText').val('');
+
+                    // Recreate autosize to re-adjust size after clearing
+                    // Required a modification to the autosize.js library
+                    // Could not upgrade at this time -- it is EMCA6 and gets bundled
+                    // with all of the JS -- would have to extract and not worth the effort at this time
+                    self.prev('.CommentText').val('').autosize();
+
                     jQuery("abbr.timeago").timeago();
                     return false;
                 }

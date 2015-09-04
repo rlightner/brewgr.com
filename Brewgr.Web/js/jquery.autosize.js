@@ -79,6 +79,8 @@
 			width = $ta.width();
 
 			if ($ta.data('autosize')) {
+			    // CTORX -- Added this modification to automatically re-adjust the textarea if it is attempted at being re-created
+			    adjust();
 				// exit if autosize has already been applied, or if the textarea is the mirror element.
 				return;
 			}
