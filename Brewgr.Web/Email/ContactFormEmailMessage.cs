@@ -36,6 +36,7 @@ namespace Brewgr.Web.Email
 		{
 			this.ContactViewModel = contactViewModel;
 			this.SenderDisplayName = contactViewModel.Name;
+            this.ReplyToRecipients.Add(contactViewModel.EmailAddress);
 		}
 
 		/// <summary>
