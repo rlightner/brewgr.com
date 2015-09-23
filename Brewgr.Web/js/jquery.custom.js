@@ -7,21 +7,6 @@
 jQuery(document).ready(function() {
 	
 /*-----------------------------------------------------------------------------------*/
-/*	Superfish Settings - http://users.tpg.com.au/j_birch/plugins/superfish/
-/*-----------------------------------------------------------------------------------*/
-	
-	if(jQuery().superfish) {
-		
-		// Main Navigation
-		jQuery('.sf-menu-wrapper ul.sf-menu').superfish({ 
-			delay: 200,
-			animation: {opacity:'show', height:'show'},
-			speed: 'fast',
-			dropShadows: false
-		});	
-	}
-	
-/*-----------------------------------------------------------------------------------*/
 /*	Toggle Content
 /*-----------------------------------------------------------------------------------*/
 	

@@ -170,6 +170,25 @@ function general_onReady() {
         window.open($(this).attr('href'));
         return false;
     });
+
+    // Back To Top Button
+    var pxShow = 300;//height on which the button will show
+    var fadeInTime = 400;//how slow/fast you want the button to show
+    var fadeOutTime = 400;//how slow/fast you want the button to hide
+    var scrollSpeed = 400;//how slow/fast you want the button to scroll to top. can be a value, 'slow', 'normal' or 'fast'
+
+    jQuery(window).scroll(function () {
+        if (jQuery(window).scrollTop() >= pxShow) {
+            jQuery("#backtotop").fadeIn(fadeInTime);
+        } else {
+            jQuery("#backtotop").fadeOut(fadeOutTime);
+        }
+    });
+
+    jQuery('#backtotop a').click(function () {
+        jQuery('html, body').animate({ scrollTop: 0 }, scrollSpeed);
+        return false;
+    });
 }
 
 /* --------------------------------------------------- [ Layout ] ---------------------------------------------------------- */
@@ -189,18 +208,38 @@ function layout_onReady() {
     });
 
     // Recent Recipe Photos
-    if($('#footer .Stream').length > 0) {
+    if ($('#footer .photo-stream').length > 0) {
         $.ajax({
             url: '/RecentPhotos',
             success: function(t) {
                 $(t).each(function(i, e) {
-                    $('#photo-stream .Stream')
+                    $('#footer .photo-stream')
                         .append($('<a href="' + e.Url + '"><img width="59" height="59" alt="" src="' + e.ImageUrl + '" /></a>'));
                 });
             }
         });
     }
+
+    function toggleMobileMenu() {
+        $('#header .container .twelve').toggle("slide", { direction: 'right' }, 250);
+    }
+
+    // Mobile Menu - Hamburger Toggle
+    $('.mobile a.menu').click(function() {
+        toggleMobileMenu();
+    });
+
+    // see: https://css-tricks.com/dangers-stopping-event-propagation/
+    $(document).on('click', function (event) {
+        if ($(event.target).closest('#navigation').length) {
+            if($('.mobile a.menu').is(':visible')) {
+                toggleMobileMenu();
+            }
+        }
+    });
 }
+
+
 
 /* --------------------------------------------------- [ Common ] ---------------------------------------------------------- */
 function common_onReady() {

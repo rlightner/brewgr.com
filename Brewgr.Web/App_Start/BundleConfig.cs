@@ -11,7 +11,10 @@ namespace Brewgr.Web
 				.Include(
 					"~/js/jquery.tmpl.min.js",
 					"~/js/jquery.colorbox.js",
-					"~/js/superfish.js",
+					//"~/js/superfish.js",
+					"~/js/shortcodes.js",
+					"~/js/tooltip.js",
+
 					"~/js/jquery.tipsy.js",
 					"~/js/jquery.validate.js",
 					"~/js/jquery.validate.unobtrusive.js",
@@ -33,8 +36,11 @@ namespace Brewgr.Web
 			bundles.Add(new StyleBundle("~/bundles/css")
 				.Include(
 					"~/css/smoothness/jquery-ui-1.10.3.custom.css",
-					"~/css/style.css",
-					"~/css/custom.css",
+					"~/css/base.css",
+					"~/css/skeleton.css",
+                    "~/css/style.css",
+                    "~/css/shortcodes.css",
+                    "~/css/custom.css",
 					"~/css/builder.css",
 					"~/css/colorbox.css"));
 		} 

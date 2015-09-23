@@ -19,18 +19,16 @@
     @RenderSection("Scripts", false)
 }
 
-@Html.Partial("~/Views/Shared/_SiteAnnouncement.cshtml")
+@Html.Partial("_Header")
+@Html.Partial("_TitleBar")		
 
-<!-- Header Start-->
-<div class="header-wrapper1">
-    @Html.Partial("_Header")
-    @Html.Partial("_TitleBar")		
-</div>
 @*  Middle Part Start *@
-<div id="middle-wrapper">
+<div class="container">
     @Html.Partial("_SiteMessages", ViewBag.Messages as IList<IMessage>)
     @RenderBody()
 </div>
+
+<div class="container clearfix spacer"></div>
 
 @*  Footer Part Start *@
 @Html.Partial("_Footer")

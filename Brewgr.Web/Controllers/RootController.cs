@@ -133,7 +133,7 @@ namespace Brewgr.Web.Controllers
 		/// </summary>
 		public JsonResult RecentPhotos()
 		{
-			return Json(this.RecipeService.GetRecentRecipesCached(3)
+			return Json(this.RecipeService.GetRecentRecipesCached(6)
 				.Select(x => new
 				{
 					ImageUrl = Url.RecipeThumbnailUrl(x.ImageUrlRoot, x.Srm),

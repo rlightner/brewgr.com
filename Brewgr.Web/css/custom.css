@@ -1,6 +1,52 @@
-﻿
+﻿/* ---- [ theme-overrides / structural changes ] ---------------------------------------------> */
+/* These are direct changes to styles defined in styles.css */
+	#header .columns, #subtitle .columns { margin-left: 0; }
+	#header .container .twelve.columns { margin-right: 0; float: right; }
+	#logo { height: 41px; margin-top: 14px; }
+	#navigation { float: none; }
+	#navigation #user-info ul li { float: none; }
+	#current { border-top: solid 3px #3f3f3f !important; }
+	#navigation ul li:hover > a { border-top: 3px solid #FFD709; }
+	#navigation ul li:nth-of-type(2) ul { width: 270px; }
+	#navigation ul li:nth-of-type(2) ul li a { width: 240px; }
+	#navigation ul ul li a:hover { background-color: initial; color: #FFD709 !important; }
+	#navigation ul ul li a { font-size: 14px; color: #fff; }
+	#subtitle { height: 60px; }
+	#subtitle .container .four.columns { float: right; margin-right: 0; }
+	h1 { font-size: 24px; }
+	h1.title { float: left; margin-top: 5px; }
+    .columns p { margin-bottom: 20px; }
+
+/* ---- [ layout ] ---------------------------------------------> */
+/* Styles pertaining to core layout of the site, such as header/footer */
+	#auth-choice { float: right; padding-right: 18px; margin-top: 16px; }
+	#auth-choice a#login { color: #ccc; font-size: 12px; font-family: Tahoma,Arial; font-size: 14px; padding-left: 12px; }
+	.mobile #login-link { margin-right: 18px; }
+	.top-search { float:right; width:299px; height:39px; background:url(../img/search.png) no-repeat center center; margin-top:12px}
+	.top-search form { position: relative; }	
+	.top-search input[type=text] {background:transparent; border:none; padding:11px 15px; color:#888; width:225px; }
+	.top-search input[type=image] { position: absolute; top: 4px; }
+	#footer_bottom .tagline { color: #ccc; margin: 15px 0; text-align: right; }
+	#footer .logo-btm { padding: 20px 0; }
+	#footer .container .columns p { color: #ccc;  }
+	#footer .container .three.columns a { color: #ccc; display: block; margin-left: 4px; line-height: 17px; }
+	#footer .container .three.columns a:hover { color: #fff; }
+	#footer .photo-stream img { float:left; border:3px solid #606570; margin: 0 8px 8px 0; cursor:pointer; -webkit-transition:all 0.2s linear; -moz-transition:all 0.2s linear; -o-transition:all 0.3s linear; -transition:all 0.2s linear; width: 50px; height: 50px; }
+	#footer .photo-stream img:hover{ border:3px solid #90959f;}
+	input.newsletter{background: url(../img/news-letter.png) no-repeat center center; padding:14px 30px 14px 8px; margin-top: 14px; border:none; width:185px; color:#babdc0; text-align:center;  text-shadow: 0 1px 0 #25272f; font-size:12px;}
+
+/* ---- [ user-info (header) ] ---------------------------------------------> */
+	#user-info { background-color: #47484A; float: right; min-width: 200px; height: 40px; -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; padding: 6px 8px; margin: 8px 0; }
+	#user-info > img { display: block; float: left; } 
+	#user-info > ul { display: block; float: left; margin-left: 12px; }
+	#user-info > ul > li > a { padding: 13px 0 0 0; color: #eee; border: 0; width: 150px; height: 33px; text-transform: none; font-size: 14px;	 }
+	#navigation ul #user-menu { margin-top: 18px; left: -20px; }
+	#user-info a.trigger, #user-info a.trigger:hover { border: 0 !important; background: initial !important; }
+
 /* ---- [ shared ] ---------------------------------------------> */
-	.floatleft { float: left; }
+/* These are shared styles -- which will mostly be un-used with the new theme */
+
+	/*.floatleft { float: left; }
 	.floatright { float: right; }
 	.floatnone { float: none !important; }
 	.clearall { clear: both; }
@@ -46,9 +92,9 @@
 	.inline { display: inline !important; }
 	.block { display: block !important; }
 	.inline-block { display: inline-block !important; }
-	.bold { font-weight: bold;}
+	.bold { font-weight: bold;}*/
 	.fine-print { font-size: 10px !important; color: #aaa; line-height: 10px; }
-	.upper { text-transform: uppercase; }
+	/*.upper { text-transform: uppercase; }
 	.aligncenter { text-align: center !important; }
 	.alignleft { text-align: left !important; }
 	.alignright { text-align: right !important; }
@@ -78,7 +124,7 @@
 	.width175 { width: 175px !important;}
 	input::-ms-clear { display: none; }
 	a.nodec, a.nodec:hover { text-decoration: none !important; }
-	a.pointer, a.pointer * { cursor: pointer !important; }
+	a.pointer, a.pointer * { cursor: pointer !important; }*/
 
 /* ---- [ Breadcrumbs ] ------------------------------------ */
 	ul.breadcrumbs { list-style: none; margin: 10px 0px 0 14px; display: inline-block; }
@@ -118,12 +164,10 @@
 	.working-dialog * { vertical-align: middle;}
 	.working-dialog h3 { display: inline-block; color: #FA8136; margin-right: 8px; font-size: 18px; }
 
-/* ---- [ layout ] ---------------------------------------------> */
-	.title h1, .title h2 { float: left; font-size: 24px; font-weight: normal; width: 600px; vertical-align: middle; max-height: 60px; overflow: hidden;}
-	
+	/*.title h1, .title h2 { float: left; font-size: 24px; font-weight: normal; width: 600px; vertical-align: middle; max-height: 60px; overflow: hidden;}
 	#middle-wrapper a:link, #middle-wrapper a:active, #middle-wrapper a:visited { color: #888; }
 	#middle-wrapper a:hover { color: #333; text-decoration: underline; }
-	tast
+
 	#other-stuff a:link, #other-stuff a:active, #other-stuff a:visited { color: #fff; }
 	#other-stuff a:hover { color: #aaa; text-decoration: none; }
 	
@@ -132,16 +176,18 @@
 	.top-search { position: relative; }
 	.top-search input[type=text] { padding-top: 9px; color: #888; }
 	.top-search input[type=image] { position: absolute; width: 24px; height: 24px; top: -4px; left: 248px; }
-    a.finder-link { position: absolute; top: 45px; right: 20px; font-size: 11px !important; color: #aaa; text-decoration: underline; }
+    */
+	a.finder-link { position: absolute; top: 45px; right: 20px; font-size: 11px !important; color: #aaa; text-decoration: underline; }
     a.finder-link:hover { color: #666; text-decoration: none; }
     #view-home a.finder-link { display: none; }
+	/*
 	#other-stuff a { color: #fff; display: block; margin-bottom: 4px; margin-left: 4px; }
 	#other-stuff { width: 150px; }
 	#photo-stream { width: 250px; }
 	.auth-choice { float: right; padding-right: 18px; margin-top: 24px; }
 	.auth-choice a#login { color: #ccc; font-size: 12px; font-family: Tahoma, Arial; font-size: 14px; padding-left: 12px; }
 	.auth-choice a#login:hover { color: #eee; text-decoration: underline; }
-	#Dialogs { display: none; }
+	#Dialogs { display: none; }*/
     #buildinfo { color: #666; margin-left: 12px; font-size: 11px; }
     #buildinfo:hover { text-decoration: underline; }
 
@@ -270,12 +316,11 @@
 	#view-feedback textarea { width: 590px; height: 130px; }
 	#FeedbackCounter { display: block; color: #aaa; font-size: 11px; }
 
-/* ---- [ user info / user list ] ---------------------------------------------> */
-	#user-info { background-color: #4a4e5a; float: right; min-width: 200px; height: 40px; -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; padding: 8px; margin: 10px 0; }
-	#user-info > img { display: block; }
-	#user-info > div a { color: #fff; margin-top: 4px; }
-	#user-info > ul > li { color: #eee; font-size: 14px; font-weight: bold; margin-top: 6px; }
-	#user-info ul a:hover {	background: none; border-bottom: none; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; }
+/* ---- [ user list ] ---------------------------------------------> */
+
+
+
+*/
 
 	.user-list .user { border-bottom: dashed 1px #aaa; padding: 24px; margin-bottom: 12px; }
 	.user-list .user.last { border-bottom: 0px;  }
@@ -487,19 +532,20 @@
 	 .recipe-list .recipe.last, .brewsession-list .brewsession.last { border-bottom: 0px;  } 
 	 .recipe-list .recipe h3, .brewsession-list .brewsession h3 { font-size: 18px; display: inline; margin-bottom: 0; float: none; width: auto; line-height: 18px; background-image: none;}
 	 .recipe-list .recipe h3 a, .brewsession-list .brewsession h3 a { color: #666 !important; }
-	 .recipe-list .recipe .details, .brewsession-list .brewsession .details { padding-top: 2px; margin-left: 100px; }
+	 .recipe-list .recipe .details, .brewsession-list .brewsession .details { padding-top: 2px; }
 	 .recipe-list .recipe .data, .brewsession-list .brewsession .data { margin-top: 4px; font-size: 14px; }
 	 .recipe-list .recipe .actions, .brewsession-list .brewsession .actions { margin-top: 12px; font-size: 14px; }
 	 .recipe-list .recipe .actions .button_small, .brewsession-list .brewsession .actions .button_small { margin-right: 4px; }
 	 .recipe-list .recipe .image, .brewsession-list .brewsession .image { float: left; margin-right: 18px; }
 	 .recipe-list .recipe .image img, .brewsession-list .brewsession .image img { border: solid 1px #ddd; }
-	 .recipe-list .recipe .description, .brewsession-list .brewsession .description { clear: both; font-size: 14px; padding: 12px 12px 12px 0px; margin-left: 100px; }
+	 .recipe-list .recipe .description, .brewsession-list .brewsession .description { clear: both; font-size: 14px; padding: 12px; }
 	 .brewsession-list .brewsession .data .datapoint { margin-right: 5px; vertical-align: middle; }
 	 .brewsession-list .brewsession .data .datapoint * { vertical-align: middle; }
 	
  /* --- [ Features ] -----------------------------------------> */
-	#view-features .last { background-color: #eee; padding: 24px; margin-left: 640px; border: solid 1px #ccc; }
-	#view-features .img-wrap { margin: 0 auto; padding: 8px; border: solid 1px #ccc; background-color: #fff; width: 510px; text-align: center; margin-bottom: 18px;}
+    .view-features ul { margin-left: 24px; padding-left: 12px; list-style: disc; }
+    .view-features img { margin-bottom: 20px; }
+
 
  /* --- [ Features ] -----------------------------------------> */
 	#view-faq ul { margin-left: 40px; }
@@ -507,7 +553,7 @@
 
  /* --- [ Suggestion Form ] -----------------------------------------> */
 	#suggestion-form { }
-	#suggestion-form textarea { display: block; width: 220px; padding: 12px; height: 145px; border: solid 1px #ccc; resize: none; margin-bottom: 18px; }
+	#suggestion-form textarea { display: block; width: 190px; padding: 12px; height: 145px; border: solid 1px #ccc; resize: none; margin-bottom: 18px; }
 	#suggestion-form .success-message { font-size: 10px; margin-top: 4px; display: none; color: #86a830 ; }
 	#suggest-limit { font-size: 11px; color: #aaa; display: block; margin-bottom: 20px; }
 	
@@ -541,20 +587,22 @@
 /* --- [ Contact ] --------------------------------------------------------> */
 	#contact-view textarea { width: 550px; height: 200px; resize: none; }
 	#contact-view .form-field { margin-bottom: 18px; }
+	#social a { width: 32px; height: 32px; margin: 0 9px 9px 0; display: block; float: left; }
 	
 /* --- [ How it works ] --------------------------------------------------------> */
-	#howitworks .twocol-copyleft { margin-top:20px; }
+	#howitworks .twocol-copyleft { margin-top:20px; clear:both; }
     #howitworks .twocol-copyleft-copy { float:left; width:250px; margin-right:50px; }
     #howitworks .twocol-copyleft-copy h3 { margin-top:40px; background-image: none; margin-bottom:0px; line-height:normal; }
     #howitworks .twocol-copyright { margin-top:20px; }
     #howitworks .twocol-copyright-image { float:left; width:253px; margin-right:50px; }
     #howitworks .twocol-copyright-copy { margin-left:400px; width:300px; padding-top:25px; }
-    #howitworks .twocol-copyright-copy h3 { margin-top:40px; background-image: none; margin-bottom:0px; float:none; line-height:normal; }
-    #howitworks .twocol-copyleft-copy-small { float:left; width:290px; margin-right:15px; }
+    #howitworks .twocol-copyright-copy h3 { margin-top:40px; background-image: none; margin-bottom:0px; float:none; line-height:normal; font-weight:bold; }
+    #howitworks .twocol-copyleft-copy-small { float:left; width:280px; margin-right:15px; }
     #howitworks .rightsec { margin-top: 80px; }
     #howitworks .howitworksbuttons { width: 180px; height: 22px;font-weight: bold; font-size: 14px; text-align: center;border: solid 1px #AAA; }
     #howitworks .howitworksbuttons:hover { width: 180px; height: 22px; font-weight: bold; font-size: 14px; text-align: center;border: solid 1px #AAA; }
     #howitworks .howitworks-header { font-size:34px; }
+    #howitworks .four { padding-top: 40px; }
 
 /* --- [ Browse Recipes ] --------------------------------------------------------> */
 	#recipes-view .style { width: 280px; height: 115px; padding: 10px; float: left; border: solid 2px #ccc; background-color: #eee; -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; margin-right: 12px; margin-bottom: 12px; }
@@ -872,7 +920,7 @@
 
 /* ---- [ Comments ] ------------------------------------ */
 	.comments-wrapper { -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; padding: 6px; background-color: #DDD;margin-top: 12px; overflow: auto; }
-	.comments-wrapper > div:first-child, .comments-wrapper .noborder > div:first-child  { box-shadow: none; }
+	.comments-wrapper > div:first-child, .comments-wrapper .noborder > div:first-child  { border-top: none; box-shadow: none; }
 	.comments-wrapper .comment { min-height: 35px; background-color: #EEECEC; padding: 10px; border-top: 1px solid #ddd; box-shadow: inset 0 1px 0 #fff; min-height: 30px; }
 	.comments-wrapper .actual-comments .comment:nth-of-type(1) { box-shadow: 0 0 1px 0 #fff; border-top: 0; }
 	.comments-wrapper .comment img { height: 32px; width: 32px; margin-right: 10px; float: left; margin-top: 2px;}
@@ -934,5 +982,94 @@
 	.dashboard-item.tasting-note .notes { margin-top: 8px; margin-left: 70px; }
 
 
+/*================================================= */
+/* #Media Queries 
+   (also defined in style.css -- these are in addition)
+================================================== */
+	/* Desktop 960 */
+	@media only screen and (min-width: 960px) {
+		.mobile { display: none; }
+		#navigation li.mobile { display: none; }
+	} 
+	
+	/* Smaller than standard 960 (devices and browsers) */
+	@media only screen and (max-width: 959px) {
+		.mobile { display: none; }
+		#navigation li.mobile { display: none; }
+	}
 
+	/* Tablet Portrait size to standard 960 (devices and browsers) */
+	@media only screen and (min-width: 768px) and (max-width: 959px) {
+		#navigation { width: 100% !important; }
+	}
+
+	/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) {
+		#header .mobile { display: block; float: right; float: right; margin-top: 17px;	 }
+		#header .mobile a { display: inline-block; }
+		#header .mobile .avatar { border: solid 3px #3f3f3f; height: 28px; width: 28px; margin-right: 8px; }
+		#navigation #auth-choice { display: none !important; }
+		#user-info, #auth-choice, .top-search  { display: none; }
+		#logo { float: left; }
+				
+
+		/* Nav Menu */
+		.header { width: 100%; height: 65px; }
+		.container{ position: inherit; width: 100%; }		
+		#header .container { position: fixed; width: 100%; background: #363636; padding: 0 10px; height: 65px; z-index: 999; }		
+		#header .container #navigation { width: 50% !important; }
+		#header .container .four.columns { height: 65px; }
+		#header .container .twelve
+		{ 
+			position: absolute !important;
+			background-color: #444 !important;
+			z-index: 9999999;
+			right: 0px !important;
+			padding: 24px;
+			border-left: solid 14px #333;
+			border-bottom: solid 14px #333;
+			top: 65px;
+			width: 80%;
+			display: none;
+		}
+
+		/* reset navigation and children */
+		#navigation, #navigation * 
+		{
+			position: relative !important;
+			color: #fff !important;
+			display: block !important; 
+			visibility: visible; 
+			top: auto !important; 
+			left: auto;
+			opacity: 1.0 !important;
+			padding: 0 !important; 
+			margin: 0 !important; 
+			height: initial; 
+			width: initial !important; 
+			border: 0 !important; 
+			background-color: initial; 
+			color: initial; 
+			float: none !important;
+		}		
+		
+		#navigation ul ul { background: none; }
+		#navigation > ul > li { margin-bottom: 14px !important; }
+		#navigation > ul > li > a { color: #FFD709 !important; font-size: 15px; padding-bottom: 6px !important; }
+		#navigation ul ul li a { line-height: 21px; }
+
+		#user-info { display: none !important; }
+	}
+
+	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+	@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+	}
+
+	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+	@media only screen and (max-width: 479px) {
+
+		
+	}
+	
 
