@@ -7,7 +7,7 @@
 /* ======================================================= */
 /* Import Section
 /* ======================================================= */
-@import url("base.css");				/* Default Reset, Typography, Forms, etc. */ 
+/* @import url("base.css");				/* Default Reset, Typography, Forms, etc. */ 
 /*@import url("skeleton.css");			/* 960 Grid + Media Query Layouts */ 
 /*@import url("flexslider.css");			/* Flex Slider Styles */ 
 /*@import url("pricing_tables.css");		/* Pricing Table Styles */ 
@@ -17,6 +17,10 @@
 /*================================================= */
 /* Header
 ================================================== */
+#announcement { padding: 12px; font-size: 20px; color: #fff; text-align: center; background-color: #f79646; }
+#announcement a { color: #fff; text-decoration: underline; }
+#announcement a:hover { text-decoration: none; }
+
 #header {background: #363636; padding:0; margin:0;}
 #logo {display: block; height: 70px;}
 

@@ -4,17 +4,20 @@
 <div id="header">
     <div class="container">
         <div class="four columns">
-            <div id="logo"><a href="@Url.Action("Index", "Root", null, "http")"><img src="@Url.Image("~/img/logo.png")" alt="Brewgr" /></a></div>            
-            <div class="mobile">
-                @if(ViewBag.ActiveUser != null)
-                {
-                    <a href="@Url.UserProfileUrl((ViewBag.ActiveUser as UserSummary).Username)">
-                        <img src="@((ViewBag.ActiveUser as UserSummary).GetAvatar(28))" class="avatar" />
-                    </a>
-                }
-                <a href="#" class="menu"><img src="/img/hamburger.jpg" alt="menu" /></a>
-            </div>
+            <div id="logo"><a href="@Url.Action("Index", "Root", null, "http")"><img src="@Url.Image("~/img/logo.png")" alt="Brewgr" /></a></div>                        
         </div>
+
+        <div class="mobile">
+            @if (ViewBag.ActiveUser != null)
+            {
+                <a href="@Url.UserProfileUrl((ViewBag.ActiveUser as UserSummary).Username)">
+                    <img src="@((ViewBag.ActiveUser as UserSummary).GetAvatar(28))" class="avatar" />
+                </a>
+            }
+            <a href="#" class="menu"><img src="/img/hamburger.jpg" alt="menu" /></a>
+        </div>
+
+
 
         <div class="twelve columns">
             <!-- Menu -->
@@ -28,7 +31,7 @@
                             <li><a href="@Url.Action("dashboard", "dashboard", null, "http")/#brewsessions">My Brew Sessions</a> </li>
                             <li><a href="@Url.Action("homebrew-recipes", "recipe", null, "http")"><span>Homebrew Recipe Catalog</span></a></li>
                             <li><a href="@Url.Action("homebrew-recipe-calculator", "recipe", null, Url.Https())">Create a New Recipe</a></li>
-                            <li><a href="#" class="recipe-import" rel="nofollow">Import Beer Xml</a></li>
+                            <li class="no-mobile"><a href="#" class="recipe-import" rel="nofollow">Import Beer Xml</a></li>
                         </ul>
                     </li>
                     <li>
@@ -47,7 +50,7 @@
                             <li><a href="@Url.Action("features","root")">Features</a></li>
                         </ul>
                     </li>
-                    <li><a href="http://brewgr.com/blog">Blog</a></li>
+                    <li class="no-mobile"><a href="http://brewgr.com/blog">Blog</a></li>
                     <li class="mobile">
                         @if (ViewBag.ActiveUser != null)
                         { 
