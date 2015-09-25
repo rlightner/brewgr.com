@@ -225,7 +225,8 @@ function layout_onReady() {
     }
 
     // Mobile Menu - Hamburger Toggle
-    $('.mobile a.menu').click(function() {
+    $('.mobile a.menu').click(function (event) {
+        event.preventDefault();
         toggleMobileMenu();
     });
 

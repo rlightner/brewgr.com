@@ -1003,11 +1003,12 @@
 		#navigation { width: 100% !important; }
 
         #footer .container div.three { width: 105px; }
-        #footer .container div.four:nth-of-type(3) { width: 130px; }        
+        #footer .container div.four:nth-of-type(3) { width: 130px; }   
+        .container .twelve.columns { width: 585px; }     
 	}
 
-    @media only screen and (min-width: 768px) {
-        .container .twelve.columns { width: 585px; }
+    @media only screen and (min-width: 768px) and (max-width: 785px) {
+
     }
 
 	/* All Mobile Sizes (devices and browser) */
