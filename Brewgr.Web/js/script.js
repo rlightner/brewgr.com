@@ -221,11 +221,11 @@ function layout_onReady() {
     }
 
     function toggleMobileMenu() {
-        $('#header .container .twelve').toggle("slide", { direction: 'right' }, 250);
+        $('#navigation').toggle("slide", { direction: 'right' }, 150);
     }
 
     // Mobile Menu - Hamburger Toggle
-    $('.mobile a.menu').click(function (event) {
+    $('#hamburger a.menu').click(function (event) {
         event.preventDefault();
         toggleMobileMenu();
     });

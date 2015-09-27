@@ -1,27 +1,15 @@
 ﻿@using Brewgr.Web
 @using Brewgr.Web.Core.Model
 
-<div id="header">
+<header>
     <div class="container">
-        <div class="four columns">
-            <div id="logo"><a href="@Url.Action("Index", "Root", null, "http")"><img src="@Url.Image("~/img/logo.png")" alt="Brewgr" /></a></div>                        
-        </div>
-
-        <div class="mobile">
-            @if (ViewBag.ActiveUser != null)
-            {
-                <a href="@Url.UserProfileUrl((ViewBag.ActiveUser as UserSummary).Username)">
-                    <img src="@((ViewBag.ActiveUser as UserSummary).GetAvatar(28))" class="avatar" />
-                </a>
-            }
-            <a href="#" class="menu"><img src="/img/hamburger.jpg" alt="menu" /></a>
-        </div>
-
-        <div class="twelve columns">
-            <!-- Menu -->
-            <div id="navigation">
-                <ul id="nav">
-                    <li><a href="@Url.Action("Index", "Root", null, "http")">Home</a></li>
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <a id="logo" href="@Url.Action("Index", "Root", null, "http")"><img src="@Url.Image("~/img/logo.png")" alt="Brewgr" /></a>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <ul id="navigation" class="nav">
+                    <li class="hidden-xs hidden-sm"><a href="@Url.Action("Index", "Root", null, "http")">Home</a></li>
                     <li>
                         <a href="#">Recipes</a>
                         <ul>
@@ -29,7 +17,7 @@
                             <li><a href="@Url.Action("dashboard", "dashboard", null, "http")/#brewsessions">My Brew Sessions</a> </li>
                             <li><a href="@Url.Action("homebrew-recipes", "recipe", null, "http")"><span>Homebrew Recipe Catalog</span></a></li>
                             <li><a href="@Url.Action("homebrew-recipe-calculator", "recipe", null, Url.Https())">Create a New Recipe</a></li>
-                            <li class="no-mobile"><a href="#" class="recipe-import" rel="nofollow">Import Beer Xml</a></li>
+                            <li class="hidden-xs"><a href="#" class="recipe-import" rel="nofollow">Import Beer Xml</a></li>
                         </ul>
                     </li>
                     <li>
@@ -39,19 +27,19 @@
                             <li><a href="@Url.Action("CalculatorsHydrometerTemp", "content", null, "http")">Hydrometer Correction Calculator</a></li>
                             <li><a href="@Url.Action("CalculatorsMashSpargeWater", "content", null, "http")">Mash/Sparge Water Infusion Calculator</a></li>
                         </ul>
-                    </li>                    
+                    </li>
                     <li>
                         <a href="#">About</a>
                         <ul>
-                            <li><a href="@Url.Action("about","root")">About Brewgr</a></li>
-                            <li><a href="@Url.Action("howitworks","root")">How It Works</a></li>
-                            <li><a href="@Url.Action("features","root")">Features</a></li>
+                            <li><a href="@Url.Action("about", "root")">About Brewgr</a></li>
+                            <li><a href="@Url.Action("howitworks", "root")">How It Works</a></li>
+                            <li><a href="@Url.Action("features", "root")">Features</a></li>
                         </ul>
                     </li>
-                    <li class="no-mobile"><a href="http://brewgr.com/blog">Blog</a></li>
-                    <li class="mobile">
-                        @if (ViewBag.ActiveUser != null)
-                        { 
+                    <li class="hidden-xs"><a href="http://brewgr.com/blog">Blog</a></li>
+                    <li class="visible-xs">
+                        @if(ViewBag.ActiveUser != null)
+                        {
                             <a href="/logout">Sign Out</a>
                         }
                         else
@@ -61,18 +49,32 @@
                     </li>
                 </ul>
 
-                @if (ViewBag.ActiveUser != null)
-                {
-                    @Html.Partial("_UserInfo", ViewBag.ActiveUser as UserSummary)
-                }
-                else
-                {
-                    <div id="auth-choice">
-                        <a href="@Url.Action("login", "auth")" class="button button_green">Create Free Account</a>
-                        <a href="@Url.Action("login", "auth")" id="login" class="login-link" data-returnurl="@Server.UrlEncode(Request.Url.PathAndQuery)">Login</a>
-                    </div>
-                }
+                @* User Info *@
+                <div class="hidden-xs">
+                    @if (ViewBag.ActiveUser != null)
+                    {
+                        @Html.Partial("_UserInfo", ViewBag.ActiveUser as UserSummary)
+                    }
+                    else
+                    {
+                        <div id="auth-choice">
+                            <a href="@Url.Action("login", "auth")" class="button button_green">Create Free Account</a>
+                            <a href="@Url.Action("login", "auth")" id="login" class="login-link" data-returnurl="@Server.UrlEncode(Request.Url.PathAndQuery)">Login</a>
+                        </div>
+                    }
+                </div>
+
+                @* Mobile Hamburger *@
+                <div id="hamburger" class="visible-xs">
+                    @if (ViewBag.ActiveUser != null)
+                    {
+                        <a href="@Url.UserProfileUrl((ViewBag.ActiveUser as UserSummary).Username)">
+                            <img src="@((ViewBag.ActiveUser as UserSummary).GetAvatar(28))" class="avatar" />
+                        </a>
+                    }
+                    <a href="#" class="menu"><img src="/img/hamburger.jpg" alt="menu" /></a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</header>

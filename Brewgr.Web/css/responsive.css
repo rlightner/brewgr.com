@@ -1,0 +1,101 @@
+﻿/*
+    Responsive Media Queries only
+*/
+
+/*================================================= */
+/* #Media Queries
+================================================== */
+	
+	/* Desktop 1200 */
+	@media only screen and (min-width: 1200px) {
+		ul.nav li a, #userinfo a.trigger, #userinfo a.trigger:hover { font-size: 16px; } /* Larger Nav Menu Links */
+        #userinfo { min-width: 260px; } /* wider user info */
+        #titlebar h1 { font-size: 30px; margin-top: 10px; } /* Larger Titlebar Text */
+	} 
+
+    /* Desktop 960 */
+	@media only screen and (min-width: 960px) {
+
+	} 
+	
+	/* Smaller than standard 960 (devices and browsers) */
+	@media only screen and (max-width: 959px) {
+	    
+	}
+
+	/* Tablet Portrait size to standard 960 (devices and browsers) */
+	@media only screen and (min-width: 768px) and (max-width: 959px) {
+		#logo img { width: 175px; margin-top: 4px; }
+	}
+
+    /* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) and (orientation: landscape) {
+	    #navigation { 
+            display: block; 
+            left: -171px; 
+            width: auto !important; 
+            height: 195px !important; 
+	    }
+
+        #navigation ul li a { width: 165px !important; }
+	}
+
+
+	/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) and (orientation: portrait) {
+
+        /* Nav Menu */
+		#navigation
+		{
+            width: 275px;
+		    right: 0;
+		    height: 460px;
+		}		
+
+        #navigation ul li a { width: 225px !important; }
+	}
+
+    @media only screen and (max-width: 767px) {
+
+        header .container { position: fixed; width: 100%; background: #363636; padding: 0 10px; height: 69px; z-index: 999; } /* sticky header */
+        #titlebar { padding-top: 80px; } /* sticky header */
+
+        #titlebar h1 { margin-top: 2px; } /* Decrease margin of title h1 */
+	    
+        #search { text-align: left; } /* left align search -- TODO: Hide by default, move to menu? */
+        #search input[type=image] { right: 0; left: 278px; } /* reposition search magnify icon */
+        #search a { margin: 4px 0 0 4px; } /* adjust padding of finder link */
+
+        /* Nav to Hamburger Menu */
+        #hamburger { position: absolute; right: 20px; top: 18px; }
+		#navigation
+		{
+            display: none;
+            position: absolute !important;
+            top: 69px;
+            background-color: #444 !important;
+            z-index: 1000;		    
+            border-left: solid 14px #333;
+            border-bottom: solid 14px #333;
+		    padding-top: 10px;
+            color: #fff !important;
+		}		
+		
+		#navigation ul { background: none; opacity: 1; position: relative; top: 0; left: 0; width: auto !important; }
+		#navigation > li { margin-bottom: 14px !important; display: block;  }
+		#navigation > li > a { color: #FFD709 !important; font-size: 16px; padding-bottom: 6px !important; padding-top: 6px;  }
+		#navigation li:hover > a , #navigation ul li:hover > ul { background-color: initial !important; } /* no bg on menu items */
+		#navigation ul li { display: block; float: none; padding: 4px 0 0 10px; }
+		#navigation ul li a { line-height: 21px; font-size: 15px; border: 0; padding: 0; line-height: 18px;   }
+	}
+
+	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+	@media only screen and (min-width: 480px) and (max-width: 767px) {
+		
+	}
+
+	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+	@media only screen and (max-width: 479px) {
+		
+	}
+	

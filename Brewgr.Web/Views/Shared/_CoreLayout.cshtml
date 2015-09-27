@@ -1,68 +1,63 @@
-@using System.Web.Optimization
+﻿@using System.Web.Optimization
 
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="en">
- <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <meta name="description" content="@(ViewBag.Description ?? "Brewgr is an online homebrew community and recipe calculator to help homebrewers find, create and share homebrew recipes with other homebrewers.")" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    @if(!string.IsNullOrWhiteSpace(ViewBag.Description))
+    {
+        <meta name="description" content="@(ViewBag.Description ?? "Brewgr is an online homebrew community and recipe calculator to help homebrewers find, create and share homebrew recipes with other homebrewers.")"/>
+    }
+
     <title>@ViewBag.Title | Brewgr</title>
 
-    @* Stylesheet Bundle *@
-    @Styles.Render("~/bundles/css")
-
-    @* Styles Insertion Point *@
-    <!-- Styles -->
-    @RenderSection("Styles", false)
-
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-
-    @*<script type="text/javascript">
-            var config = { staticRoot: '@ViewBag.StaticRoot' };
-        </script>*@
-
-    @if (ViewBag.Canonical != null)
+    @if (!string.IsNullOrWhiteSpace(ViewBag.Canonical))
     {
         <link rel="canonical" href="@(ViewBag.Canonical)" />
     }
 
-    @*
-        NOTE: jQuery should be included at the end of <body> but there is a weird issue with jQueryUI tabs and a password fields
-        within them that causes the page to flash and do weird stuff with text on page load, so we're keeping it up here for now
-    *@
+    @* Bootstrap CSS *@
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    @* Style Bundle *@
+    @Styles.Render("~/bundles/css")
+
+    @* Styles Insertion Point *@
+    @RenderSection("Styles", false)
+
+    @* jQuery $() Queue -- Taken from: http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/ *@
+    <script>(function(w,d,u){w.readyQ=[];w.bindReadyQ=[];function p(x,y){if(x=="ready"){w.bindReadyQ.push(y);}else{w.readyQ.push(x);}};var a={ready:p,bind:p};w.$=w.jQuery=function(f){if(f===d||f===u){return a}else{p(f)}}})(window,document)</script>
+</head>
+<body>
+    @RenderBody()
 
     @* jQuery from Google CDN with fallback *@
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="@Url.Content("~/js/jquery-1.11.0.min.js")"><\/script>')</script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="@Url.Content("~/js/lib/jquery-1.11.3.min.js")"><\/script>')</script>
 
     @* jQuery Migrate CDN with fallback - This is required to deal with jquery validate parseJSON error -- keep an eye on it for later removal *@
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script>window.jQuery.migrateWarnings || document.write('<script src="@Url.Content("~/js/jquery-migrate-1.2.1.min.js")"><\/script>')</script>
+    <script>window.jQuery.migrateWarnings || document.write('<script src="@Url.Content("~/js/lib/jquery-migrate-1.2.1.min.js")"><\/script>')</script>
 
-</head>
-    <body>
-        @RenderBody()
+    @* jQuery $() Queue -- Taken from: http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/ *@
+    <script>(function($,d){$.each(readyQ,function(i,f){$(f)});$.each(bindReadyQ,function(i,f){$(d).bind("ready",f)})})(jQuery,document)</script>
 
-        @* jQuery UI CDN with fallback *@
-        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-        <script>window.jQuery.ui || document.write('<script src="@Url.Content("~/js/jquery-ui.min.js")"><\/script>')</script>
+@* jQuery UI CDN with fallback *@
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script>window.jQuery.ui || document.write('<script src="@Url.Content("~/js/lib/jquery-ui-1.11.4.min.js")"><\/script>')</script>
 
-        @* Scripts Bundle *@
-        @Scripts.Render("~/bundles/js")
+    @* Scripts Bundle *@
+    @Scripts.Render("~/bundles/js")
 
-        @* Scripts Insertion Point *@
-        <!-- Scripts -->
-        @RenderSection("Scripts", false)
-        
-        @if (ViewBag.Environment == "prod" && (ViewBag.ActiveUser == null || !ViewBag.ActiveUser.IsAdmin))
-        {
-            @Html.Partial("_TrackingScript")
-        }
-    </body>
+    @* Scripts Insertion Point *@
+    @RenderSection("Scripts", false)
+
+    @if (ViewBag.Environment == "prod" && (ViewBag.ActiveUser == null || !ViewBag.ActiveUser.IsAdmin))
+    {
+        @Html.Partial("_TrackingScript")
+    }
+</body>
 </html>

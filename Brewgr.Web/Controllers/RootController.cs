@@ -59,6 +59,11 @@ namespace Brewgr.Web.Controllers
 			this.SeoSitemap = seoSitemap;
 		}
 
+	    public ActionResult Blank()
+	    {
+	        return this.View();
+	    }
+
 		#region LOGIN CHECK
 
 		/// <summary>

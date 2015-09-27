@@ -1,5 +1,58 @@
 ﻿@using Brewgr.Web
-<div id="footer">
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a class="logo" href="@Url.Action("Index", "Root", null, "http")"><img src="@Url.Image("~/img/logo-footer.png")" alt=""/></a>
+                <p>Brewgr is an online homebrew community and recipe calculator to help homebrewers find, create and share homebrew recipes with other homebrewers.</p>
+                <ul class="social">
+                    <li class="facebook"> <a href="https://www.facebook.com/brewgr"> </a> </li>
+                    <li class="twitter"> <a href="https://twitter.com/Brewgr_com"> </a></li>
+                    <li class="flickr"> <a href="http://www.flickr.com/people/83842708@N02/"> </a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4>Other Stuff</h4>
+                <a href="@Url.Action("about", "root", null, "http")">About</a>
+                <a href="@Url.Action("Features", "Root", null, "http")">New Features</a>
+                <a href="@Url.Action("terms", "root", null, "http")">Terms of Use</a>
+                <a href="@Url.Action("privacy", "root", null, "http")">Privacy Policy</a>
+                <a href="@Url.Action("contact", "root", null, "http")">Contact</a>
+            </div>
+            <div class="col-md-3">
+                <h4>Photo Stream</h4>
+                <div class="photo-stream"></div>
+            </div>
+            <div class="col-md-3">
+                <h4>Newsletter</h4>
+                <p>
+                    Brewgr periodically sends out updates, tips and other announcements. Sign up to receive for our free email newsletter.
+                </p>
+                <form id="emailSignUp" action="@Url.Action("EmailSignUp", "Marketing", null, "https")">
+                    <input type="text" name="EmailAddress" onblur="if(this.value == '')this.value = 'Enter your email adress';" onfocus="if(this.value == 'Enter your email adress')this.value = '';" value="Enter your email adress" class="newsletter"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div id="subfoot">
+    <div class="container">
+        <div class="col-md-12">
+            &copy; Copyright @DateTime.Now.Year by <a href="http://brewgr.com">brewgr.com</a>. All Rights Reserved.
+            <a href="https://github.com/ctorx/brewgr.com/releases/tag/v2.2.2" id="buildinfo">v2.2.2</a>
+        </div>
+    </div>
+</div>
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+
+
+@*<div id="footer">
     <div class="container">
 
         <div class="five columns">
@@ -21,7 +74,6 @@
             <a href="@Url.Action("contact", "root", null, "http")">Contact</a>
         </div>
 
-        <!--  Latest Tweets - 1/4 Columns -->
         <div class="four columns">
             <h4>Photo Stream</h4>
             <div class="photo-stream">
@@ -38,10 +90,10 @@
             </form>
         </div>
     </div>
-</div>
+</div>*@
 
-<div id="footer_bottom">
-    <!-- 960 Container -->
+@*<div id="footer_bottom">
+
     <div class="container">
 
         <div class="twelve columns">
@@ -53,11 +105,9 @@
         <div class="four columns tagline">
             Start Crafting Great Beer
         </div>
-    </div><!-- End 960 Container -->
-</div>
+    </div>
+</div>*@
 
-<!-- Back To Top Button -->
-<div id="backtotop"><a href="#"></a></div>
 
 
 <!--

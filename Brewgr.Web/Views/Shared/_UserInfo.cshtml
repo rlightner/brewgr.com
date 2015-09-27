@@ -1,20 +1,20 @@
 ﻿@using Brewgr.Web
 @model Brewgr.Web.Core.Model.UserSummary
            
-<div id="user-info">
+<div id="userinfo">
     <img src="@Model.GetAvatar(40)" width="40" height="40" alt="" />
-        <ul>
+        <ul class="nav">
             <li>
                 <a href="@Url.UserProfileUrl(Model.Username)" class="trigger">@Model.Username</a>                
-                <ul id="user-menu">                    
+                <ul>                    
                     @* Admin Tools *@
                     @if (Model.IsAdmin)
                     {
                         <li><a href="@Url.Action("tools", "admin", null, Url.Https())">Admin Tools</a>
-                            @*<ul>
+                            <ul>
                                 <li><a href="@Url.Action("Affiliates", "Admin")" target="_blank">Affiliates</a></li>
                                 <li><a href="@Url.Action("Exceptions", "Admin")" target="_blank">View Exception Log</a></li>
-                            </ul>*@
+                            </ul>
                         </li>
                     }
                     
