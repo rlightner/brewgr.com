@@ -230,6 +230,12 @@ function layout_onReady() {
         toggleMobileMenu();
     });
 
+    $(window).scroll(function() {
+        if($('#hamburger a.menu').is(':visible')) {
+            $('#navigation').hide();
+        }
+    });
+
     // see: https://css-tricks.com/dangers-stopping-event-propagation/
     $(document).on('click', function (event) {
         if ($(event.target).closest('#navigation').length) {

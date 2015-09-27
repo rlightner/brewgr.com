@@ -28,11 +28,11 @@
 		#logo img { width: 175px; margin-top: 4px; }
 	}
 
-    /* All Mobile Sizes (devices and browser) */
+    /* All Mobile Sizes (devices and browser) -- LANDSCAPE */
 	@media only screen and (max-width: 767px) and (orientation: landscape) {
 	    #navigation { 
             display: block; 
-            left: -171px; 
+            left: -160px; 
             width: auto !important; 
             height: 195px !important; 
 	    }
@@ -41,7 +41,7 @@
 	}
 
 
-	/* All Mobile Sizes (devices and browser) */
+	/* All Mobile Sizes (devices and browser) -- PORTRAIT  */
 	@media only screen and (max-width: 767px) and (orientation: portrait) {
 
         /* Nav Menu */
@@ -52,9 +52,21 @@
 		    height: 460px;
 		}		
 
+        #navigation li { float: none; }
         #navigation ul li a { width: 225px !important; }
 	}
 
+    /* iPhone 5 Retina regardless of IOS version - PORTRAIT */
+    @media (device-height : 568px) and (device-width : 320px) and (-webkit-min-device-pixel-ratio: 2) and (orientation : portrait) {
+        #navigation > li:nth-of-type(4) ul { display: none; } /* hide about menu items to gain space */
+    }
+
+    /* iPhone 5 Retina regardless of IOS version - LANDSCAPE */
+    @media (device-height : 568px) and (device-width : 320px) and (-webkit-min-device-pixel-ratio: 2) and (orientation : landscape) {
+        #navigation { padding-top: 0 !important; top: 58px !important; } /* adjust menu placement */
+    }
+
+    /* All Mobile Sizes (devices and browser)  */
     @media only screen and (max-width: 767px) {
 
         header .container { position: fixed; width: 100%; background: #363636; padding: 0 10px; height: 69px; z-index: 999; } /* sticky header */
@@ -80,7 +92,7 @@
 		    padding-top: 10px;
             color: #fff !important;
 		}		
-		
+
 		#navigation ul { background: none; opacity: 1; position: relative; top: 0; left: 0; width: auto !important; }
 		#navigation > li { margin-bottom: 14px !important; display: block;  }
 		#navigation > li > a { color: #FFD709 !important; font-size: 16px; padding-bottom: 6px !important; padding-top: 6px;  }

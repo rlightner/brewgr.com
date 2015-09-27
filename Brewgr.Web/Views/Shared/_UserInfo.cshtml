@@ -1,24 +1,25 @@
 ﻿@using Brewgr.Web
 @model Brewgr.Web.Core.Model.UserSummary
-           
-<div id="userinfo">
-    <img src="@Model.GetAvatar(40)" width="40" height="40" alt="" />
+
+@if (ViewBag.ActiveUser != null)
+{
+    <div id="userinfo">
+        <img src="@Model.GetAvatar(40)" width="40" height="40" alt=""/>
         <ul class="nav">
             <li>
-                <a href="@Url.UserProfileUrl(Model.Username)" class="trigger">@Model.Username</a>                
-                <ul>                    
+                <a href="@Url.UserProfileUrl(Model.Username)" class="trigger">@Model.Username</a>
+                <ul>
                     @* Admin Tools *@
                     @if (Model.IsAdmin)
                     {
-                        <li><a href="@Url.Action("tools", "admin", null, Url.Https())">Admin Tools</a>
+                        <li>
+                            <a href="@Url.Action("tools", "admin", null, Url.Https())">Admin Tools</a>
                             <ul>
                                 <li><a href="@Url.Action("Affiliates", "Admin")" target="_blank">Affiliates</a></li>
                                 <li><a href="@Url.Action("Exceptions", "Admin")" target="_blank">View Exception Log</a></li>
                             </ul>
                         </li>
-                    }
-                    
-                    @* Partner Tools *@
+                    }@* Partner Tools *@
                     @if (Model.IsPartner)
                     {
                         <li><a href="@Url.Action("tools", "partner", null, Url.Https())"><span>Partner Tools</span></a></li>
@@ -30,7 +31,17 @@
                     <li><a href="@Url.Action("settings", "User", null, Url.Https())">Settings</a></li>
                     <li><a href="@Url.Action("logout", "auth", null, Url.Https())" data-returnurl="@Server.UrlEncode(Request.Url.PathAndQuery)" class="sign-out-link">Sign Out</a></li>
                 </ul>
+
             </li>
         </ul>
-    <div class="clearfix"></div>
-</div>
+        <div class="clearfix"></div>
+    </div>
+}
+else
+{
+    <div id="userlogin">
+        <a href="@Url.Action("login", "auth")" class="btn btn-success" data-returnurl="@Server.UrlEncode(Request.Url.PathAndQuery)"><span class="glyphicon glyphicon-user"></span> Login / Sign Up</a>
+    </div>
+}
+
+

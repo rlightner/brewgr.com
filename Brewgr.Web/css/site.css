@@ -52,7 +52,6 @@ footer h4 {
     font-size: 16px;
     font-weight: bold;
     letter-spacing: -.5px;
-    border-bottom: 1px solid #484848;
     margin: 5px 0 15px;
     padding: 10px 0;
 }
@@ -63,7 +62,7 @@ footer h4 {
 
 }
 /*================================================= */
-/* User Info Box
+/* User Info Box / User Login Button
 /*================================================= */
 #userinfo { background-color: #47484A; float: right; min-width: 200px; height: 53px; -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; padding: 6px 8px; margin: 8px 0; }
 #userinfo > img { display: block; float: left; } 
@@ -72,6 +71,9 @@ footer h4 {
 #userinfo a.trigger, #userinfo a.trigger:hover { border: 0 !important; background: initial !important; }
 #userinfo .nav > li > ul { margin-left: -52px;  }
 
+#userlogin { float: right; margin: 18px 0 0 0; }
+#userlogin a { width: 170px; }
+#userlogin a span { display: inline-block; margin-right: 4px; }
 
 /*================================================= */
 /* Site Announcement
@@ -84,7 +86,7 @@ footer h4 {
 /*================================================= */
 /* Main Nav
 /*================================================= */
-#navigation { float: left; }
+#navigation { float: left; display: inline-block; }
 #navigation li:nth-of-type(2) ul { width: 270px; }
 #navigation li:nth-of-type(2) ul li a { width: 240px; }
 

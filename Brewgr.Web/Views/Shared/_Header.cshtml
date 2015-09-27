@@ -29,7 +29,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">About</a>
+                        <a href="@Url.Action("about", "root")">About</a>
                         <ul>
                             <li><a href="@Url.Action("about", "root")">About Brewgr</a></li>
                             <li><a href="@Url.Action("howitworks", "root")">How It Works</a></li>
@@ -51,17 +51,7 @@
 
                 @* User Info *@
                 <div class="hidden-xs">
-                    @if (ViewBag.ActiveUser != null)
-                    {
-                        @Html.Partial("_UserInfo", ViewBag.ActiveUser as UserSummary)
-                    }
-                    else
-                    {
-                        <div id="auth-choice">
-                            <a href="@Url.Action("login", "auth")" class="button button_green">Create Free Account</a>
-                            <a href="@Url.Action("login", "auth")" id="login" class="login-link" data-returnurl="@Server.UrlEncode(Request.Url.PathAndQuery)">Login</a>
-                        </div>
-                    }
+                    @Html.Partial("_UserInfo", ViewBag.ActiveUser as UserSummary)
                 </div>
 
                 @* Mobile Hamburger *@
