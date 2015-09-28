@@ -365,6 +365,12 @@
     <Content Include="img\mash2.png" />
     <Content Include="img\pliny-the-elder.jpg" />
     <Content Include="img\search-button.png" />
+    <Content Include="img\social_icons\facebook.png" />
+    <Content Include="img\social_icons\github.png" />
+    <Content Include="img\social_icons\instagram.png" />
+    <Content Include="img\social_icons\twitter.png" />
+    <Content Include="img\social_icons\youtube-2.png" />
+    <Content Include="img\social_icons\youtube.png" />
     <Content Include="img\spice-jars.jpg" />
     <Content Include="img\yeast-cake.jpg" />
     <Content Include="img\yeast-vial.jpg" />

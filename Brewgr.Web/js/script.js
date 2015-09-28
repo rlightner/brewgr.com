@@ -208,12 +208,12 @@ function layout_onReady() {
     });
 
     // Recent Recipe Photos
-    if ($('#footer .photo-stream').length > 0) {
+    if ($('footer .photo-stream').length > 0) {
         $.ajax({
             url: '/RecentPhotos',
             success: function(t) {
                 $(t).each(function(i, e) {
-                    $('#footer .photo-stream')
+                    $('footer .photo-stream')
                         .append($('<a href="' + e.Url + '"><img width="59" height="59" alt="" src="' + e.ImageUrl + '" /></a>'));
                 });
             }

@@ -1,16 +1,20 @@
 ﻿@using Brewgr.Web
-@model Brewgr.Web.Core.Model.UserSummary
+@using Brewgr.Web.Core.Model
 
-@if (ViewBag.ActiveUser != null)
+@{
+    var user = ViewBag.ActiveUser as UserSummary;
+}
+
+@if (user != null)
 {
     <div id="userinfo">
-        <img src="@Model.GetAvatar(40)" width="40" height="40" alt=""/>
+        <img src="@user.GetAvatar(40)" width="40" height="40" alt=""/>
         <ul class="nav">
             <li>
-                <a href="@Url.UserProfileUrl(Model.Username)" class="trigger">@Model.Username</a>
+                <a href="@Url.UserProfileUrl(user.Username)" class="trigger">@user.Username</a>
                 <ul>
                     @* Admin Tools *@
-                    @if (Model.IsAdmin)
+                    @if (user.IsAdmin)
                     {
                         <li>
                             <a href="@Url.Action("tools", "admin", null, Url.Https())">Admin Tools</a>
@@ -20,12 +24,12 @@
                             </ul>
                         </li>
                     }@* Partner Tools *@
-                    @if (Model.IsPartner)
+                    @if (user.IsPartner)
                     {
                         <li><a href="@Url.Action("tools", "partner", null, Url.Https())"><span>Partner Tools</span></a></li>
                     }
 
-                    <li><a href="@Url.UserProfileUrl(Model.Username)">Profile</a></li>
+                    <li><a href="@Url.UserProfileUrl(user.Username)">Profile</a></li>
                     <li><a href="@Url.Action("dashboard", "dashboard", null, "http")/#recipes">My Recipes</a></li>
                     <li><a href="@Url.Action("dashboard", "dashboard", null, "http")/#brewsessions">My Brew Sessions</a></li>
                     <li><a href="@Url.Action("settings", "User", null, Url.Https())">Settings</a></li>
