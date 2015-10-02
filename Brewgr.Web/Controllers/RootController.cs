@@ -20,6 +20,7 @@ using AutoMapper;
 
 namespace Brewgr.Web.Controllers
 {
+    [RoutePrefix("")]
 	public class RootController : BrewgrController
 	{
 		readonly IUnitOfWorkFactory<BrewgrContext> UnitOfWorkFactory;
@@ -59,7 +60,56 @@ namespace Brewgr.Web.Controllers
 			this.SeoSitemap = seoSitemap;
 		}
 
-	    public ActionResult Blank()
+        [Route("features")]
+        public ViewResult Features()
+        {
+            return View();
+        }
+
+        [Route("about")]
+        public ActionResult About()
+        {
+            //return Content("About");
+            return View();
+        }
+
+        [Route("terms")]
+        public ViewResult Terms()
+        {
+            return View();
+        }
+
+        [Route("privacy")]
+        public ViewResult Privacy()
+        {
+            return View();
+        }
+
+        [Route("faq")]
+        public ViewResult Faq()
+        {
+            return View();
+        }
+
+        [Route("howitworks")]
+        public ActionResult HowItWorks301()
+        {
+            return RedirectPermanent("~/how-it-works");
+        }
+
+        [Route("how-it-works")]
+        public ViewResult HowItWorks()
+        {
+            return View();
+        }
+
+        [Route("open-source-homebrew-software")]
+        public ViewResult OpenSourceSoftware()
+        {
+            return View();
+        }
+
+        public ActionResult Blank()
 	    {
 	        return this.View();
 	    }
@@ -79,6 +129,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for Index
 		/// </summary>
+		[Route("")]
 		public ActionResult Index()
 		{
             if (this.ActiveUser != null)
@@ -93,50 +144,13 @@ namespace Brewgr.Web.Controllers
 			return View(new HomePageViewModel { NewRecipes = newRecipes, TopContributors = topContrinutors, PopularRecipes = popularRecipes});
 		}
 
-		/// <summary>
-		/// Executes the View for Featires
-		/// </summary>
-		public ViewResult Features()
-		{
-			return View();
-		}
 		
-		/// <summary>
-		/// Executes the View for About
-		/// </summary>
-		public ViewResult About()
-		{
-			return View();
-		}
 
-		/// <summary>
-		/// Executes the View for Terms
-		/// </summary>
-		public ViewResult Terms()
-		{
-			return View();
-		}
-
-		/// <summary>
-		/// Executes the View for Privacy
-		/// </summary>
-		public ViewResult Privacy()
-		{
-			return View();
-		}
-
-		/// <summary>
-		/// Executes the View for Faq
-		/// </summary>
-		public ViewResult Faq()
-		{
-			return View();
-		}
-
-		/// <summary>
-		/// Executes the View for RecentPhotos
-		/// </summary>
-		public JsonResult RecentPhotos()
+        /// <summary>
+        /// Executes the View for RecentPhotos
+        /// </summary>
+        [Route("RecentPhotos")]
+        public JsonResult RecentPhotos()
 		{
 			return Json(this.RecipeService.GetRecentRecipesCached(12)
 				.Select(x => new
@@ -147,10 +161,11 @@ namespace Brewgr.Web.Controllers
 				}), JsonRequestBehavior.AllowGet);
 		}
 
-		/// <summary>
-		/// Executes the View for Contact
-		/// </summary>
-		public ViewResult Contact()
+        /// <summary>
+        /// Executes the View for Contact
+        /// </summary>
+        [Route("contact")]
+        public ViewResult Contact()
 		{
 			if(this.ActiveUser != null)
 			{
@@ -164,7 +179,8 @@ namespace Brewgr.Web.Controllers
 		/// Executes the Http Post View for Contact
 		/// </summary>
 		[HttpPost]
-		public ActionResult Contact(ContactViewModel contactViewModel)
+        [Route("contact")]
+        public ActionResult Contact(ContactViewModel contactViewModel)
 		{
 			if(!this.ValidateAndAppendMessages(contactViewModel))
 			{
@@ -180,24 +196,13 @@ namespace Brewgr.Web.Controllers
 			return RedirectToAction("contact");
 		}
 
+        
+
         /// <summary>
-        /// Executes the View for HowItWorks
+        /// Executes the View for Sitemap
         /// </summary>
-        public ViewResult HowItWorks()
-        {
-            return View();
-        }
-
-        [Route("open-source-homebrew-software")]
-	    public ViewResult OpenSourceSoftware()
-        {
-            return View();
-        }
-
-		/// <summary>
-		/// Executes the View for Sitemap
-		/// </summary>
-		public ContentResult Sitemap()
+        [Route("SiteMap")]
+        public ContentResult Sitemap()
 		{
 			this.Response.ContentType = "text/xml";
 			return Content(this.SeoSitemap.GenerateXml(this.Url));

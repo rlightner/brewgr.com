@@ -38,8 +38,9 @@ function general_onReady() {
     });
     
     // Date Picker
-    $('.datepicker').datepicker();
-    
+    //$('.datepicker').datepicker();
+    console.log("TODO: Replace datepicker with a non jqueryIU version");
+
     $('.recipe-import').click(function () {
         $.colorbox({ html: '<iframe id="ImportBeerXmlIFrame" src="/ImportBeerXmlDialog" width="525" height="200" scrolling="no" />', opacity: .35, overlayClose: false, escKey: false, scrolling: false });
         return false;
@@ -194,14 +195,14 @@ function general_onReady() {
 /* --------------------------------------------------- [ Layout ] ---------------------------------------------------------- */
 function layout_onReady() {
  // Email Signup
-    $('#emailSignUp').submit(function () {
-        $.ajax($(this).attr("action") + '/?emailAddress=' + $('#emailSignUp input:first').val(),
+    $('#newsletterform').submit(function () {
+        $.ajax($(this).attr("action") + '/?emailAddress=' + $('#newsletterform input:first').val(),
 			{
 			    async: true,
 			    cache: false,
 			    success: function (t) {
 			        $.colorbox({ html: '<h1 class="aligncenter">Thank you for signing up!</h1>', opacity: .35, width: 500, height: 70, scrolling: false });
-			        $('#emailSignUp input:first').val('Enter your email adress').trigger('blur');
+			        $('#newsletterform input:first').val('Enter your email adress').trigger('blur');
 			    }
 			});
         return false;
@@ -911,7 +912,7 @@ function dashboard_onReady() {
             url: '/dashboard/all',
             type: 'get',
             success: function (response) {
-                $('.spinner-dashboard').html(response);
+                $('#tabfeed').html(response);
                 $('[data-raty-rating]').each(function(i, e) { wireRatyStar(e); });
                 comment_onReady();
             }
@@ -936,14 +937,14 @@ function dashboard_onReady() {
         });
 
 
-        $('#tab-my-recipes').click(function () {
+        $('[aria-controls=tabrecipes]').click(function () {
             $('.dashboard-nomorerecipes').hide();
             $('.dashboard-nomorebrewsessions').hide();
             $.ajax({
                 url: '/dashboard/recipes',
                 type: 'get',
                 success: function(response) {
-                    $('.spinner-recipe').html(response);
+                    $('#tabrecipes').html(response);
                     if (response.indexOf('NoDashboardItems') > 0) {
                         $('.dashboard-nomore').hide();
                         $('.dashboard-nomorerecipes').show();
@@ -956,30 +957,28 @@ function dashboard_onReady() {
                     return false;
                 }
             });
-            return false;
         });
 
-        $('#tab-my-brewsessions').click(function () {
+        $('[aria-controls=tabsessions]').click(function () {
             $('.dashboard-nomorerecipes').hide();
             $('.dashboard-nomorebrewsessions').hide();
             $.ajax({
                 url: '/dashboard/sessions',
                 type: 'get',
                 success: function(response) {
-                    $('.spinner-sessions').html(response);
+                    $('#tabsessions').html(response);
                     if (response.indexOf('NoDashboardItems') > 0) {
                         $('.dashboard-nomore').hide();
                         $('.dashboard-nomorebrewsessions').show();
                     }
 
-                    $('#tab-tab-3 .CommentText').autosize();
+                    $('#tabrecipes .CommentText').autosize();
 
-                    $('.spinner-sessions .dashboard-more').hide();
+                    $('#tabrecipes .dashboard-more').hide();
                     jQuery("abbr.timeago").timeago();
                     return false;
                 }
             });
-            return false;
         });
 
         // Has Change Event

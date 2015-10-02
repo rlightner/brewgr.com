@@ -19,6 +19,7 @@ using ctorx.Core.Web;
 
 namespace Brewgr.Web.Controllers
 {
+    [RoutePrefix("")]
 	[ForceHttps]
 	public class AuthController : BrewgrController
 	{
@@ -56,6 +57,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the Http Post View for SignUp
 		/// </summary>
+		[Route("signup")]
 		[HttpPost]
 		public ActionResult SignUp(SignUpViewModel signUpViewModel)
 		{
@@ -87,10 +89,11 @@ namespace Brewgr.Web.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Executes the View for SignUpViaDialog
-		/// </summary>
-		[ForceHttps]
+        /// <summary>
+        /// Executes the View for SignUpViaDialog
+        /// </summary>
+        [Route("signupviadialog")]
+        [ForceHttps]
 		[HttpPost]
 		public ViewResult SignUpViaDialog(SignUpViewModel signUpViewModel)
 		{
@@ -146,23 +149,25 @@ namespace Brewgr.Web.Controllers
 			}
 		}
 
-		#endregion
+        #endregion
 
-		#region LOGIN / LOGOUT
+        #region LOGIN / LOGOUT
 
-		/// <summary>
-		/// Executes the View for Login
-		/// </summary>
-		public ViewResult Login()
+        /// <summary>
+        /// Executes the View for Login
+        /// </summary>
+        [Route("login")]
+        public ViewResult Login()
 		{
 			this.InitializeFacebookAuth(Url.Action("OAuthLogin", "Auth", null, "https"));
 			return View();
 		}
 
-		/// <summary>
-		/// Executes the Http Post View for Login
-		/// </summary>
-		[HttpPost]
+        /// <summary>
+        /// Executes the Http Post View for Login
+        /// </summary>
+        [Route("login")]
+        [HttpPost]
 		public ActionResult Login(LoginViewModel loginViewModel)
 		{
 			this.InitializeFacebookAuth(Url.Action("OAuthLogin", "Auth", null, "https"));
@@ -183,10 +188,11 @@ namespace Brewgr.Web.Controllers
 			return SignInAndRedirect(userSummary, loginViewModel.KeepMeLoggedIn);
 		}
 
-		/// <summary>
-		/// Executes the View for LoginViaDialog
-		/// </summary>
-		public ViewResult LoginViaDialog()
+        /// <summary>
+        /// Executes the View for LoginViaDialog
+        /// </summary>
+        [Route("loginviadialog")]
+        public ViewResult LoginViaDialog()
 		{
 			this.InitializeFacebookAuth(string.Concat(this.WebSettings.RootPathSecure, "/OAuthLoginViaDialog"));
 
@@ -200,10 +206,11 @@ namespace Brewgr.Web.Controllers
 			return View();
 		}
 
-		/// <summary>
-		/// Executes the Http Post View for LoginViaDialog
-		/// </summary>
-		[HttpPost]
+        /// <summary>
+        /// Executes the Http Post View for LoginViaDialog
+        /// </summary>
+        [Route("loginviadialog")]
+        [HttpPost]
 		public ViewResult LoginViaDialog(LoginViewModel loginViewModel)
 		{
 			this.InitializeFacebookAuth(string.Concat(this.WebSettings.RootPathSecure, "/OAuthLoginViaDialog"));
@@ -225,10 +232,11 @@ namespace Brewgr.Web.Controllers
 			return View();
 		}
 
-		/// <summary>
-		/// Executes the Logout View
-		/// </summary>
-		public ActionResult Logout()
+        /// <summary>
+        /// Executes the Logout View
+        /// </summary>
+        [Route("logout")]
+        public ActionResult Logout()
 		{
 			this.AuthenticationService.SignOut();
 			Session.Abandon();
@@ -269,7 +277,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the view for ResetPassword
 		/// </summary>
-		[ActionName("reset-password")]
+		[Route("reset-password")]
 		public ViewResult ResetPassword()
 		{
 			return View();
@@ -278,7 +286,7 @@ namespace Brewgr.Web.Controllers
 		/// Executes the post view for ResetPassword
 		/// </summary>
 		[HttpPost]
-		[ActionName("reset-password")]
+		[Route("reset-password")]
 		public ActionResult ResetPassword(PasswordResetViewModel passwordResetViewModel)
 		{
 			if (!this.ValidateAndAppendMessages(passwordResetViewModel))
@@ -323,7 +331,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the SetPassword view
 		/// </summary>
-		[ActionName("set-password")]
+		[Route("set-password")]
 		public ActionResult SetPassword(string authToken)
 		{
 			if(string.IsNullOrWhiteSpace(authToken))
@@ -344,7 +352,7 @@ namespace Brewgr.Web.Controllers
 		/// Executes the Http Post View for SetPassword
 		/// </summary>
 		[HttpPost]
-		[ActionName("set-password")]
+		[Route("set-password")]
 		public ActionResult SetPassword(SetPasswordViewModel setPasswordViewModel)
 		{
 			if(!this.ValidateAndAppendMessages(setPasswordViewModel))
@@ -381,14 +389,15 @@ namespace Brewgr.Web.Controllers
 			return View();
 		}
 
-		#endregion
+        #endregion
 
-		#region CHANGE PASSWORD 
+        #region CHANGE PASSWORD 
 
-		/// <summary>
-		/// Executes the Http Post View for ChangePassword
-		/// </summary>
-		[HttpPost]
+        /// <summary>
+        /// Executes the Http Post View for ChangePassword
+        /// </summary>
+        [Route("changepassword")]
+        [HttpPost]
 		public ActionResult ChangePassword(ChangePasswordViewModel changePasswordViewModel)
 		{
 			if(!this.ValidateAndForwardMessages(changePasswordViewModel))
@@ -420,31 +429,34 @@ namespace Brewgr.Web.Controllers
 		    return Json(new { Success = true, Message = "Your password has been changed" });
 		}
 
-		#endregion
+        #endregion
 
-		# region OAUTH
+        #region OAUTH
 
-		/// <summary>
-		/// Executes the View for fbOpenGraph
-		/// </summary>
-		public ContentResult FbOpenGraph()
+        /// <summary>
+        /// Executes the View for fbOpenGraph
+        /// </summary>
+        [Route("fbopengraph")]
+        public ContentResult FbOpenGraph()
 		{
 			return Content("");
 		}
 
-		/// <summary>
-		/// Executes the Http Post View for FacebookLogin
-		/// </summary>
-		public ActionResult OAuthLogin()
+        /// <summary>
+        /// Executes the Http Post View for FacebookLogin
+        /// </summary>
+        [Route("oauthlogin")]
+        public ActionResult OAuthLogin()
 		{
 			var userSummary = this.ProcessOAuthResponse(Url.Action("OAuthLogin", "Auth", null, "https"));
 			return SignInAndRedirect(userSummary, true); // always persist login when oauth is used
 		}
 
-		/// <summary>
-		/// Executes the OAuthLoginViaDialog view
-		/// </summary>
-		public ActionResult OAuthLoginViaDialog()
+        /// <summary>
+        /// Executes the OAuthLoginViaDialog view
+        /// </summary>
+        [Route("oauthloginviadialog")]
+        public ActionResult OAuthLoginViaDialog()
 		{
 			var userSummary = this.ProcessOAuthResponse(Url.Action("OAuthLoginViaDialog", "Auth", null, "https"));
 			ViewBag.LoginViaDialogSuccess = true;

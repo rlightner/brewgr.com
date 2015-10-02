@@ -8,24 +8,24 @@
                 <a id="logo" href="@Url.Action("Index", "Root", null, "http")"><img src="@Url.Image("~/img/logo.png")" alt="Brewgr" /></a>
             </div>
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                <ul id="navigation" class="nav">
+                <ul id="navigation" class="menu">
                     <li class="hidden-xs hidden-sm"><a href="@Url.Action("Index", "Root", null, "http")">Home</a></li>
                     <li>
                         <a href="#">Recipes</a>
                         <ul>
                             <li><a href="@Url.Action("dashboard", "dashboard", null, "http")/#recipes">My Recipes</a></li>
                             <li><a href="@Url.Action("dashboard", "dashboard", null, "http")/#brewsessions">My Brew Sessions</a> </li>
-                            <li><a href="@Url.Action("homebrew-recipes", "recipe", null, "http")"><span>Homebrew Recipe Catalog</span></a></li>
-                            <li><a href="@Url.Action("homebrew-recipe-calculator", "recipe", null, Url.Https())">Create a New Recipe</a></li>
+                            <li><a href="@Url.Action("Recipes", "recipe", null, "http")"><span>Homebrew Recipe Catalog</span></a></li>
+                            <li><a href="@Url.Action("NewRecipe", "recipe", null, Url.Https())">Create a New Recipe</a></li>
                             <li class="hidden-xs"><a href="#" class="recipe-import" rel="nofollow">Import Beer Xml</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#">Tools</a>
                         <ul>
-                            <li><a href="@Url.Action("homebrew-recipe-calculator", "recipe", null, Url.Https())">Homebrew Recipe Calculator</a></li>
-                            <li><a href="@Url.Action("CalculatorsHydrometerTemp", "content", null, "http")">Hydrometer Correction Calculator</a></li>
-                            <li><a href="@Url.Action("CalculatorsMashSpargeWater", "content", null, "http")">Mash/Sparge Water Infusion Calculator</a></li>
+                            <li><a href="@Url.Action("NewRecipe", "recipe", null, Url.Https())">Homebrew Recipe Calculator</a></li>
+                            <li><a href="@Url.Action("CalculatorsHydrometerTemp", "Calculators", null, "http")">Hydrometer Correction Calculator</a></li>
+                            <li><a href="@Url.Action("CalculatorsMashSpargeWater", "Calculators", null, "http")">Mash/Sparge Water Infusion Calculator</a></li>
                         </ul>
                     </li>
                     <li>

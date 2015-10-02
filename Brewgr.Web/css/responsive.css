@@ -1,6 +1,7 @@
-﻿/*
-    Responsive Media Queries only
-*/
+﻿/* ================================================================================================= */
+/* NOTE: The CSS in this file is for responsiveness only - no layout, reuse */
+/* ::Comment on how the style is modifying layout for responsiveness, where not obvious */
+/* ================================================================================================= */
 
 /*================================================= */
 /* #Media Queries
@@ -8,13 +9,15 @@
 	
 	/* Desktop 1200 */
 	@media only screen and (min-width: 1200px) {
-		ul.nav li a, #userinfo a.trigger, #userinfo a.trigger:hover { font-size: 16px; } /* Larger Nav Menu Links */
+
+		ul.menu li a, #userinfo a.trigger, #userinfo a.trigger:hover { font-size: 16px; } /* Larger Nav Menu Links */
         #userinfo { min-width: 260px; } /* wider user info */
+        #titlebar { margin-bottom: 10px; } /* extra witespace */
         #titlebar h1 { font-size: 30px; margin-top: 10px; } /* Larger Titlebar Text */
 
         footer .photo-stream img { margin: 0 23px 10px 0 !important; }
 
-        /*footer .photo-stream { padding-right: 0 !important; }*/
+        ul.menu li a { font-size: 16px !important; } /* Larger Menu Items */
 	} 
 
     /* Desktop 960 */
@@ -110,6 +113,9 @@
 
         #subfoot { text-align: center; }
         #buildinfo { display: block; text-align: center; }
+
+        /*.btn { display: block; }*/
+
 	}
 
 	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */

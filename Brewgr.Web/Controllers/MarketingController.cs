@@ -9,6 +9,7 @@ using Brewgr.Web.Core.Service;
 
 namespace Brewgr.Web.Controllers
 {
+    [RoutePrefix("marketing")]
 	public class MarketingController : BrewgrController
 	{
 		readonly IUnitOfWorkFactory<BrewgrContext> UnitOfWorkFactory;
@@ -27,6 +28,7 @@ namespace Brewgr.Web.Controllers
 		/// Executes the EmailSignUp view
 		/// </summary>
 		[ForceHttps]
+        [Route("EmailSignUp")]
 		public EmptyResult EmailSignUp()
 		{
 			var emailAddress = Request["emailAddress"];
@@ -58,6 +60,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for Feedback
 		/// </summary>
+		[Route("Feedback")]
 		public ViewResult Feedback()
 		{
 			return View();
@@ -67,6 +70,7 @@ namespace Brewgr.Web.Controllers
 		/// Executes the Http Post View for UserSuggestion
 		/// </summary>
 		[HttpPost]
+        [Route("Feedback")]
 		public ActionResult Feedback(FeedbackViewModel feedbackViewModel)
 		{
 			// Simple Validation (one property model)
@@ -101,6 +105,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for FeedbackReceived
 		/// </summary>
+		[Route("FeedbackReceived")]
 		public ViewResult FeedbackReceived()
 		{
 			return View();

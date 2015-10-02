@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
+using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.SessionState;
 using Brewgr.Web.Core.Data;
 using Brewgr.Web.Core.Model;
 using StackExchange.Exceptional;
@@ -27,19 +30,31 @@ namespace Brewgr.Web
 	{
 		static readonly Regex WwwRegex = new Regex("(http|https)://www\\.", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-		/// <summary>
-		/// Fires on Application Start
-		/// </summary>
-		protected void Application_Start()
+        /// <summary>
+        /// Fires on Init
+        /// </summary>
+        public override void Init()
+        {
+            // Enable Session State for WebApi (for user resolution)
+            this.PostAuthenticateRequest += (s, a) => { HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required); };
+        }
+
+        /// <summary>
+        /// Fires on Application Start
+        /// </summary>
+        protected void Application_Start()
 		{
-			AreaRegistration.RegisterAllAreas();
-			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            AreaRegistration.RegisterAllAreas();
+
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-			MvcHandler.DisableMvcResponseHeader = true;
-
-			FluentValidationModelValidatorProvider.Configure(provider =>
+            
+            MvcHandler.DisableMvcResponseHeader = true;
+            
+            FluentValidationModelValidatorProvider.Configure(provider =>
 			{
 				provider.ValidatorFactory = new ViewModelValidatorFactory();
 			});

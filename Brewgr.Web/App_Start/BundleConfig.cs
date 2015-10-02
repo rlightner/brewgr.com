@@ -43,6 +43,7 @@ namespace Brewgr.Web
 					//"~/css/builder.css",
 
 					"~/css/site.css",
+					"~/css/feature.css",
                     "~/css/responsive.css",
                     "~/css/lib/colorbox.css"));
 		} 

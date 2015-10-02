@@ -12,6 +12,7 @@ using Brewgr.Web.Models;
 
 namespace Brewgr.Web.Controllers
 {
+    [RoutePrefix("")]
 	public class UserController : BrewgrController
 	{
 		readonly IUnitOfWorkFactory<BrewgrContext> UnitOfWorkFactory;
@@ -38,6 +39,7 @@ namespace Brewgr.Web.Controllers
 		/// </summary>
 		[ForceHttps]
 		[Authorize]
+        [Route("Settings")]
 		public ViewResult Settings()
 		{
 			var user = this.UserService.GetUserById(this.ActiveUser.UserId);
@@ -50,7 +52,8 @@ namespace Brewgr.Web.Controllers
 		[HttpPost]
 		[ForceHttps]
 		[Authorize]
-		public ActionResult Settings(UserSettingsViewModel userSettingsViewModel)
+        [Route("Settings")]
+        public ActionResult Settings(UserSettingsViewModel userSettingsViewModel)
 		{
 			if(!this.ValidateAndAppendMessages(userSettingsViewModel))
 			{
@@ -107,7 +110,8 @@ namespace Brewgr.Web.Controllers
 		/// Executes the Http Post View for SetNotifications
 		/// </summary>
 		[HttpPost]
-		public ActionResult SetNotifications(UserSettingsViewModel userSettingsViewModel)
+        [Route("SetNotifications")]
+        public ActionResult SetNotifications(UserSettingsViewModel userSettingsViewModel)
 		{
 			if (userSettingsViewModel.UserId != this.ActiveUser.UserId)
 			{
@@ -211,7 +215,8 @@ namespace Brewgr.Web.Controllers
 		/// Executes the UsernameExists view
 		/// </summary>
 		[Authorize]
-		public ContentResult UsernameExists(string username)
+        [Route("UsernameExists")]
+        public ContentResult UsernameExists(string username)
 		{
 			if(string.IsNullOrWhiteSpace(username))
 			{
@@ -225,7 +230,8 @@ namespace Brewgr.Web.Controllers
 		/// Executes the View for EmailAddressInUse
 		/// </summary>
 		[Authorize]
-		public ContentResult EmailAddressInUse()
+        [Route("EmailAddressInUse")]
+        public ContentResult EmailAddressInUse()
 		{
 			var emailAddress = Request["email"];
 
@@ -237,10 +243,11 @@ namespace Brewgr.Web.Controllers
 			return Content(this.UserService.EmailAddressIsInUse(Server.UrlDecode(emailAddress), this.ActiveUser.UserId) ? "1" : "0");
 		}
 
-		/// <summary>
-		/// Executes the View for UserProfile
-		/// </summary>
-		public ActionResult UserProfile(string userName)
+        /// <summary>
+        /// Executes the View for UserProfile
+        /// </summary>
+        [Route("!/{username}")]
+        public ActionResult UserProfile(string userName)
 		{            
             var user = this.UserService.GetUserByUserName(userName);
 			
@@ -281,7 +288,8 @@ namespace Brewgr.Web.Controllers
 		/// Executes the View for ToggleView
 		/// </summary>
 		[HttpPost]
-		public ActionResult ToggleBrewerFollow(int userId)
+        [Route("ToggleBrewerFollow")]
+        public ActionResult ToggleBrewerFollow(int userId)
 		{
 			using (var unitOfWork = this.UnitOfWorkFactory.NewUnitOfWork())
 			{

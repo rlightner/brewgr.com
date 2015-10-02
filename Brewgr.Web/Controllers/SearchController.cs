@@ -8,6 +8,7 @@ using Brewgr.Web.Models;
 
 namespace Brewgr.Web.Controllers
 {
+    [RoutePrefix("")]
 	public class SearchController : BrewgrController
 	{
 		readonly ISearchService SearchService;
@@ -24,7 +25,8 @@ namespace Brewgr.Web.Controllers
 		/// Executes the View for Search
 		/// </summary>
 		[HttpGet]
-		public ActionResult Search(string searchTerm)
+        [Route("Search/{searchTerm}")]
+        public ActionResult Search(string searchTerm)
 		{
 			if (string.IsNullOrWhiteSpace(searchTerm))
 			{

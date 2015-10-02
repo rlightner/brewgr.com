@@ -72,7 +72,7 @@ namespace Brewgr.Web.Controllers
 		
 		[ForceHttps]
 		[Authorize]
-		[Route("{brewsessionId}/delete")]
+		[Route("{BrewSessionId}/delete")]
 		public ActionResult BrewSessionDelete(int brewSessionId)
 		{
 			using (var unitOfWork = this.UnitOfWorkFactory.NewUnitOfWork())
@@ -118,14 +118,13 @@ namespace Brewgr.Web.Controllers
 				}
 			}
 		}
-
-
-
+        
 		/// <summary>
 		/// Executes the View for BrewSession
 		/// </summary>
 		[ForceHttps]
 		[Authorize]
+        [Route("NewBrewSession")]
 		public ActionResult NewBrewSession(int recipeId)
 		{
 			var recipe = this.RecipeService.GetRecipeById(recipeId);
@@ -162,7 +161,8 @@ namespace Brewgr.Web.Controllers
 		/// </summary>
 		[ForceHttps]
 		[Authorize]
-		public ActionResult BrewSessionEdit(int brewSessionId)
+        [Route("BrewSessionEdit")]
+        public ActionResult BrewSessionEdit(int brewSessionId)
 		{
 			var brewSession = this.RecipeService.GetBrewSessionById(brewSessionId);
 

@@ -36,7 +36,10 @@ namespace Brewgr.Web
 			"http://brewgr.com/calculations/alcohol-content",
 			"http://brewgr.com/calculations/calories",
 			"http://brewgr.com/calculators/hydrometer-correction",
-			"http://brewgr.com/pliny-the-elder-clone-recipes"
+			"http://brewgr.com/calculators/masg-sparge-water-infusion",
+			"http://brewgr.com/pliny-the-elder-clone-recipes",
+            "http://brewgr.com/open-source-homebrew-software",
+            "http://brewgr.com/homebrew-recipe-finder"
 		};
 
 		/// <summary>
@@ -52,7 +55,6 @@ namespace Brewgr.Web
 		/// <summary>
 		/// Generates the Xml Sitemap
 		/// </summary>
-		/// <param name="urlHelper"> </param>
 		public string GenerateXml(UrlHelper urlHelper)
 		{
 			var xml = new StringBuilder();
@@ -97,12 +99,12 @@ namespace Brewgr.Web
 
 			if(uncategorizedPageCount > 0)
 			{
-				xml.AppendLine(this.CreateUrlString(urlHelper.Action("other-homebrew-recipes", "Recipe", new { page = (int?)null }, "http"), DateTime.Now, "daily", "1.0"));
+				xml.AppendLine(this.CreateUrlString(urlHelper.Action("UnCategorized", "Recipe", new { page = (int?)null }, "http"), DateTime.Now, "daily", "1.0"));
 				if(uncategorizedPageCount > 1)
 				{
 					for(var page = 2; page <= uncategorizedPageCount; page++)
 					{
-						xml.AppendLine(this.CreateUrlString(urlHelper.Action("other-homebrew-recipes", "Recipe", new { page = page }, "http"), DateTime.Now, "daily", "1.0"));
+						xml.AppendLine(this.CreateUrlString(urlHelper.Action("UnCategorized", "Recipe", new { page = page }, "http"), DateTime.Now, "daily", "1.0"));
 					}
 				}
 			}

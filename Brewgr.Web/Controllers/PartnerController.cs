@@ -15,6 +15,7 @@ namespace Brewgr.Web.Controllers
 {
 	[Authorize]
 	[ForceHttps]
+    [RoutePrefix("partner")]
 	public class PartnerController : BrewgrController
 	{
 		readonly IUnitOfWorkFactory<BrewgrContext> UnitOfWorkFactory;
@@ -37,6 +38,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the PartnerTools View
 		/// </summary>
+		[Route("tools")]
 		public ActionResult Tools()
 		{
 			// Fetch their linked Partners
@@ -63,10 +65,11 @@ namespace Brewgr.Web.Controllers
 			return this.View(partners);
 		}
 
-		/// <summary>
-		/// Executes the Partners Dashboard View
-		/// </summary>
-		public ActionResult Dashboard(int partnerId)
+        /// <summary>
+        /// Executes the Partners Dashboard View
+        /// </summary>
+        [Route("dashboard")]
+        public ActionResult Dashboard(int partnerId)
 		{
 			var partner = this.GetPartnerIfAuthorized(partnerId);
 			if(partner == null)
@@ -79,12 +82,13 @@ namespace Brewgr.Web.Controllers
 			return this.View(new PartnerDashboardViewModel { Partner = partner, Services = services });
 		}
 
-		#region PARTNER SETTINGS 
+        #region PARTNER SETTINGS 
 
-		/// <summary>
-		/// Executes the Partner Settings View
-		/// </summary>
-		public ActionResult Settings(int partnerId)
+        /// <summary>
+        /// Executes the Partner Settings View
+        /// </summary>
+        [Route("settings")]
+        public ActionResult Settings(int partnerId)
 		{
 			var partner = this.GetPartnerIfAuthorized(partnerId);
 			if (partner == null)
@@ -101,7 +105,8 @@ namespace Brewgr.Web.Controllers
 		/// Executes the Partner Settings View
 		/// </summary>
 		[HttpPost]
-		public ActionResult Settings(PartnerSettingsViewModel partnerSettingsViewModel)
+        [Route("settings")]
+        public ActionResult Settings(PartnerSettingsViewModel partnerSettingsViewModel)
 		{
 			if(!this.ValidateAndAppendMessages(partnerSettingsViewModel))
 			{
@@ -136,11 +141,12 @@ namespace Brewgr.Web.Controllers
 			}
 		}
 
-		#endregion
+        #endregion
 
-		#region SERVICE SETTINGS
+        #region SERVICE SETTINGS
 
-		public ActionResult ServiceSettings(int partnerId, int partnerServiceTypeId)
+        [Route("servicesettings")]
+        public ActionResult ServiceSettings(int partnerId, int partnerServiceTypeId)
 		{
 			// Choose Appropriate View For Service Type Id
 			switch(partnerServiceTypeId)
@@ -158,7 +164,8 @@ namespace Brewgr.Web.Controllers
 		/// Executes the disable partner service view
 		/// </summary>
 		[HttpPost]
-		public ActionResult SetPartnerServiceStatus(PartnerServiceStatusViewModel serviceStatusViewModel)
+        [Route("SetPartnerServiceStatus")]
+        public ActionResult SetPartnerServiceStatus(PartnerServiceStatusViewModel serviceStatusViewModel)
 		{
 			if (serviceStatusViewModel == null)
 			{
@@ -203,14 +210,15 @@ namespace Brewgr.Web.Controllers
 			}
 		}
 
-		#endregion
+        #endregion
 
-		#region SEND TO SHOP 
+        #region SEND TO SHOP 
 
-		/// <summary>
-		/// Executes the Send To Shop Settings View
-		/// </summary>
-		public ActionResult SendToShopSettings(int partnerId)
+        /// <summary>
+        /// Executes the Send To Shop Settings View
+        /// </summary>
+        [Route("SendToShopSettings")]
+        public ActionResult SendToShopSettings(int partnerId)
 		{
 			var partner = this.GetPartnerIfAuthorized(partnerId);
 			if (partner == null)
@@ -245,7 +253,8 @@ namespace Brewgr.Web.Controllers
 		/// Executes the SendToShopSettings post view
 		/// </summary>
 		[HttpPost]
-		public ActionResult SendToShopSettings(PartnerSendToShopSettings partnerSendToShopSettings)
+        [Route("SendToShopSettings")]
+        public ActionResult SendToShopSettings(PartnerSendToShopSettings partnerSendToShopSettings)
 		{
 			var partner = this.GetPartnerIfAuthorized(partnerSendToShopSettings.PartnerId);
 			if (partner == null)
@@ -273,10 +282,11 @@ namespace Brewgr.Web.Controllers
 			}
 		}
 
-		/// <summary>
-		/// Executes the SendToShopIngredients View
-		/// </summary>
-		public ActionResult SendToShopIngredients(int partnerId)
+        /// <summary>
+        /// Executes the SendToShopIngredients View
+        /// </summary>
+        [Route("SendToShopIngredients")]
+        public ActionResult SendToShopIngredients(int partnerId)
 		{
 			var partner = this.GetPartnerIfAuthorized(partnerId);
 			if (partner == null)
@@ -308,7 +318,8 @@ namespace Brewgr.Web.Controllers
 		/// Executes the SendToShopIngredients View
 		/// </summary>
 		[HttpPost]
-		public ActionResult SendToShopIngredients(SendToShopIngredientsViewModel partnerSendToShopIngredientsViewModel)
+        [Route("SendToShopIngredients")]
+        public ActionResult SendToShopIngredients(SendToShopIngredientsViewModel partnerSendToShopIngredientsViewModel)
 		{
 			var partner = this.GetPartnerIfAuthorized(partnerSendToShopIngredientsViewModel.PartnerId);
 			if (partner == null)

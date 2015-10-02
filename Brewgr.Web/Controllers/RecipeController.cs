@@ -23,6 +23,7 @@ using Brewgr.Web.Core.Model;
 
 namespace Brewgr.Web.Controllers
 {
+    [RoutePrefix("")]
 	public class RecipeController : BrewgrController
 	{
 		readonly IUnitOfWorkFactory<BrewgrContext> UnitOfWorkFactory;
@@ -62,7 +63,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for Recipes
 		/// </summary>
-		[ActionName("homebrew-recipes")]
+		[Route("homebrew-recipes")]
 		public ViewResult Recipes()
 		{
 			var styles = this.BeerStyleService.GetStyleSummaries();
@@ -71,11 +72,11 @@ namespace Brewgr.Web.Controllers
 			var model = Mapper.Map(styles, new BrowseRecipesViewModel());
 			model.UnCategorizedRecipeCount = uncategorizedCount;
 
-			return View("Recipes", model);
+			return View(model);
 		}
 
-		[ActionName("other-homebrew-recipes")]
-		public ActionResult UnCategorizedRecipes(int? page)
+		[Route("other-homebrew-recipes")]
+		public ActionResult UnCategorized(int? page)
 		{
 			var pager = new Pager { CurrentPage = page ?? 1, ItemsPerPage = this.WebSettings.DefaultRecipesPerPage };
 
@@ -86,13 +87,14 @@ namespace Brewgr.Web.Controllers
 				return this.Issue404();
 			}
 
-			return View("UnCategorized", new UnCategorizedRecipesViewModel { Recipes = recipes, Pager = pager, 
-				BaseUrl = Url.Action("other-homebrew-recipes", "Recipe", new { page = (int?)null }, "http")});
+			return View(new UnCategorizedRecipesViewModel { Recipes = recipes, Pager = pager, 
+				BaseUrl = Url.Action("UnCategorized", "Recipe", new { page = (int?)null }, "http")});
 		}
 
 		/// <summary>
 		/// Executes the View for StyleDetail
 		/// </summary>
+		[Route("StyleDetail")]
 		public ActionResult StyleDetail(string urlFriendlyName, int? page)
 		{
 			// 301 for old page 1 URL from previous button
@@ -138,6 +140,7 @@ namespace Brewgr.Web.Controllers
 		[HttpPost]
 		[Authorize]
 		[ForceHttps]
+        [Route("SaveRecipe")]
 		public ActionResult SaveRecipe(PostedRecipeViewModel postedRecipeViewModel)
 		{
 			// NOTE: This action handles saving for both new recipes
@@ -436,6 +439,7 @@ namespace Brewgr.Web.Controllers
 		/// Executes the View for RecipeClone
 		/// </summary>
 		[ForceHttps]
+        [Route("recipe/{recipeid}/clone")]
 		public ActionResult RecipeClone(int recipeId)
 		{
 			var recipe = this.RecipeService.GetRecipeById(recipeId);
@@ -469,16 +473,16 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for RecipeBuilder301
 		/// </summary>
-		[ActionName("homebrew-recipe-builder")]
+		[Route("homebrew-recipe-builder")]
 		public ActionResult RecipeBuilder301()
 		{
-			return RedirectPermanent(Url.Action("homebrew-recipe-calculator"));
+			return RedirectPermanent(Url.Action("NewRecipe"));
 		}
 
 		/// <summary>
 		/// Executes the View for NewRecipe
 		/// </summary>
-		[ActionName("homebrew-recipe-calculator")]
+		[Route("homebrew-recipe-calculator")]
 		[ForceHttps]
 		public ViewResult NewRecipe()
 		{
@@ -500,7 +504,7 @@ namespace Brewgr.Web.Controllers
 
 		#region NEW ING ROWS
 
-		[ActionName("buildertemplates-v2")]
+		[Route("buildertemplates-v2")]
 		[ForceHttps]
 		public ViewResult BuilderTemplates()
 		{
@@ -516,6 +520,7 @@ namespace Brewgr.Web.Controllers
 		/// </summary>
 		[Authorize]
 		[ForceHttps]
+        [Route("recipe/{recipeid}/edit")]
 		public ActionResult RecipeEdit(int recipeId)
 		{
 			var recipe = this.RecipeService.GetRecipeById(recipeId);
@@ -558,6 +563,7 @@ namespace Brewgr.Web.Controllers
 		/// </summary>
 		[Authorize]
 		[ForceHttps]
+        [Route("BuilderChangeRecipePhoto")]
 		public ActionResult BuilderChangeRecipePhoto(int recipeId)
 		{
 			var recipe = this.RecipeService.GetRecipeById(recipeId);
@@ -578,6 +584,7 @@ namespace Brewgr.Web.Controllers
 		/// </summary>
 		[HttpPost]
 		[ForceHttps]
+        [Route("BuilderChangeRecipePhoto")]
 		public ActionResult BuilderChangeRecipePhoto(ChangeRecipePhotoViewModel changeRecipePhotoViewModel)
 		{
 			using(var unitOfWork = this.UnitOfWorkFactory.NewUnitOfWork())
@@ -627,6 +634,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for RecipeDetail
 		/// </summary>
+		[Route("recipe/{recipeid}/{recipename}")]
 		public ActionResult RecipeDetail(int recipeId)
 		{
 			var recipe = this.RecipeService.GetRecipeById(recipeId);
@@ -701,6 +709,7 @@ namespace Brewgr.Web.Controllers
 
  
         [HttpPost]
+        [Route("AddComment")]
         public ActionResult AddComment(CommentAddViewModel commentAddViewModel)
         {
             if (!commentAddViewModel.Validate().IsValid)
@@ -767,6 +776,7 @@ namespace Brewgr.Web.Controllers
         /// Executes the View for RecipeDelete
         /// </summary>
         [ForceHttps]
+        [Route("recipe/{recipeid}/delete")]
         public ActionResult RecipeDelete(int recipeId)
         {
             using (var unitOfWork = this.UnitOfWorkFactory.NewUnitOfWork())
@@ -825,7 +835,7 @@ namespace Brewgr.Web.Controllers
 
 		#region PRINT RECIPE 
 
-		[Route("recipe/{recipeid:int}/print")]
+		[Route("{recipeid:int}/print")]
 		public ActionResult RecipePrint(int recipeId)
 		{
 			var recipe = this.RecipeService.GetRecipeById(recipeId);
@@ -849,14 +859,15 @@ namespace Brewgr.Web.Controllers
 			return this.View(recipeDetailViewModel);
 		}
 
-		#endregion
+        #endregion
 
-		#region RECIPE BREW SESSIONS
+        #region RECIPE BREW SESSIONS
 
-		/// <summary>
-		/// Executes the View for RecipeBrewSessions
-		/// </summary>
-		public ActionResult RecipeBrewSessions(int recipeId)
+        /// <summary>
+        /// Executes the View for RecipeBrewSessions
+        /// </summary>
+        [Route("recipe/{recipeid}/{recipename}/brew-sessions")]
+        public ActionResult RecipeBrewSessions(int recipeId)
 		{
 			var recipeSummary = this.RecipeService.GetRecipeSummaryById(recipeId);
 
@@ -883,6 +894,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for Export
 		/// </summary>
+		[Route("recipe/{recipeid}/beerxml")]
 		public ActionResult BeerXml(int recipeId)
 		{
 			var recipe = this.RecipeService.GetRecipeById(recipeId);
@@ -916,6 +928,7 @@ namespace Brewgr.Web.Controllers
 		/// Executes the View for ImportBeerXml
 		/// </summary>
 		[ForceHttps]
+        [Route("ImportBeerXmlDialog")]
 		public ViewResult ImportBeerXmlDialog()
 		{
 			return View();
@@ -926,7 +939,8 @@ namespace Brewgr.Web.Controllers
 		/// </summary>
 		[HttpPost]
 		[ForceHttps]
-		public ActionResult ImportBeerXmlDialog(HttpPostedFileBase beerXmlFile)
+        [Route("ImportBeerXmlDialog")]
+        public ActionResult ImportBeerXmlDialog(HttpPostedFileBase beerXmlFile)
 		{
 			this.AppendMessage(new InfoMessage { Text = "The recipe has been imported below. Please review before saving." });
 

@@ -18,9 +18,9 @@ using Brewgr.Web.Core.Configuration;
 using Brewgr.Web.Core.Model;
 using Brewgr.Web.Core.Service;
 
-namespace Brewgr.Web.Controllers
+namespace Brewgr.Web
 {
-	public abstract class BrewgrController : Controller
+    public abstract class BrewgrController : Controller
 	{
 		readonly IMessageStore ForwardedMessageStore;
 		readonly IUserResolver UserResolver;

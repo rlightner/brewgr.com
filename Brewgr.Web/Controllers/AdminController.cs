@@ -20,6 +20,7 @@ namespace Brewgr.Web.Controllers
 {
 	[ForceHttps]
 	[Authorize]
+    [RoutePrefix("admin")]
 	public class AdminController : BrewgrController
 	{
 		readonly IUnitOfWorkFactory<BrewgrContext> UnitOfWorkFactory;
@@ -67,6 +68,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the ImpersonateView
 		/// </summary>
+		[Route("impersonate/{username}")]
 		public ActionResult Impersonate(string username)
 		{
 			var user = this.UserService.GetUserByUserName(username);
@@ -87,6 +89,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for Tools
 		/// </summary>
+		[Route("tools")]
 		public ViewResult Tools()
 		{
 			var siteStats = this.AdminService.GetSiteStats();
@@ -106,6 +109,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for Exceptions
 		/// </summary>
+		[Route("{resource}/{subResource}")]
 		public ActionResult Exceptions(string resource, string subResource)
 		{
 			var context = System.Web.HttpContext.Current;
@@ -119,6 +123,7 @@ namespace Brewgr.Web.Controllers
 		/// Executes the UploadStyle View
 		/// </summary>
 		[HttpPost]
+        [Route("uploadstyle")]
         public ActionResult UploadStyle(HttpPostedFileBase stylefile)
         {
 
@@ -146,6 +151,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for ImportProducts
 		/// </summary>
+		[Route("affiliates")]
 		public ViewResult Affiliates()
 		{
 			return View();
@@ -155,6 +161,7 @@ namespace Brewgr.Web.Controllers
 		/// Executes the Http Post View for ImportMidwestProducts
 		/// </summary>
 		[HttpPost]
+        [Route("ImportMidwestProducts")]
 		public ActionResult ImportMidwestProducts(ImportProductsViewModel importProductsViewModel)
 		{
 			if (importProductsViewModel.ProductFeedFile == null)
@@ -185,6 +192,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the ResendSendToShopOrder action
 		/// </summary>
+		[Route("ResendSendToShopOrder/{sendToShopId}")]
 		public ActionResult ResendSendToShopOrder(int sendToShopId)
 		{
 			this.SendToShopService.Notify(sendToShopId, "brewgr@brewgr.com");
@@ -196,6 +204,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for AdminCss
 		/// </summary>
+		[Route("AdminCss")]
 		public FileResult AdminCss()
 		{
 			var filePath = Server.MapPath("../Views/Admin/admin.css");
@@ -206,6 +215,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for AdminJs
 		/// </summary>
+		[Route("AdminJs")]
 		public FileResult AdminJs()
 		{
 			var filePath = Server.MapPath("../Views/Admin/admin.js");
@@ -220,6 +230,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for Resolvefeedback
 		/// </summary>
+		[Route("Resolvefeedback/{userFeedbackId}")]
 		public EmptyResult Resolvefeedback(int userFeedbackId)
 		{
 			if (userFeedbackId < 1)
@@ -239,6 +250,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for RemoveCacheItem
 		/// </summary>
+		[Route("RemoveCacheItem/{key}")]
 		public EmptyResult RemoveCacheItem(string key)
 		{
 			if(string.IsNullOrWhiteSpace(key))
@@ -254,6 +266,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for PromoteFermentable
 		/// </summary>
+		[Route("PromoteFermentable")]
 		[HttpPost]
 		public EmptyResult PromoteFermentable(PromoteIngredientViewModel promoteIngredientViewModel )
 		{
@@ -274,6 +287,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for PromoteHop
 		/// </summary>
+		[Route("PromoteHop")]
 		[HttpPost]
 		public EmptyResult PromoteHop(PromoteIngredientViewModel promoteIngredientViewModel)
 		{
@@ -293,6 +307,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for PromoteYeast
 		/// </summary>
+		[Route("PromoteYeast")]
 		[HttpPost]
 		public EmptyResult PromoteYeast(PromoteIngredientViewModel promoteIngredientViewModel)
 		{
@@ -313,6 +328,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for PromoteAdjunct
 		/// </summary>
+		[Route("PromoteAdjunct")]
 		[HttpPost]
 		public EmptyResult PromoteAdjunct(PromoteIngredientViewModel promoteIngredientViewModel)
 		{

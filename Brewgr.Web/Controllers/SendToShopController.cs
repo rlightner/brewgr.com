@@ -11,6 +11,7 @@ using ctorx.Core.Messaging;
 
 namespace Brewgr.Web.Controllers
 {
+    [RoutePrefix("SendToShop")]
 	public class SendToShopController : BrewgrController
 	{
 		readonly IUnitOfWorkFactory<BrewgrContext> UnitOfWorkFactory;
@@ -52,7 +53,8 @@ namespace Brewgr.Web.Controllers
 		/// Executes the Send to Shop view
 		/// </summary>
 		[Authorize]
-		public ActionResult Create(int recipeId)
+        [Route("Create")]
+        public ActionResult Create(int recipeId)
 		{
 			var partnerId = this.PartnerIdResolver.Resolve();
 
@@ -91,7 +93,8 @@ namespace Brewgr.Web.Controllers
 		/// </summary>
 		[HttpPost]
 		[Authorize]
-		public ActionResult CreateOrder(SendToShopOrderViewModel sendToShopOrderViewModel)
+        [Route("CreateOrder")]
+        public ActionResult CreateOrder(SendToShopOrderViewModel sendToShopOrderViewModel)
 		{
 			if(!this.ValidateWithoutMessaging(sendToShopOrderViewModel))
 			{
@@ -130,7 +133,8 @@ namespace Brewgr.Web.Controllers
 		/// Executes the Confirmation view
 		/// </summary>
 		[Authorize]
-		public ActionResult Confirmation()
+        [Route("Confirmation")]
+        public ActionResult Confirmation()
 		{
 			var partnerId = this.PartnerIdResolver.Resolve();
 			if(!partnerId.HasValue)
@@ -143,10 +147,11 @@ namespace Brewgr.Web.Controllers
 			return this.View();
 		}
 
-		/// <summary>
-		/// Handles an action link for Send-To-Shop
-		/// </summary>
-		public ActionResult Action(string actionToPerform, string token)
+        /// <summary>
+        /// Handles an action link for Send-To-Shop
+        /// </summary>
+        [Route("Action/{actionToPerform}/{token}")]
+        public ActionResult Action(string actionToPerform, string token)
 		{
 			// TODO: Add Check to ensure user is logged in and they are a Partner Admin
 

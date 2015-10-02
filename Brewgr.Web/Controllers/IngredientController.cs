@@ -29,6 +29,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for Fermentables
 		/// </summary>
+		[Route("fermentables")]
 		public ViewResult Fermentables()
 		{
 			var fermentables = this.RecipeDataService.GetUsableIngredients<Fermentable>(null).OrderBy(x => x.Lovibond).ThenBy(x => x.Name).ToList();
@@ -39,10 +40,11 @@ namespace Brewgr.Web.Controllers
 			return View(model);
 		}
 
-		/// <summary>
-		/// Executes the View for Hops
-		/// </summary>
-		public ViewResult Hops()
+        /// <summary>
+        /// Executes the View for Hops
+        /// </summary>
+        [Route("hops")]
+        public ViewResult Hops()
 		{
 			var hops = this.RecipeDataService.GetUsableIngredients<Hop>(null).OrderBy(x => x.Name).ThenBy(x => x.Name).ToList();
 			var topTenIds = this.RecipeDataService.GetTopHopIds();
@@ -52,10 +54,11 @@ namespace Brewgr.Web.Controllers
 			return View(model);
 		}
 
-		/// <summary>
-		/// Executes the View for Yeasts
-		/// </summary>
-		public ViewResult Yeasts()
+        /// <summary>
+        /// Executes the View for Yeasts
+        /// </summary>
+        [Route("yeasts")]
+        public ViewResult Yeasts()
 		{
 			var yeasts = this.RecipeDataService.GetUsableIngredients<Yeast>(null).OrderBy(x => x.Name).ThenBy(x => x.Name).ToList();
 			var topTenIds = this.RecipeDataService.GetTopYeastIds();
@@ -65,10 +68,11 @@ namespace Brewgr.Web.Controllers
 			return View(model);
 		}
 
-		/// <summary>
-		/// Executes the View for Adjuncts
-		/// </summary>
-		public ViewResult Adjuncts()
+        /// <summary>
+        /// Executes the View for Adjuncts
+        /// </summary>
+        [Route("adjuncts")]
+        public ViewResult Adjuncts()
 		{
 			var adjuncts = this.RecipeDataService.GetUsableIngredients<Adjunct>(null).OrderBy(x => x.Name).ThenBy(x => x.Name).ToList();
 			var topTenIds = this.RecipeDataService.GetTopAdjunctIds();
@@ -78,47 +82,48 @@ namespace Brewgr.Web.Controllers
 			return View(model);
 		}
 
-		//public ActionResult IngredientDetail<TIngredientType>(string viewName, int ingredientId, int? page) where TIngredientType : class, IIngredient
-		//{
-		//	// Get ingredient
-		//	var ingredient = this.RecipeDataService.GetIngredientById<TIngredientType>(ingredientId);
+        //public ActionResult IngredientDetail<TIngredientType>(string viewName, int ingredientId, int? page) where TIngredientType : class, IIngredient
+        //{
+        //	// Get ingredient
+        //	var ingredient = this.RecipeDataService.GetIngredientById<TIngredientType>(ingredientId);
 
-		//	if (ingredient == null)
-		//	{
-		//		return this.Issue404();
-		//	}
+        //	if (ingredient == null)
+        //	{
+        //		return this.Issue404();
+        //	}
 
-		//	var pager = new Pager { CurrentPage = page ?? 1, ItemsPerPage = this.WebSettings.DefaultRecipesPerPage };
+        //	var pager = new Pager { CurrentPage = page ?? 1, ItemsPerPage = this.WebSettings.DefaultRecipesPerPage };
 
-		//	// Get Recipes
-		//	var ingRecipes = this.RecipeDataService.GetIngredientRecipes<TIngredientType>(ingredientId, pager);
+        //	// Get Recipes
+        //	var ingRecipes = this.RecipeDataService.GetIngredientRecipes<TIngredientType>(ingredientId, pager);
 
-		//	// Get Best Match Product
-		//	var product = this.AffiliateService.GetBestMatchProduct<TIngredientType>(ingredientId);
+        //	// Get Best Match Product
+        //	var product = this.AffiliateService.GetBestMatchProduct<TIngredientType>(ingredientId);
 
-		//	if (ingRecipes.Any() && !pager.IsInRange())
-		//	{
-		//		return this.Issue404();
-		//	}
+        //	if (ingRecipes.Any() && !pager.IsInRange())
+        //	{
+        //		return this.Issue404();
+        //	}
 
-		//	var model = new IngredientDetailViewModel<TIngredientType>
-		//	{
-		//		Ingredient = ingredient,
-		//		AffiliateProduct = product,
-		//		Pager = pager,
-		//		Recipes = ingRecipes,
-		//		BaseUrl = Url.FermentableDetailUrl(ingredientId, ingredient.Name)
-		//	};
+        //	var model = new IngredientDetailViewModel<TIngredientType>
+        //	{
+        //		Ingredient = ingredient,
+        //		AffiliateProduct = product,
+        //		Pager = pager,
+        //		Recipes = ingRecipes,
+        //		BaseUrl = Url.FermentableDetailUrl(ingredientId, ingredient.Name)
+        //	};
 
-		//	return View(viewName, model);
-		//}
+        //	return View(viewName, model);
+        //}
 
-		///// <summary>
-		///// Executes the View for IngredientDetail
-		///// </summary>
-		//public ActionResult FermentableDetail(int ingredientId, int? page)
-		//{
-		//	return IngredientDetail<Fermentable>("FermentableDetail", ingredientId, page);
-		//}
-	}
+        ///// <summary>
+        ///// Executes the View for IngredientDetail
+        ///// </summary>
+        /// [Route("fermentables/{ingredientId}/{name}/{page}")]
+        //public ActionResult FermentableDetail(int ingredientId, int? page)
+        //{
+        //	return IngredientDetail<Fermentable>("FermentableDetail", ingredientId, page);
+        //}
+    }
 }

@@ -1,0 +1,8 @@
+﻿/* ================================================================================================= */
+/* NOTE: The CSS in this file is for view specific styles only -- no layout or reusable styles */
+/* ::Feature specific RESPONSIVE features should be included in this file */
+/* ================================================================================================= */
+
+/* -- How It Works -- */
+#vw-howitworks .row > .col-md-9 a { display: block; margin-top: 4px; }
+#vw-howitworks > .row > .col-md-3 { margin-top: 5%; }

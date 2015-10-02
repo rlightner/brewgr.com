@@ -25,10 +25,8 @@
 @Html.Partial("_TitleBar")		
 
 @*  Middle Part Start *@
-<div class="container">
-    @Html.Partial("_SiteMessages", ViewBag.Messages as IList<IMessage>)
-    @RenderBody()
-</div>
+@Html.Partial("_SiteMessages", ViewBag.Messages as IList<IMessage>)
+@RenderBody()
 
 <div class="container clearfix spacer"></div>
 
