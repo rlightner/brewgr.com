@@ -3,24 +3,16 @@
 @using Brewgr.Web
 @{
 	ViewBag.Title = "Homebrew Website and Recipe Calculator Features";
-	ViewBag.Description = "Brewgr is a homebrew recipe calculator with support for all grain and extract, recipe cloning, style guide, homebrew calculations, custom ingredients and more";
 }
 
-<div class="eleven columns view-features">
 
-    @*<h2>February 3, 2014</h2>
-        <p>
-            When we originally implemented Brew Session functionality on the site, the project was a bit rushed and ended up not working
-            quite as well as we had liked.  The system was rigid with lots of requirements and was a bit difficult to find.  We've known
-            this was a problem for some time and we've finally completed a significant overhaul of brew sessions which we hope will make
-            tracking your brews much easier from brew day through to enjoyment of the finished product.
-        </p>
+@* 
+    TODO: This page should be changed to list the features that the app offers rather than listing changes as they come out
+    TODO: This page should be changed to list the features that the app offers rather than listing changes as they come out
+    TODO: This page should be changed to list the features that the app offers rather than listing changes as they come out
+*@
 
-        <h3>Moving Between Your Recipe and Brew Session</h3>
-        <p>
-            Previously, going from your recipe to your brew session was difficult taking
-        </p>*@
-
+<div id="vw-features" class="container">
     <h2>February 5, 2014</h2>
 
     <p>
@@ -396,19 +388,4 @@
         <li>Use our homebrew Style Guide to find out which BJCP (Beer Judge Certification Program) styles your recipes most closely match</li>
         <li>Quickly create new homebrew recipes from existing recipes using the Recipe Clone tool.</li>
     </ul>
-
 </div>
-<div class="five columns">
-    <div class="large-notice">
-        @Html.Partial("_SuggestionForm", new FeedbackViewModel())
-    </div>
-</div>
-
-@section Scripts
-{
-    <script type="text/javascript">
-        $(function () {
-            $(".group1").colorbox({ rel: 'group1' });
-        });
-    </script>
-}

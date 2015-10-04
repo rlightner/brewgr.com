@@ -11,7 +11,7 @@
                 <ul id="navigation" class="menu">
                     <li class="hidden-xs hidden-sm"><a href="@Url.Action("Index", "Root", null, "http")">Home</a></li>
                     <li>
-                        <a href="#">Recipes</a>
+                        <a href="@Url.Action("Recipes", "recipe", null, "http")">Recipes</a>
                         <ul>
                             <li><a href="@Url.Action("dashboard", "dashboard", null, "http")/#recipes">My Recipes</a></li>
                             <li><a href="@Url.Action("dashboard", "dashboard", null, "http")/#brewsessions">My Brew Sessions</a> </li>
@@ -21,7 +21,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Tools</a>
+                        <a>Tools</a>
                         <ul>
                             <li><a href="@Url.Action("NewRecipe", "recipe", null, Url.Https())">Homebrew Recipe Calculator</a></li>
                             <li><a href="@Url.Action("CalculatorsHydrometerTemp", "Calculators", null, "http")">Hydrometer Correction Calculator</a></li>

@@ -1,0 +1,29 @@
+﻿/* ================================================================================================= */
+/* NOTE: The CSS in this file is for view specific styles only -- no layout or reusable styles */
+/* ::Feature specific responsive features SHOULD be included in this file */
+/* ::Build off of bootstrap styles first and only define styles when absolutely necessary */
+/* ================================================================================================= */
+
+/* Adsense Ad */
+.ad { margin: 18px 0; }
+
+/* -- About -- */
+#vw-about h4 { margin-top: 18px; }
+#vw-about .col-md-4 { margin-top: 18px; }
+
+/* -- How It Works -- */
+#vw-howitworks .row > .col-md-9 a { display: block; margin-top: 4px; }
+#vw-howitworks > .row > .col-md-3 { margin-top: 10%; }
+@media only screen and (max-width: 767px) {
+    #vw-howitworks img { width: 90%; height: auto; }
+}
+
+/* -- Features -- */
+#vw-features img { display: block; margin: 3% auto; }
+@media only screen and (max-width: 767px) {
+    #vw-features img  { width: 90%; height: auto; }
+}
+
+/* -- Recipes --*/
+#vw-recipes .panel { min-height: 215px; }
+#vw-recipes .panel h3 { margin-top: 0; }
