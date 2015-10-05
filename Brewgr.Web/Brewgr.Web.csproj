@@ -356,13 +356,12 @@
     <Content Include="css\lib\bootstrap.min.css" />
     <Content Include="css\partners.css" />
     <Content Include="css\sendtoshop.css" />
-    <Content Include="css\responsive.css" />
     <Content Include="css\shortcodes.css" />
     <Content Include="css\skeleton.css" />
     <Content Include="css\smoothness\images\animated-overlay.gif" />
     <Content Include="css\smoothness\jquery-ui-1.10.3.custom.css" />
-    <Content Include="css\site.css" />
-    <Content Include="css\targeted.css" />
+    <Content Include="css\structure.css" />
+    <Content Include="css\content.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="img\baby-hop-cones.jpg" />
     <Content Include="img\chosen-sprite%402x.png" />

@@ -221,14 +221,10 @@ function layout_onReady() {
         });
     }
 
-    function toggleMobileMenu() {
-        $('#navigation').toggle("slide", { direction: 'right' }, 150);
-    }
-
     // Mobile Menu - Hamburger Toggle
     $('#hamburger a.menu').click(function (event) {
         event.preventDefault();
-        toggleMobileMenu();
+        $('#navigation').toggle();
     });
 
     $(window).scroll(function() {
@@ -241,7 +237,7 @@ function layout_onReady() {
     $(document).on('click', function (event) {
         if ($(event.target).closest('#navigation').length) {
             if($('.mobile a.menu').is(':visible')) {
-                toggleMobileMenu();
+                $('#navigation').toggle();
             }
         }
     });

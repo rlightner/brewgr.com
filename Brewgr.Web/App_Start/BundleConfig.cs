@@ -42,9 +42,8 @@ namespace Brewgr.Web
                     //"~/css/custom.css",
 					//"~/css/builder.css",
 
-					"~/css/site.css",
-					"~/css/targeted.css",
-                    "~/css/responsive.css",
+					"~/css/structure.css",
+                    "~/css/content.css",                    
                     "~/css/lib/colorbox.css"));
 		} 
 	}

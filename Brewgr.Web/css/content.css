@@ -7,6 +7,13 @@
 /* Adsense Ad */
 .ad { margin: 18px 0; }
 
+/* View Specific */
+.view h2 { font-size: 24px; color: #EB7723; line-height: 30px; }
+.view h3 { font-size: 21px; color: #666; }
+@media only screen and (max-width: 767px) {
+    .view img { width: 100%; height: auto; } /* full width images */
+}
+
 /* -- About -- */
 #vw-about h4 { margin-top: 18px; }
 #vw-about .col-md-4 { margin-top: 18px; }
@@ -21,9 +28,15 @@
 /* -- Features -- */
 #vw-features img { display: block; margin: 3% auto; }
 @media only screen and (max-width: 767px) {
-    #vw-features img  { width: 90%; height: auto; }
+    /*#vw-features img  { width: 90%; height: auto; }*/
 }
 
 /* -- Recipes --*/
-#vw-recipes .panel { min-height: 215px; }
+@media only screen and (min-width: 768px) {
+    #vw-recipes .panel { min-height: 215px; }
+}
 #vw-recipes .panel h3 { margin-top: 0; }
+
+/* -- Style Detail -- */
+#vw-styledetail .hero .col-md-6 div { padding: 0 18px 18px 0; }
+#vw-styledetail .hero p { font-size: 18px; line-height: 26px; margin-top: 12px; }

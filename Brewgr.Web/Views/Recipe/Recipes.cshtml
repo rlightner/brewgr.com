@@ -16,32 +16,38 @@
                 styles. For more information on Beer Judge Certification Program (BJCP) and the BJCP style guidlines, visit BJCP online at <a href="http://www.bjcp.org">http://www.bjcp.org</a>.
             </p>
         </div>
-
-        @Html.Partial("_ResponsiveAd")
-
-        <div class="col-md-6">
-            @foreach (var category in Model.GetFirstHalf())
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.Partial("_ResponsiveAd")
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+            @foreach(var category in Model.GetFirstHalf())
             {
                 <div class="panel panel-default">
                     <h3 class="panel-heading">@category.CategoryId.ToString(). @category.CategoryName Recipes (@category.RecipeCount)</h3>
                     <div class="panel-body">
-                        @foreach (var style in category.Styles.OrderBy(x => x.SubCategoryId))
+                        @foreach(var style in category.Styles.OrderBy(x => x.SubCategoryId))
                         {
-                            <div>@style.SubCategoryId. <a href="@Url.StyleDetailUrl(style.UrlFriendlyName)">@style.SubCategoryName</a> (@style.RecipeCount)</div>
+                            <div>@style.SubCategoryId. <a href="@Url.StyleDetailUrl(style.UrlFriendlyName)">@style.SubCategoryName</a> (@style.RecipeCount)
+                            </div>
                         }
                     </div>
                 </div>
             }
         </div>
-        <div class="col-md-6">
-            @foreach (var category in Model.GetSecondHalf())
+        <div class="col-sm-6 col-md-6">
+            @foreach(var category in Model.GetSecondHalf())
             {
                 <div class="panel panel-default">
                     <h3 class="panel-heading">@category.CategoryId.ToString(). @category.CategoryName Recipes (@category.RecipeCount)</h3>
                     <div class="panel-body">
-                        @foreach (var style in category.Styles.OrderBy(x => x.SubCategoryId))
+                        @foreach(var style in category.Styles.OrderBy(x => x.SubCategoryId))
                         {
-                            <div>@style.SubCategoryId. <a href="@Url.StyleDetailUrl(style.UrlFriendlyName)">@style.SubCategoryName</a> (@style.RecipeCount)</div>
+                            <div>@style.SubCategoryId. <a href="@Url.StyleDetailUrl(style.UrlFriendlyName)">@style.SubCategoryName</a> (@style.RecipeCount)
+                            </div>
                         }
                     </div>
                 </div>
@@ -49,9 +55,11 @@
         </div>
     </div>
     <div class="row">
-
-        @Html.Partial("_ResponsiveAd")
-
+        <div class="col-md-12">
+            @Html.Partial("_ResponsiveAd")
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <h3 class="panel-heading">Other Homebrew Recipes (@Model.UnCategorizedRecipeCount)</h3>

@@ -31,7 +31,7 @@
 
         <div class="col-md-3">
 
-            <a href="@Url.Action("homebrew-recipe-calculator", "Recipe", null, Url.Https())" class="button button_green bold margintop10 create-recipe">Create a New Recipe</a>
+            <a href="@Url.Action("NewRecipe", "Recipe", null, Url.Https())" class="button button_green bold margintop10 create-recipe">Create a New Recipe</a>
 
             @* Following *@
             @if (Model.Following.Count > 0)

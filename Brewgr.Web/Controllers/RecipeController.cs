@@ -94,7 +94,7 @@ namespace Brewgr.Web.Controllers
 		/// <summary>
 		/// Executes the View for StyleDetail
 		/// </summary>
-		[Route("StyleDetail")]
+		[Route("style/{urlfriendlyname}/{page?}")]
 		public ActionResult StyleDetail(string urlFriendlyName, int? page)
 		{
 			// 301 for old page 1 URL from previous button

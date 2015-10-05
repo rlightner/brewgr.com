@@ -31,7 +31,7 @@ namespace Brewgr.Web.Models
         /// </summary>
 	    public IList<BjcpCategoryViewModel> GetFirstHalf()
 	    {
-	        return this.BjcpCategories.OrderBy(x => x.CategoryId).Take(Convert.ToInt32(Math.Floor(this.BjcpCategories.Count / 2d)) + 1).ToList();
+	        return this.BjcpCategories.OrderBy(x => x.CategoryId).Take(Convert.ToInt32(Math.Floor(this.BjcpCategories.Count / 2d))).ToList();
 	    }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Brewgr.Web.Models
         /// </summary>
         public IList<BjcpCategoryViewModel> GetSecondHalf()
         {
-            return this.BjcpCategories.OrderBy(x => x.CategoryId).Skip(Convert.ToInt32(Math.Floor(this.BjcpCategories.Count / 2d)) + 1).ToList();
+            return this.BjcpCategories.OrderBy(x => x.CategoryId).Skip(Convert.ToInt32(Math.Floor(this.BjcpCategories.Count / 2d))).ToList();
         }
     }
 }
