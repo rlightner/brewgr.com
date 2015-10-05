@@ -40,3 +40,10 @@
 /* -- Style Detail -- */
 #vw-styledetail .hero .col-md-6 div { padding: 0 18px 18px 0; }
 #vw-styledetail .hero p { font-size: 18px; line-height: 26px; margin-top: 12px; }
+#vw-styledetail .media { border-bottom: solid 1px #eee; margin-bottom: 18px; padding-bottom: 18px; }
+#vw-styledetail .media img.avatar { width: 16px; height: 16px; }
+
+#vw-styledetail .media .list-inline { margin-top: 8px; margin-left: 0; }
+#vw-styledetail .media .list-inline li { padding: 0; }
+#vw-styledetail .media .list-inline li .badge { background-color: #eee; color: #666; padding: 4px 15px; border-radius: 4px; }
+
