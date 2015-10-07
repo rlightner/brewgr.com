@@ -190,6 +190,9 @@ function general_onReady() {
         jQuery('html, body').animate({ scrollTop: 0 }, scrollSpeed);
         return false;
     });
+
+    // Time Ago
+    $("abbr.timeago").timeago().show();
 }
 
 /* --------------------------------------------------- [ Layout ] ---------------------------------------------------------- */

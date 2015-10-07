@@ -75,7 +75,7 @@ namespace Brewgr.Web.Controllers
 			return View(model);
 		}
 
-		[Route("other-homebrew-recipes")]
+		[Route("other-homebrew-recipes/{page?}")]
 		public ActionResult UnCategorized(int? page)
 		{
 			var pager = new Pager { CurrentPage = page ?? 1, ItemsPerPage = this.WebSettings.DefaultRecipesPerPage };
