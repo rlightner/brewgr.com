@@ -4,62 +4,125 @@
 /* ::Build off of bootstrap styles first and only define styles when absolutely necessary */
 /* ================================================================================================= */
 
-/* Adsense Ad */
-.ad { margin: 18px 0; }
+/* ------------------------------------------------------------------------------------------*/
+/* --------- Bootstrap Overrides ----------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
+.page-header { margin: 20px 0 20px 0; padding-bottom: 15px; }
 
-/* Hide TimeAgo by Default to prevent flashing */
-abbr.timeago { display: none; }
 
-/* Recipe List */
+/* ------------------------------------------------------------------------------------------*/
+/* --------- Components -------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
+.ad { margin: 18px 0; border: solid 1px #ccc; padding: 8px 8px; text-align: center; }
+abbr.timeago { display: none; } /* Hide TimeAgo by Default to prevent flashing */
+.subhead, .view .subhead { color: #779e00; }
+
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- Recipe List ------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
+
+/* TODO - genericize for list to repurpose */
+/* TODO - genericize for list to repurpose */
+/* TODO - genericize for list to repurpose */
+/* TODO - genericize for list to repurpose */
 
 .recipe-list .media { position: relative; overflow: visible; border-bottom: solid 1px #eee; margin-bottom: 18px; padding-bottom: 18px; }
 .recipe-list abbr { cursor: default; border-bottom: 0; color: #585d5e; }
-.recipe-list h3.media-heading { font-size: 20px; font-weight: bold; }
+.recipe-list h3.media-heading { font-size: 18px; font-weight: bold; }
 .recipe-list .media-body > span a:nth-of-type(2) { text-decoration: underline; }
 .recipe-list .media-body > span a:nth-of-type(2):hover { text-decoration: none; }
 .recipe-list .media img.avatar { width: 16px; height: 16px; }
 .recipe-list .media .list-inline { margin-top: 8px; margin-left: 0; }
 .recipe-list .media .list-inline li { padding: 0; }
 .recipe-list .media .list-inline li .badge { background-color: #eee; color: #666; padding: 4px 15px; border-radius: 4px; }
+.recipe-list .srm { display: inline-block; border-radius: 6px; width: 11px; height: 11px; }
 .recipe-list .menu { position: absolute; top: 0; right: 0; }
-
+/*.recipe-list .menu .dropdown-toggle { padding: 2px 5px; }*/
 @media only screen and (max-width: 767px) {
     .recipe-list h3.media-heading { padding-right: 48px; }
 }
 
-/* View Specific */
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- Recipe Widget ----------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
+.recipe-widget { }
+.recipe-widget .media-body { color: #666; }
+.recipe-widget h4 { font-size: 14px; font-weight: bold; margin-bottom: 0; }
+.recipe-widget .badge { display: table;  width: 100%; border-radius: 4px; background-color: #eee; margin-top: 8px; border: solid 1px #ddd; color: #57595D; font-weight: normal; }
+.recipe-widget .badge span { display: table-cell; text-align: center; vertical-align: middle; }
+.recipe-widget .srm { display: inline-block; width: 16px; height: 16px; border-radius: 8px; }
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- SRM ----------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
+.srmFF { background: #ffffff; } .srm1  { background: #FFE699; } 
+.srm2  { background: #FFD878; } .srm3  { background: #FFCA5A; }
+.srm4  { background: #FFBF42; } .srm5  { background: #FBB123; } 
+.srm6  { background: #F8A600; } .srm7  { background: #F39C00; } 
+.srm8  { background: #EA8F00; } .srm9  { background: #E58500; } 
+.srm10 { background: #DE7C00; } .srm11 { background: #D77200; } 
+.srm12 { background: #CF6900; } .srm13 { background: #CB6200; } 
+.srm14 { background: #C35900; } .srm15 { background: #BB5100; } 
+.srm16 { background: #B54C00; } .srm17 { background: #B04500; } 
+.srm18 { background: #A63E00; } .srm19 { background: #A13700; } 
+.srm20 { background: #9B3200; } .srm21 { background: #952D00; } 
+.srm22 { background: #8E2900; } .srm23 { background: #882300; } 
+.srm24 { background: #821E00; } .srm25 { background: #7B1A00; } 
+.srm26 { background: #771900; } .srm27 { background: #701400; } 
+.srm28 { background: #6A0E00; } .srm29 { background: #660D00; } 
+.srm30 { background: #5E0B00; } .srm31 { background: #5A0A02; } 
+.srm32 { background: #600903; } .srm33 { background: #520907; } 
+.srm34 { background: #4C0505; } .srm35 { background: #470606; } 
+.srm36 { background: #440607; } .srm37 { background: #3F0708; } 
+.srm38 { background: #3B0607; } .srm39 { background: #3A070B; } 
+.srm40 { background: #36080A; } .srm00 { background: #000000; }
+
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- View: Common ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------*/
 .view h2 { font-size: 24px; color: #EB7723; line-height: 30px; }
-/*.view h3 { font-size: 21px; color: #666; }*/
+.view h3 { font-size: 21px; color: #666; }
 @media only screen and (max-width: 767px) {
     .view img { width: 100%; height: auto; } /* full width images */
 }
 
-/* -- About -- */
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- View: ABOUT ------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
 #vw-about h4 { margin-top: 18px; }
 #vw-about .col-md-4 { margin-top: 18px; }
 
-/* -- How It Works -- */
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- View: HOW IT WORKS ------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------*/
 #vw-howitworks .row > .col-md-9 a { display: block; margin-top: 4px; }
 #vw-howitworks > .row > .col-md-3 { margin-top: 10%; }
 @media only screen and (max-width: 767px) {
     #vw-howitworks img { width: 90%; height: auto; }
 }
 
-/* -- Features -- */
-#vw-features img { display: block; margin: 3% auto; }
-@media only screen and (max-width: 767px) {
-    /*#vw-features img  { width: 90%; height: auto; }*/
-}
 
-/* -- Recipes --*/
+/* ------------------------------------------------------------------------------------------*/
+/* --------- View: FEATURES ---------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
+#vw-features img { display: block; margin: 3% auto; }
+
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- View: RECIPE CATALOG ---------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
 @media only screen and (min-width: 768px) {
     #vw-recipes .panel { min-height: 215px; }
-}
 #vw-recipes .panel h3 { margin-top: 0; }
 
-/* -- Style Detail -- */
-#vw-styledetail .hero .col-md-6 div { padding: 0 18px 18px 0; }
-#vw-styledetail .hero p { font-size: 18px; line-height: 26px; margin-top: 12px; }
 
-
-
+/* ------------------------------------------------------------------------------------------*/
+/* --------- View: STYLE DETAIL ------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------*/
+#vw-styledetail .hero .col-md-7 { text-align: right; padding-top: 8px; }
+#vw-styledetail .hero p { font-size: 16px; line-height: 24px; margin-top: 12px; }

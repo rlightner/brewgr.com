@@ -62,10 +62,35 @@ namespace Brewgr.Web
 			return "";
 		}
 
-		/// <summary>
-		/// Gets db content by content Id
-		/// </summary>
-		public static IHtmlString DbContent(this HtmlHelper htmlHelper, int contentId)
+        /// <summary>
+        /// Gets the Srm display
+        /// </summary>
+	    public static IHtmlString Srm(this HtmlHelper htmlHelper, double srm)
+        {
+            return htmlHelper.Raw($"{Math.Round(srm)}&deg; L");
+        } 
+
+        /// <summary>
+        /// Gets the appropriate SRM class 
+        /// </summary>
+	    public static string SrmClass(this HtmlHelper htmlHelper, double srm)
+	    {
+	        var rounded = Math.Round(srm);
+            return rounded >= 41 ? "srm00" : rounded > 0 ? "srm" + rounded : "srmFF";
+        }
+
+        /// <summary>
+        /// Gets an abbreviated value with elipsis or the original if length not met
+        /// </summary>
+	    public static string Ellipsis(this HtmlHelper htmlHelper, string value, int maxLength)
+	    {
+            return value.Length > maxLength ? value.Substring(0, maxLength) + "..." : value;
+        }
+
+        /// <summary>
+        /// Gets db content by content Id
+        /// </summary>
+        public static IHtmlString DbContent(this HtmlHelper htmlHelper, int contentId)
 		{
 			if (contentId <= 0)
 			{

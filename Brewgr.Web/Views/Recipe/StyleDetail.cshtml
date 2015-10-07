@@ -94,8 +94,8 @@
             @* Top rated *@
             @if (Model.TopRatedRecipes.Count > 0)
             {
-                <div id="toprated-recipes">
-                    <h3 class="green margintop20">Highest Rated @Model.BjcpStyle.SubCategoryName Recipes</h3>
+                <div class="hidden-xs">
+                    <h3 class="subhead margintop20">Highest Rated @Model.BjcpStyle.SubCategoryName Recipes</h3>
                     @foreach (RecipeSummary recipeSummary in Model.TopRatedRecipes)
                     {
                         @Html.Partial("_RecipeWidget", recipeSummary)

@@ -11,14 +11,8 @@
 /* Core
 /*================================================= */
 body { font: 14px/21px Tahoma, Arial, Helvetica, "Trebuchet MS", sans-serif; }
-
 a { color: #585d5e; text-decoration: none; cursor: pointer; }
 a:hover { color: #292f33; text-decoration: underline; }
-
-/*================================================= */
-/* Bootstrap Overrides
-/*================================================= */
-.page-header { margin: 20px 0 20px 0; padding-bottom: 15px; }
 
 /*================================================= */
 /* Layout
