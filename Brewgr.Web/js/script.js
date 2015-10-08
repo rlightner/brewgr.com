@@ -191,8 +191,19 @@ function general_onReady() {
         return false;
     });
 
+
+    //////////////////////////////////////////
+
     // Time Ago
     $("abbr.timeago").timeago().show();
+
+    // Raty
+    $('[data-rating]').raty({
+        path: '/img/raty/',
+        hints: ['worst beer ever', 'ok', 'good', 'really good', 'best beer ever'],
+        readOnly: function() { return $(this).data('readonly'); },
+        score: function() { return $(this).data('rating'); }
+    });
 }
 
 /* --------------------------------------------------- [ Layout ] ---------------------------------------------------------- */

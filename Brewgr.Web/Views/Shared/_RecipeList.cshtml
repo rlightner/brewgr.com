@@ -3,7 +3,7 @@
 @using ctorx.Core.Formatting
 @model IList<Brewgr.Web.Core.Model.RecipeSummary>
 
-<div class="recipe-list">
+<div class="list list-recipe">
     @foreach (var recipe in Model)
     {
         <div class="media">
@@ -11,14 +11,16 @@
                 <a href="@Url.RecipeDetailUrl(recipe.RecipeId, recipe.RecipeName, recipe.BJCPStyleName)" class="media-object"><img src="@Url.RecipeThumbnailUrl(recipe.ImageUrlRoot, recipe.Srm)" alt="@recipe.RecipeName" height="80" width="80" /></a>
             </div>
             <div class="media-body">
+                <div data-rating="@recipe.AverageRating" data-readonly="true" class="keepsize"></div>
                 <h3 class="media-heading">
                     <a href="@Url.RecipeDetailUrl(recipe.RecipeId, recipe.RecipeName, recipe.BJCPStyleName)">@recipe.RecipeName</a>
                 </h3>
                 <span>
-                    <a href="@Url.UserProfileUrl(recipe.CreatedByUserName)"><img class="avatar" src="@UserAvatar.GetAvatar(16,recipe.CreatedByUserEmail)" alt="" /></a>
+                    <a href="@Url.UserProfileUrl(recipe.CreatedByUserName)"><img class="avatar" src="@UserAvatar.GetAvatar(16, recipe.CreatedByUserEmail)" alt="" /></a>
                     <a href="@Url.UserProfileUrl(recipe.CreatedByUserName)">@(ViewBag.ActiveUser != null && recipe.WasCreatedBy(ViewBag.ActiveUser.UserId) ? "you" : recipe.CreatedByUserName)</a>
                     <small><abbr class="timeago" title="@recipe.DateCreated.ToString("g")">@recipe.DateCreated</abbr></small>
                 </span>
+                
                 <ul class="list-unstyled list-inline">
                     <li><span class="badge"><span class="srm @Html.SrmClass(recipe.Srm)"></span> @Html.Srm(recipe.Srm)</span></li>
                     <li><span class="badge">@recipe.GetRecipeTypeName()</span></li>
@@ -27,7 +29,7 @@
                     <li><span class="badge">@recipe.Ibu.ToString("0") IBU</span></li>
                     <li><span class="badge">@recipe.Abv.ToString("F1") % ABV</span></li>
                 </ul>
-                @if (!string.IsNullOrWhiteSpace(recipe.Description))
+                @if(!string.IsNullOrWhiteSpace(recipe.Description))
                 {
                     <p>
                         @StringCleaner.CleanForPreviewText(recipe.Description, 500)

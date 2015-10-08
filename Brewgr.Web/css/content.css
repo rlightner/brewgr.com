@@ -14,34 +14,39 @@
 /* --------- Components -------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------*/
 .ad { margin: 18px 0; border: solid 1px #ccc; padding: 8px 8px; text-align: center; }
-abbr.timeago { display: none; } /* Hide TimeAgo by Default to prevent flashing */
+abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by Default to prevent flashing */
 .subhead, .view .subhead { color: #779e00; }
+
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- List ------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
+.list .media { position: relative; overflow: visible; border-bottom: solid 1px #eee; margin-bottom: 18px; padding-bottom: 18px; }
+.list abbr { cursor: default; border-bottom: 0; color: #585d5e; }
+.list h3.media-heading { font-size: 18px; font-weight: bold; }
+.list .media img.avatar { width: 16px; height: 16px; }
+.list .media .list-inline { margin-top: 8px; margin-left: 0; }
+.list .media .list-inline li { padding: 0; }
+.list .media .list-inline li .badge { background-color: #eee; color: #666; padding: 4px 15px; border-radius: 4px; }
+.list .menu { position: absolute; top: 0; right: 0; }
+@media only screen and (max-width: 767px) {
+    .list h3.media-heading { padding-right: 48px; }
+}
 
 
 /* ------------------------------------------------------------------------------------------*/
 /* --------- Recipe List ------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------*/
-
-/* TODO - genericize for list to repurpose */
-/* TODO - genericize for list to repurpose */
-/* TODO - genericize for list to repurpose */
-/* TODO - genericize for list to repurpose */
-
-.recipe-list .media { position: relative; overflow: visible; border-bottom: solid 1px #eee; margin-bottom: 18px; padding-bottom: 18px; }
-.recipe-list abbr { cursor: default; border-bottom: 0; color: #585d5e; }
-.recipe-list h3.media-heading { font-size: 18px; font-weight: bold; }
-.recipe-list .media-body > span a:nth-of-type(2) { text-decoration: underline; }
-.recipe-list .media-body > span a:nth-of-type(2):hover { text-decoration: none; }
-.recipe-list .media img.avatar { width: 16px; height: 16px; }
-.recipe-list .media .list-inline { margin-top: 8px; margin-left: 0; }
-.recipe-list .media .list-inline li { padding: 0; }
-.recipe-list .media .list-inline li .badge { background-color: #eee; color: #666; padding: 4px 15px; border-radius: 4px; }
-.recipe-list .srm { display: inline-block; border-radius: 6px; width: 11px; height: 11px; }
-.recipe-list .menu { position: absolute; top: 0; right: 0; }
-/*.recipe-list .menu .dropdown-toggle { padding: 2px 5px; }*/
-@media only screen and (max-width: 767px) {
-    .recipe-list h3.media-heading { padding-right: 48px; }
+.list-recipe .srm { display: inline-block; border-radius: 6px; width: 11px; height: 11px; }
+.list-recipe .media-body > span a:nth-of-type(2) { text-decoration: underline; }
+.list-recipe .media-body > span a:nth-of-type(2):hover { text-decoration: none; }
+.list-recipe [data-rating] { margin-bottom: 10px; }
+@media only screen and (min-width: 768px) {
+    .list-recipe h3.media-heading { margin-right: 140px; }
+    .list-recipe [data-rating] { position: absolute; right: 35px; top: 0; }    
 }
+
+
 
 
 /* ------------------------------------------------------------------------------------------*/
@@ -87,6 +92,7 @@ abbr.timeago { display: none; } /* Hide TimeAgo by Default to prevent flashing *
 .view h3 { font-size: 21px; color: #666; }
 @media only screen and (max-width: 767px) {
     .view img { width: 100%; height: auto; } /* full width images */
+    .view img.keepsize, .view .keepsize img { width: initial; height: initial; } /* full width images */
 }
 
 
@@ -118,8 +124,8 @@ abbr.timeago { display: none; } /* Hide TimeAgo by Default to prevent flashing *
 /* ------------------------------------------------------------------------------------------*/
 @media only screen and (min-width: 768px) {
     #vw-recipes .panel { min-height: 215px; }
-#vw-recipes .panel h3 { margin-top: 0; }
-
+    #vw-recipes .panel h3 { margin-top: 0; }
+}
 
 /* ------------------------------------------------------------------------------------------*/
 /* --------- View: STYLE DETAIL ------------------------------------------------------------ */

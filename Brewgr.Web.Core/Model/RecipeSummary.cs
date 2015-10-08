@@ -183,6 +183,11 @@ namespace Brewgr.Web.Core.Model
         /// </summary>
         public IList<RecipeComment> RecipeComments { get; set; }
 
+	    /// <summary>
+	    /// Gets or sets the AverageRating
+	    /// </summary>
+	    public double AverageRating { get; set; }
+
 		/// <summary>
 		/// Determines if the Recipe has an Image
 		/// </summary>
