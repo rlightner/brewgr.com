@@ -7,10 +7,11 @@
         <div class="media">
             <div class="media-left">
                 <a class="media-object" href="@Url.RecipeDetailUrl(Model.RecipeId, Model.RecipeName, Model.BJCPStyleName)">
-                    <img src="@Url.RecipeThumbnailUrl(Model.ImageUrlRoot, Model.Srm)" alt="" border="0" width="65" height="65"/>
+                    <img src="@Url.RecipeThumbnailUrl(Model.ImageUrlRoot, Model.Srm)" alt="" width="80" height="80" />
                 </a>
             </div>
             <div class="media-body">
+                <div data-rating="@Model.AverageRating" data-readonly="true" class="keepsize"></div>
                 <h4 class="media-heading">
                     <a href="@Url.RecipeDetailUrl(Model.RecipeId, Model.RecipeName, Model.BJCPStyleName)">@Html.Ellipsis(Model.RecipeName, 30)</a>
                 </h4>
@@ -31,29 +32,3 @@
         </div>
     </div>
 </div>
-
-
-@*<div class="recipe-widget">
-    <div class="image">
-        <a href="@Url.RecipeDetailUrl(Model.RecipeId, Model.RecipeName, Model.BJCPStyleName)">
-            <img src="@Url.RecipeThumbnailUrl(Model.ImageUrlRoot, Model.Srm)" alt="" border="0" width="45" height="45" />
-        </a> 
-    </div>
-    <div class="info">
-        <div class="name">
-            <a href="@Url.RecipeDetailUrl(Model.RecipeId, Model.RecipeName, Model.BJCPStyleName)">@Html.Ellipsis(Model.RecipeName, 30)</a>
-        </div>
-        <div class="type">@Model.GetRecipeTypeName() Recipe</div>
-        <div class="author">
-             by <a href="@Url.UserProfileUrl(Model.CreatedByUserName)">@Model.CreatedByUserName</a>
-        </div>
-    </div>
-    <div class="clearall"> </div>
-    <div class="data">
-        <div class="srm @Html.SrmClass(Model.Srm)">&nbsp;</div>
-        <div class="lovi">@Math.Round(Model.Srm)&deg;</div>
-        <div class="ibu">@Model.Ibu.ToString("F1") IBU</div>
-        <div class="abv">@Model.Abv.ToString("F1")% ABV</div>
-        <div class="calories">@Model.Calories cal.</div>
-    </div>
-</div>*@

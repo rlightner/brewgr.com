@@ -7,7 +7,7 @@
     @foreach (var recipe in Model)
     {
         <div class="media">
-            <div class="media-left">
+            <div class="media-left hidden-xs">
                 <a href="@Url.RecipeDetailUrl(recipe.RecipeId, recipe.RecipeName, recipe.BJCPStyleName)" class="media-object"><img src="@Url.RecipeThumbnailUrl(recipe.ImageUrlRoot, recipe.Srm)" alt="@recipe.RecipeName" height="80" width="80" /></a>
             </div>
             <div class="media-body">

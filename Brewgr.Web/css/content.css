@@ -40,6 +40,7 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 .list-recipe .srm { display: inline-block; border-radius: 6px; width: 11px; height: 11px; }
 .list-recipe .media-body > span a:nth-of-type(2) { text-decoration: underline; }
 .list-recipe .media-body > span a:nth-of-type(2):hover { text-decoration: none; }
+.list-recipe .media-body .badge { margin-bottom: 5px; }
 .list-recipe [data-rating] { margin-bottom: 10px; }
 @media only screen and (min-width: 768px) {
     .list-recipe h3.media-heading { margin-right: 140px; }
@@ -47,17 +48,17 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 }
 
 
-
-
 /* ------------------------------------------------------------------------------------------*/
 /* --------- Recipe Widget ----------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------*/
-.recipe-widget { }
+.recipe-widget { font-size: 12px; line-height: 18px; }
+.recipe-widget [data-rating] { margin-bottom: 6px; margin-top: -4px; }
 .recipe-widget .media-body { color: #666; }
-.recipe-widget h4 { font-size: 14px; font-weight: bold; margin-bottom: 0; }
+.recipe-widget h4 { font-size: 14px; font-weight: bold; margin-bottom: 2px; }
 .recipe-widget .badge { display: table;  width: 100%; border-radius: 4px; background-color: #eee; margin-top: 8px; border: solid 1px #ddd; color: #57595D; font-weight: normal; }
 .recipe-widget .badge span { display: table-cell; text-align: center; vertical-align: middle; }
 .recipe-widget .srm { display: inline-block; width: 16px; height: 16px; border-radius: 8px; }
+
 
 /* ------------------------------------------------------------------------------------------*/
 /* --------- SRM ----------------------------------------------------------------- */
