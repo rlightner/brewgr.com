@@ -7,7 +7,8 @@
 /* ------------------------------------------------------------------------------------------*/
 /* --------- Bootstrap Overrides ----------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------*/
-.page-header { margin: 20px 0 20px 0; padding-bottom: 15px; }
+.page-header { margin: 0 0 20px 0; padding-bottom: 15px; }
+.nav-tabs > li.active > a { font-weight: bold; }
 
 
 /* ------------------------------------------------------------------------------------------*/
@@ -23,7 +24,7 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 /* ------------------------------------------------------------------------------------------*/
 .list .media { position: relative; overflow: visible; border-bottom: solid 1px #eee; margin-bottom: 18px; padding-bottom: 18px; }
 .list abbr { cursor: default; border-bottom: 0; color: #585d5e; }
-.list h3.media-heading { font-size: 18px; font-weight: bold; }
+.list h3.media-heading { font-size: 18px; line-height: 24px; font-weight: bold; }
 .list .media img.avatar { width: 16px; height: 16px; }
 .list .media .list-inline { margin-top: 8px; margin-left: 0; }
 .list .media .list-inline li { padding: 0; }
@@ -43,9 +44,16 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 .list-recipe .media-body .badge { margin-bottom: 5px; }
 .list-recipe [data-rating] { margin-bottom: 10px; }
 @media only screen and (min-width: 768px) {
-    .list-recipe h3.media-heading { margin-right: 140px; }
-    .list-recipe [data-rating] { position: absolute; right: 35px; top: 0; }    
+    /*.list h3.media-heading { margin-right: 140px; }
+    .list [data-rating] { position: absolute; right: 35px; top: 0; }*/    
 }
+
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- Session List ------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
+
+
 
 
 /* ------------------------------------------------------------------------------------------*/
@@ -89,8 +97,9 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 /* ------------------------------------------------------------------------------------------*/
 /* --------- View: Common ------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------*/
-.view h2 { font-size: 24px; color: #EB7723; line-height: 30px; }
-.view h3 { font-size: 21px; color: #666; }
+.view { padding-top: 10px; }
+.view h2, .view .h2 { font-size: 24px; color: #EB7723; line-height: 30px; }
+.view h3, .view .h3 { font-size: 21px; color: #666; }
 @media only screen and (max-width: 767px) {
     .view img { width: 100%; height: auto; } /* full width images */
     .view img.keepsize, .view .keepsize img { width: initial; height: initial; } /* full width images */
@@ -133,3 +142,24 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 /* ------------------------------------------------------------------------------------------*/
 #vw-styledetail .hero .col-md-7 { text-align: right; padding-top: 8px; }
 #vw-styledetail .hero p { font-size: 16px; line-height: 24px; margin-top: 12px; }
+
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- View: PROFILE ------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------*/
+#vw-profile .col-md-3 .thumbnail { border: 0; }
+#vw-profile .info h2 { margin-bottom: 0; }
+#vw-profile .info p { margin-top: 12px; }
+#vw-profile .tab-pane { padding-top: 18px; }
+#vw-profile .tab-content .thumbnail { width: 130px; float: left;  }
+#vw-profile [data-followid] { display: block; width: 200px; border-top-left-radius: 0; border-top-right-radius: 0; }
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+    #vw-profile .nav-tabs { margin-top: 18px; }
+}
+@media only screen and (min-width: 768px) {
+    #vw-profile .tab-pane { padding: 18px 30px; }
+    #vw-profile .username { margin-top: 8px; }
+}
+@media only screen and (max-width: 767px) {
+    #vw-profile [data-followid] { display: block; width: auto; }   
+}

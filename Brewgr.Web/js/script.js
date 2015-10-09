@@ -46,33 +46,105 @@ function general_onReady() {
         return false;
     });
 
+
+    // Following Button Toggle
+    $('[data-followid]').on('mouseover mouseout click', function (event) {
+        var btn = $(this);
+        var followed = $(this).data('followed') == "1";
+        var id = $(this).data('followid');
+        var textEle = $(this).children('span:nth-of-type(2)');
+        var iconEle = $(this).children('span:first-of-type');
+
+        if (event.type === 'mouseover') {
+            if (followed) {
+                btn.removeClass().addClass('btn btn-danger');
+                iconEle.removeClass().addClass('glyphicon glyphicon-remove');
+                textEle.text("Stop Following");
+            } else {
+                btn.removeClass().addClass('btn btn-success');
+                iconEle.removeClass().addClass('glyphicon glyphicon-plus');
+                textEle.text("Follow");
+            }
+        }
+        else if (event.type === 'mouseout') {
+            if (followed) {
+                btn.removeClass().addClass('btn btn-success');
+                iconEle.removeClass().addClass('glyphicon glyphicon-check');
+                textEle.text("Following");
+            } else {
+                btn.removeClass().addClass('btn btn-default');
+                iconEle.removeClass().addClass('glyphicon glyphicon-plus');
+                textEle.text("Follow");
+            }
+        } else if(event.type === 'click') {
+            event.preventDefault();
+            $.ajax({
+                url: '/ToggleBrewerFollow',
+                async: true,
+                type: 'post',
+                data: { userid: id },
+                success: function (t) {
+                    if (followed) {
+                        textEle.text("Follow");
+                        btn.removeClass().addClass('btn btn-default');
+                        iconEle.removeClass().addClass('glyphicon glyphicon-plus');
+                        btn.data('followed', '0');
+                    } else {
+                        textEle.text("Following");
+                        btn.removeClass().addClass('btn btn-success');
+                        iconEle.removeClass().addClass('glyphicon glyphicon-check');
+                        btn.data('followed', '1');
+                    }
+                },
+                error: function () {
+                    alert("uh oh, something went wrong.  Please try again.");
+                }
+            });
+        }
+
+    });
+
+
+
     // Follow Brewer
-    $('.follow-brewer').click(function () {
+    $('[Sdata-followid]').click(function (event) {
+        event.preventDefault();
         var button = $(this);
+        var textSpan = $(this).find('.status');
         $.ajax({
             url: '/ToggleBrewerFollow',
             async: true,
             type: 'post',
-            data: { userid: $(this).attr('data-brewerid') },
+            data: { userid: $(this).data('followid') },
             success: function (t) {
-                if (button.text() == "Follow") {
-                    button.text("Following").removeClass('button_green').addClass('button_gray');
+                if (button.data('followed') === "1") {
+                    textSpan.text("Following");
+                    button.removeClass('btn-success').addClass('btn-default');
+                    button.data('followed', '0');
                 } else {
-                    button.text("Follow").removeClass('button_gray').removeClass('button_red').addClass('button_green');
+                    textSpan.text("Follow");
+                    button.removeClass('btn-default');
+                    button.removeClass('btn-danger');
+                    button.addClass('btn-success');
+                    button.data('followed', '1');
                 }
+                
             },
             error: function () {
                 alert("uh oh, something went wrong.  Please try again.");
             }
         });
-        return false;
-    }).mouseover(function () {
-        if ($(this).text() == "Following") {
-            $(this).text("Unfollow").removeClass("button_gray").addClass("button_red");
+    }).mouseover(function () {        
+        //var textSpan = $(this).find('.status');
+        if ($(this).data('followed') === "1") {
+            textSpan.remove();//text("Unfollow");
+            $(this).removeClass("btn-default").addClass("btn-danger");
         }
     }).mouseout(function () {
-        if ($(this).text() == "Unfollow") {
-            $(this).text("Following").removeClass("button_red").addClass("button_gray");
+        //var textSpan = $(this).find('.status');
+        if ($(this).data('followed') === "1") {
+            textSpan.text("Following");
+            $(this).removeClass("btn-danger").addClass("btn-default");
         }
     });
     
