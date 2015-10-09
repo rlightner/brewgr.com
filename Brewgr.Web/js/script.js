@@ -9,7 +9,6 @@ $(function () {
     builder_onReady();
     settings_onReady();
     loginRelated_onReady();
-    calculatorHydro_onReady();
     waterinfusion_onReady();
     recipeDetail_onReady();
     misc_onReady();
@@ -706,37 +705,6 @@ function settings_onReady() {
         });
 
         $('#Bio').limitInput(450, $('#suggest-limit'), true);
-    }
-}
-
-/* --------------------------------------------------- [ Hydrometer Calc ] ---------------------------------------------------------- */
-function calculatorHydro_onReady() {
-    if ($('#view-calculatorHydro').length > 0) {
-        $('#SpecificGravityTempUnit').change(function() {
-            $('#TargetSpecificGravityTempUnit').val($(this).val());
-        });
-
-        $('#TargetSpecificGravityTempUnit').change(function() {
-            $('#SpecificGravityTempUnit').val($(this).val());
-        });
-
-        $('#calculateButton').click(function() {
-            var specificGravtiy = $('#SpecificGravity').val();
-            var measuredTemperature = $('#SpecificGravityTemp').val();
-            var targetTemperature = $('#TargetSpecificGravityTemp').val();
-            var tempScale = $('#SpecificGravityTempUnit').val();
-            var correctedGravity = 0;
-
-            if (tempScale == 'Celcius') {
-                measuredTemperature = ((measuredTemperature * 9 / 5) + 32);
-                targetTemperature = ((targetTemperature * 9 / 5) + 32);
-            }
-
-            correctedGravity = (specificGravtiy * ((1.00130346 - 0.000134722124 * measuredTemperature + 0.00000204052596 * Math.pow(measuredTemperature, 2) - 0.00000000232820948 * Math.pow(measuredTemperature, 3)) / (1.00130346 - 0.000134722124 * targetTemperature + 0.00000204052596 * Math.pow(targetTemperature, 2) - 0.00000000232820948 * Math.pow(targetTemperature, 3))));
-
-            $('#correctedGravity').html(correctedGravity.toFixed(3));
-            $('#results').fadeIn();
-        });
     }
 }
 
