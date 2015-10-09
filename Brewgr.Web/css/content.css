@@ -9,6 +9,7 @@
 /* ------------------------------------------------------------------------------------------*/
 .page-header { margin: 0 0 20px 0; padding-bottom: 15px; }
 .nav-tabs > li.active > a { font-weight: bold; }
+.page-header.small { font-size: 20px; margin-bottom: 10px; }
 
 
 /* ------------------------------------------------------------------------------------------*/
@@ -24,7 +25,7 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 /* ------------------------------------------------------------------------------------------*/
 .list .media { position: relative; overflow: visible; border-bottom: solid 1px #eee; margin-bottom: 18px; padding-bottom: 18px; }
 .list abbr { cursor: default; border-bottom: 0; color: #585d5e; }
-.list h3.media-heading { font-size: 18px; line-height: 24px; font-weight: bold; }
+.list h3.media-heading { font-size: 18px; line-height: 18px; font-weight: bold; }
 .list .media img.avatar { width: 16px; height: 16px; }
 .list .media .list-inline { margin-top: 8px; margin-left: 0; }
 .list .media .list-inline li { padding: 0; }
@@ -42,7 +43,7 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 .list-recipe .media-body > span a:nth-of-type(2) { text-decoration: underline; }
 .list-recipe .media-body > span a:nth-of-type(2):hover { text-decoration: none; }
 .list-recipe .media-body .badge { margin-bottom: 5px; }
-.list-recipe [data-rating] { margin-bottom: 10px; }
+.list-recipe [data-rating] { margin-bottom: 8px; }
 @media only screen and (min-width: 768px) {
     /*.list h3.media-heading { margin-right: 140px; }
     .list [data-rating] { position: absolute; right: 35px; top: 0; }*/    

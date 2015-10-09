@@ -2,33 +2,20 @@
 @model BrewSessionViewModel
 
 @{
-    if (Request.QueryString["iframe"] == "1") { this.Layout = "~/Views/Shared/_LayoutNoShell.cshtml"; }
+    Layout = "~/Views/Calculators/_CalculatorsSubLayout.cshtml";
     ViewBag.Title = "Mash and Sparge Infusion Water Calculator";
     ViewBag.Description = "Mash and sparge water temperature infusion calculator for homebrew.";
+    ViewBag.ViewId = "vw-watercalc";
 }
 
-<div id="water-calc" class="calculations">
-    @Html.Partial("_CalculatorsNavigation")
-    <div class="primary">
-        <h3>Homebrew Calculators - Mash and Sparge Water Infusion Calculator</h3>
-        <div class="ad-sense" style="width: 728px; margin: 18px auto;">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- calculations letterboard -->
-            <ins class="adsbygoogle"
-                 style="display:inline-block;width:728px;height:90px"
-                 data-ad-client="ca-pub-1415813402338064"
-                 data-ad-slot="3928938982"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+<div id="water-calc">
+        <h2 class="page-header">Mash and Sparge Water Infusion Calculator</h2>
+        
         <div class="clearall"></div>
-        <div class="builder session">
-            <div class="groupbox">
-                <span><h3 class="floatleft">Water Infusion</h3></span>
-                    <div class="summary paddingleft18 paddingtop20 options">
+                <span><h3>Water Infusion</h3></span>
+                    <div>
                         <h3>Calculator Options</h3>
-                        <div class="item">
+                        <div>
                             <label for="unit">Measurement</label>
                             <select name="unit" data-name="s_UnitType">
                                 <option value="s" selected="selected">US</option>
@@ -41,5 +28,4 @@
 
             </div>
         </div>
-    </div>
 </div>

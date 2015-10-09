@@ -1,75 +1,78 @@
 ﻿@model CalculatorHydrometerTempViewModel
 
 @{
-    if (Request.QueryString["iframe"] == "1") { this.Layout = "~/Views/Shared/_LayoutNoShell.cshtml"; }
+    Layout = "~/Views/Calculators/_CalculatorsSubLayout.cshtml";
     ViewBag.Title = "Hydrometer Temperature Correction Calculator";
     ViewBag.Description = "Hydrometer temperature correction calculator for homebrew.";
+    ViewBag.ViewId = "vw-hydrocalc";
 }
 
-<div id="view-calculatorHydro">
-    <div class="calculations">
+<h2 class="page-header">Hydrometer Temperature Correction Calculator</h2>
 
-        @Html.Partial("_CalculatorsNavigation")
+<p>
+    Most hydrometers are calibrated to give an acurate reading at 60F or 68F. Use this calculator to calculate corrections to a
+    hydrometer reading when taken at a different temperature than the hydrometers calibrated temperature.
+</p>
 
-        <div class="primary">
-            <h3>Homebrew Calculators - Hydrometer Correction</h3>
-
-            <div class="ad-sense" style="width: 728px; margin: 18px auto;">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- calculations letterboard -->
-                <ins class="adsbygoogle"
-                     style="display:inline-block;width:728px;height:90px"
-                     data-ad-client="ca-pub-1415813402338064"
-                     data-ad-slot="3928938982"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Temperature Scale</label>
+                <select id="scale" class="form-control">
+                    <option value="f" selected="selected">F (Fahrenheit)</option>
+                    <option value="c">C (Celcius)</option>
+                </select>
             </div>
-
-            <div class="clearall"></div>
-            <div class="groupbox calculators" id="HydrometerTempCalc">
-                <span>
-                    <h4>Hydrometer Temperature Correction</h4>
-                </span>
-                <div>
-                    <p>Most hydrometers are calibrated to give an acurate reading at 60F or 68F. Use this calculator to calculate corrections to a hydrometer reading when taken at a different temperature than the hydrometers calibrated temperature.</p>
-
-                    <div class="form-field">
-                        <label for="SpecificGravity">
-                            Specific Gravity
-				            <span class="helptip" original-title="The gravity reading of your hydrometer at the non-calibrated temperature.">&nbsp;</span>
-                        </label>
-                        @Html.DropDownListFor(m => m.SpecificGravity, new SelectList(ViewBag.GravityOptions, "Value", "DisplayText", Model.SpecificGravity != null ? Model.SpecificGravity : null))
-                        @@
-			            @Html.TextBoxFor(m => m.SpecificGravityTemp, new { @class = "TempVal" })
-                        @Html.DropDownListFor(m => m.SpecificGravityTempUnit, new SelectList(ViewBag.TempUnitOptions, "Value", "DisplayText", Model.SpecificGravityTempUnit != null ? Model.SpecificGravityTempUnit : null), new { @class = "TempUnit" })
-                    </div>
-
-                    <div class="form-field">
-                        <label for="TargetSpecificGravityTemp">
-                            Target Temperature
-				            <span class="helptip" original-title="The temperature your hydrometer is calibrated, usually 60 for older hydrometers and 68 for newer ones.">&nbsp;</span>
-                        </label>
-                        @Html.TextBoxFor(m => m.TargetSpecificGravityTemp, new { @class = "TempVal" })
-                        @Html.DropDownListFor(m => m.TargetSpecificGravityTempUnit, new SelectList(ViewBag.TempUnitOptions, "Value", "DisplayText", Model.TargetSpecificGravityTempUnit != null ? Model.TargetSpecificGravityTempUnit : null), new { @class = "TempUnit" })
-                    </div>
-
-                    <div class="form-field" id="results" style="display:none;">
-                        <label>
-                            Corrected Gravity
-				            <span class="helptip" original-title="The adjusted specific gravity.">&nbsp;</span>
-                        </label>
-                        <span id="correctedGravity">1.000</span>
-                    </div>
-
-                    <div class="calculate">
-                        <input type="submit" value="Calculate Correct Gravity" class="button button_green" id="calculateButton" />
-                    </div>
-
-                </div>
-            </div>
-
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Measured Temperature</label>
+                <input type="text" class="form-control" id="mtemp" value="68"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Target Temperature</label>
+                <input type="text" class="form-control" id="ttemp" value="68"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Measured Gravity</label>
+                <input type="text" class="form-control" id="mgravity" value="1.050"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Corrected Gravity</label>
+                <input type="text" class="form-control" id="cgravity" value="1.050" disabled/>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-success btn-lg">Calculate Correct Gravity</button>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#scale').change(function () {
+            var func = $('#scale').val() === "f" ? util.c_To_f : util.f_To_c;
+            $('#mtemp').val(func($('#mtemp').val()));
+            $('#ttemp').val(func($('#ttemp').val()));
+        });
+        $('#vw-hydrocalc button').click(function () {
+            var mtemp = $('#scale').val() === 'f' ? $('#mtemp').val() : util.c_To_f($('#mtemp').val());
+            var ttemp = $('#scale').val() === 'f' ? $('#ttemp').val() : util.c_To_f($('#ttemp').val());
+            var corrected = ($('#mgravity').val() * ((1.00130346 - 0.000134722124 * mtemp + 0.00000204052596 * Math.pow(mtemp, 2) - 0.00000000232820948 * Math.pow(mtemp, 3)) / (1.00130346 - 0.000134722124 * ttemp + 0.00000204052596 * Math.pow(ttemp, 2) - 0.00000000232820948 * Math.pow(ttemp, 3))));
+            $('#cgravity').val(corrected.toFixed(3));
+            $(this).blur();
+        });
+    });
+</script>
+
