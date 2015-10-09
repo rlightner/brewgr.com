@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var url = Request.Url.ToString().ToLower();
+}
+
+<div id="@ViewBag.ViewId" class="container view">
+    <div class="row">
+        <div class="col-md-3 visible-lg visible-md">
+            <h2 class="page-header small">Homebrew Calculators</h2>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="@(url.Contains("hydrometer-correction") ? "active" : "")">
+                    <a href="@Url.Action("CalculatorsHydrometerTemp", "Calculators", null, "http")">Hydrometer Temperature Correction Calculator</a>
+                </li>
+                <li class="@(url.Contains("mash-sparge-water-infusion") ? "active" : "")">
+                    <a href="@Url.Action("CalculatorsMashSpargeWater", "Calculators", null, "http")">Mash and Sparge Water Infusion Calculator</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("NewRecipe", "Recipe", null, "http")">Recipe Calculator</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+</div>
