@@ -103,50 +103,6 @@ function general_onReady() {
 
     });
 
-
-
-    // Follow Brewer
-    $('[Sdata-followid]').click(function (event) {
-        event.preventDefault();
-        var button = $(this);
-        var textSpan = $(this).find('.status');
-        $.ajax({
-            url: '/ToggleBrewerFollow',
-            async: true,
-            type: 'post',
-            data: { userid: $(this).data('followid') },
-            success: function (t) {
-                if (button.data('followed') === "1") {
-                    textSpan.text("Following");
-                    button.removeClass('btn-success').addClass('btn-default');
-                    button.data('followed', '0');
-                } else {
-                    textSpan.text("Follow");
-                    button.removeClass('btn-default');
-                    button.removeClass('btn-danger');
-                    button.addClass('btn-success');
-                    button.data('followed', '1');
-                }
-                
-            },
-            error: function () {
-                alert("uh oh, something went wrong.  Please try again.");
-            }
-        });
-    }).mouseover(function () {        
-        //var textSpan = $(this).find('.status');
-        if ($(this).data('followed') === "1") {
-            textSpan.remove();//text("Unfollow");
-            $(this).removeClass("btn-default").addClass("btn-danger");
-        }
-    }).mouseout(function () {
-        //var textSpan = $(this).find('.status');
-        if ($(this).data('followed') === "1") {
-            textSpan.text("Following");
-            $(this).removeClass("btn-danger").addClass("btn-default");
-        }
-    });
-    
     // Login Links (return Url)
     $('.login-link').click(function() {
         var url = window.location.toString();

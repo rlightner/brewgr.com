@@ -101,3 +101,11 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 		});
 	};
 })(jQuery);
+
+/* Flash Plugin to FLash Elements */
+jQuery.fn.flash = function () {
+    var elem = $(this);
+    elem.addClass('flash');
+    window.setTimeout(function () { elem    .removeClass('flash'); }, 1000);
+};
+

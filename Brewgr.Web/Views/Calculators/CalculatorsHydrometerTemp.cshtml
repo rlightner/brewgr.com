@@ -7,7 +7,7 @@
     ViewBag.ViewId = "vw-hydrocalc";
 }
 
-<h2 class="page-header">Hydrometer Temperature Correction Calculator</h2>
+<h2 class="page-header visible-md visible-lg">Hydrometer Temperature Correction Calculator</h2>
 
 <p>
     Most hydrometers are calibrated to give an acurate reading at 60F or 68F. Use this calculator to calculate corrections to a
@@ -27,29 +27,27 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-xs-6 col-md-3">
             <div class="form-group">
                 <label>Measured Temperature</label>
-                <input type="text" class="form-control" id="mtemp" value="68"/>
+                <input type="number" step=".1" class="form-control" id="mtemp" value="68"/>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
+        <div class="col-xs-6 col-md-3">
             <div class="form-group">
                 <label>Target Temperature</label>
-                <input type="text" class="form-control" id="ttemp" value="68"/>
+                <input type="number" step=".1" class="form-control" id="ttemp" value="68"/>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-xs-6 col-md-3">
             <div class="form-group">
                 <label>Measured Gravity</label>
-                <input type="text" class="form-control" id="mgravity" value="1.050"/>
+                <input type="number" step=".001" class="form-control" id="mgravity" value="1.050"/>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-xs-6 col-md-3">
             <div class="form-group">
                 <label>Corrected Gravity</label>
                 <input type="text" class="form-control" id="cgravity" value="1.050" disabled/>
@@ -67,11 +65,13 @@
             $('#ttemp').val(func($('#ttemp').val()));
         });
         $('#vw-hydrocalc button').click(function () {
+
             var mtemp = $('#scale').val() === 'f' ? $('#mtemp').val() : util.c_To_f($('#mtemp').val());
             var ttemp = $('#scale').val() === 'f' ? $('#ttemp').val() : util.c_To_f($('#ttemp').val());
             var corrected = ($('#mgravity').val() * ((1.00130346 - 0.000134722124 * mtemp + 0.00000204052596 * Math.pow(mtemp, 2) - 0.00000000232820948 * Math.pow(mtemp, 3)) / (1.00130346 - 0.000134722124 * ttemp + 0.00000204052596 * Math.pow(ttemp, 2) - 0.00000000232820948 * Math.pow(ttemp, 3))));
             $('#cgravity').val(corrected.toFixed(3));
             $(this).blur();
+            $('#cgravity').flash();
         });
     });
 </script>
