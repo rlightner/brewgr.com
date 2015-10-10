@@ -263,9 +263,15 @@ function layout_onReady() {
     }
 
     // Mobile Menu - Hamburger Toggle
-    $('#hamburger a.menu').click(function (event) {
+    $('#mobilemenu button.menu').click(function (event) {
         event.preventDefault();
         $('#navigation').toggle();
+    });
+
+    // Search Menu Trigger
+    $('.searchtrig').click(function () {
+        $('#navigation').hide();
+        $('#search').slideToggle();
     });
 
     $(window).scroll(function() {

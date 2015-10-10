@@ -54,15 +54,20 @@
                     @Html.Partial("_UserInfo")
                 </div>
 
-                @* Mobile Hamburger *@
-                <div id="hamburger" class="visible-xs">
+                @* Mobile Menu *@
+                <div id="mobilemenu" class="visible-xs">
                     @if (ViewBag.ActiveUser != null)
                     {
                         <a href="@Url.UserProfileUrl((ViewBag.ActiveUser as UserSummary).Username)">
                             <img src="@((ViewBag.ActiveUser as UserSummary).GetAvatar(28))" class="avatar" />
                         </a>
                     }
-                    <a href="#" class="menu"><img src="/img/hamburger.jpg" alt="menu" /></a>
+                    <button class="btn btn-lg searchtrig">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                    <button class="menu btn btn-lg">
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </button>
                 </div>
             </div>
         </div>
