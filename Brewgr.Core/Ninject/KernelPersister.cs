@@ -1,9 +1,8 @@
-﻿using System;
-using Ninject;
+﻿using Ninject;
 
 namespace ctorx.Core.Ninject
 {
-	public static class KernelPersister
+    public static class KernelPersister
 	{
 		static readonly object Locker = new object();
 		static IKernel Kernel;

@@ -17,19 +17,21 @@ namespace Brewgr.Web.Controllers
 	{
 		readonly IUnitOfWorkFactory<BrewgrContext> UnitOfWorkFactory;
 		readonly IUserService UserService;
-		readonly IUserResolver UserResolver;
+        readonly IUserRelationService UserRelationService;
+        readonly IUserResolver UserResolver;
         readonly IRecipeService RecipeService;
 		readonly INotificationService NotificationService;
 
 		/// <summary>
 		/// ctor the Mighty
 		/// </summary>
-        public UserController(IUnitOfWorkFactory<BrewgrContext> unitOfWorkFactory, IUserService userService, IUserResolver userResolver, 
-			IRecipeService recipeService, INotificationService notificationService)
+        public UserController(IUnitOfWorkFactory<BrewgrContext> unitOfWorkFactory, IUserService userService, IUserRelationService userRelationService,
+            IUserResolver userResolver, IRecipeService recipeService, INotificationService notificationService)
 		{
 			this.UnitOfWorkFactory = unitOfWorkFactory;
 			this.UserService = userService;
-			this.UserResolver = userResolver;
+		    this.UserRelationService = userRelationService;
+		    this.UserResolver = userResolver;
             this.RecipeService = recipeService;
 			this.NotificationService = notificationService;
 		}
@@ -262,7 +264,7 @@ namespace Brewgr.Web.Controllers
 			// Check if active user follows this user
 			if (this.ActiveUser != null)
 			{
-				ViewBag.UserIsFollowed = this.UserService.UserIsFollowedBy(user.UserId, this.ActiveUser.UserId);
+				ViewBag.UserIsFollowed = this.UserRelationService.UserIsFollowedBy(user.UserId, this.ActiveUser.UserId);
 			}
 
 			// Recipes
@@ -276,38 +278,14 @@ namespace Brewgr.Web.Controllers
 				.ToList();
 
 			// Followers
-			userProfileViewModel.Followers = this.UserService.GetFollowersOf(user.UserId);
+			userProfileViewModel.Followers = this.UserRelationService.GetFollowersOf(user.UserId);
 
 			// Followed
-			userProfileViewModel.Follows = this.UserService.GetFollowedBy(user.UserId);
+			userProfileViewModel.Follows = this.UserRelationService.GetFollowedBy(user.UserId);
 
 			return View(userProfileViewModel);	
 		}
-
-		/// <summary>
-		/// Executes the View for ToggleView
-		/// </summary>
-		[HttpPost]
-        [Route("ToggleBrewerFollow")]
-        public ActionResult ToggleBrewerFollow(int userId)
-		{
-			using (var unitOfWork = this.UnitOfWorkFactory.NewUnitOfWork())
-			{
-				try
-				{
-					this.UserService.ToggleUserFollow(userId, this.ActiveUser.UserId);
-					unitOfWork.Commit();
-					return new EmptyResult();
-				}
-				catch (Exception ex)
-				{
-					this.LogHandledException(ex);
-					unitOfWork.Rollback();
-					return this.Issue500();
-				}
-			}
-		}
-
+        
 		/// <summary>
 		/// Gets the reputation score for a user
 		/// </summary>

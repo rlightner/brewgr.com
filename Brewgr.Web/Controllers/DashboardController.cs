@@ -23,14 +23,16 @@ namespace Brewgr.Web.Controllers
 	{
 		readonly IRecipeService RecipeService;
 		readonly IUserService UserService;
+	    readonly IUserRelationService UserRelationService;
 
-		/// <summary>
+	    /// <summary>
 		/// ctor the Mighty
 		/// </summary>
-        public DashboardController(IUserService userService, IRecipeService recipeService)
+        public DashboardController(IUserService userService, IUserRelationService userRelationService, IRecipeService recipeService)
 		{
 			this.UserService = userService;
-			this.RecipeService = recipeService;
+	        this.UserRelationService = userRelationService;
+	        this.RecipeService = recipeService;
 		}
 
         /// <summary>
@@ -42,8 +44,8 @@ namespace Brewgr.Web.Controllers
             var dashboardViewModel = new DashboardViewModel();
 
             // Followers
-            dashboardViewModel.Following = this.UserService.GetFollowedBy(this.ActiveUser.UserId, 4).ToList();
-            dashboardViewModel.FollowingCount = this.UserService.GetFollowedByCount(this.ActiveUser.UserId);
+            dashboardViewModel.Following = this.UserRelationService.GetFollowedBy(this.ActiveUser.UserId, 4).ToList();
+            dashboardViewModel.FollowingCount = this.UserRelationService.GetFollowedByCount(this.ActiveUser.UserId);
 
             // Username
             dashboardViewModel.Username = this.ActiveUser.Username;

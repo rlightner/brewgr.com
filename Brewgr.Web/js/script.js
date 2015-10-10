@@ -77,11 +77,11 @@ function general_onReady() {
             }
         } else if(event.type === 'click') {
             event.preventDefault();
+            btn.attr('disabled', 'disabled');
             $.ajax({
-                url: '/ToggleBrewerFollow',
+                url: '/api/user/relation/' + id,
                 async: true,
-                type: 'post',
-                data: { userid: id },
+                type: followed ? "delete" : "post",
                 success: function (t) {
                     if (followed) {
                         textEle.text("Follow");
@@ -97,6 +97,9 @@ function general_onReady() {
                 },
                 error: function () {
                     alert("uh oh, something went wrong.  Please try again.");
+                },
+                complete: function() {
+                    btn.removeAttr('disabled');
                 }
             });
         }
@@ -271,7 +274,8 @@ function layout_onReady() {
     // Search Menu Trigger
     $('.searchtrig').click(function () {
         $('#navigation').hide();
-        $('#search').slideToggle();
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+        $('#search').slideDown();
     });
 
     $(window).scroll(function() {

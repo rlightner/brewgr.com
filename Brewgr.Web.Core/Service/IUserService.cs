@@ -88,47 +88,7 @@ namespace Brewgr.Web.Core.Service
 		/// Unsiubscribes a user from a notification type
 		/// </summary>
 		void UnsubscribeUserFromNotificationType(User user, NotificationType notificationType);
-
-		/// <summary>
-		/// Determines if a user follows another user
-		/// </summary>
-		bool DoesUserFollowUser(int userId, int otherUserId);
-
-		/// <summary>
-		/// Gets a list of followed users
-		/// </summary>
-		IList<int> GetFollowedUsers(int userId);
-
-		/// <summary>
-		/// Determines if a user is followed by another user
-		/// </summary>
-		bool UserIsFollowedBy(int userId, int followerId);
-
-		/// <summary>
-		/// Toggles a User Follow
-		/// </summary>
-		void ToggleUserFollow(int userId, int followedById);
-
-		/// <summary>
-		/// Gets a user's followers
-		/// </summary>
-		IList<MiniUserSummary> GetFollowersOf(int userId);
-
-        /// <summary>
-        /// Gets people followed by a user
-        /// </summary>
-        IList<MiniUserSummary> GetFollowedBy(int userId);
-
-        /// <summary>
-        /// Gets people followed by a user, returning count
-        /// </summary>
-        IList<MiniUserSummary> GetFollowedBy(int userId, int count);
-
-        /// <summary>
-        /// Gets people followed by a user count
-        /// </summary>
-        int GetFollowedByCount(int userId);
-
+        
         /// <summary>
 		/// Gets a list of the top contributors
 		/// </summary>
