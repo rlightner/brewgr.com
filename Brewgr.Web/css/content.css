@@ -20,21 +20,6 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 .subhead, .view .subhead { color: #779e00; }
 
 /* ------------------------------------------------------------------------------------------*/
-/* --------- Flash Elements ---------------------------------------------------------------- */
-/* ------------------------------------------------------------------------------------------*/
-.flash { 
-    -moz-animation: flash 1s ease-out; 
-    -moz-animation-iteration-count: 1; 
-    -webkit-animation: flash 1s ease-out; 
-    -webkit-animation-iteration-count: 1; 
-    -ms-animation: flash 1s ease-out; 
-    -ms-animation-iteration-count: 1; 
-}
-@-webkit-keyframes flash    { 0% { background-color:initial; } 50% { background-color:#fbf8b2; } 100% { background-color:initial; }}
-@-moz-keyframes flash       { 0% { background-color:initial; } 50% { background-color:#fbf8b2; } 100% { background-color:initial; }}
-@-ms-keyframes flash        { 0% { background-color:initial; } 50% { background-color:#fbf8b2; } 100% { background-color:initial; }}
-
-/* ------------------------------------------------------------------------------------------*/
 /* --------- List ------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------*/
 .list .media { position: relative; overflow: visible; border-bottom: solid 1px #eee; margin-bottom: 18px; padding-bottom: 18px; }
@@ -58,17 +43,6 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 .list-recipe .media-body > span a:nth-of-type(2):hover { text-decoration: none; }
 .list-recipe .media-body .badge { margin-bottom: 5px; }
 .list-recipe [data-rating] { margin-bottom: 8px; }
-@media only screen and (min-width: 768px) {
-    /*.list h3.media-heading { margin-right: 140px; }
-    .list [data-rating] { position: absolute; right: 35px; top: 0; }*/    
-}
-
-
-/* ------------------------------------------------------------------------------------------*/
-/* --------- Session List ------------------------------------------------------------------- */
-/* ------------------------------------------------------------------------------------------*/
-
-
 
 
 /* ------------------------------------------------------------------------------------------*/
@@ -80,7 +54,6 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 .recipe-widget h4 { font-size: 14px; font-weight: bold; margin-bottom: 2px; }
 .recipe-widget .badge { display: table;  width: 100%; border-radius: 4px; background-color: #eee; margin-top: 8px; border: solid 1px #ddd; color: #57595D; font-weight: normal; }
 .recipe-widget .badge span { display: table-cell; text-align: center; vertical-align: middle; }
-.recipe-widget .srm { display: inline-block; width: 16px; height: 16px; border-radius: 8px; }
 
 
 /* ------------------------------------------------------------------------------------------*/
@@ -107,6 +80,24 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 .srm36 { background: #440607; } .srm37 { background: #3F0708; } 
 .srm38 { background: #3B0607; } .srm39 { background: #3A070B; } 
 .srm40 { background: #36080A; } .srm00 { background: #000000; }
+.srm-disc { display: inline-block; width: 16px; height: 16px; border-radius: 50%; }
+
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- Flash Elements ---------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
+.flash { 
+    -moz-animation: flash 1s ease-out; 
+    -moz-animation-iteration-count: 1; 
+    -webkit-animation: flash 1s ease-out; 
+    -webkit-animation-iteration-count: 1; 
+    -ms-animation: flash 1s ease-out; 
+    -ms-animation-iteration-count: 1; 
+}
+@-webkit-keyframes flash    { 0% { background-color:initial; } 50% { background-color:#fbf8b2; } 100% { background-color:initial; }}
+@-moz-keyframes flash       { 0% { background-color:initial; } 50% { background-color:#fbf8b2; } 100% { background-color:initial; }}
+@-ms-keyframes flash        { 0% { background-color:initial; } 50% { background-color:#fbf8b2; } 100% { background-color:initial; }}
+
 
 
 /* ------------------------------------------------------------------------------------------*/
@@ -160,7 +151,7 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 
 
 /* ------------------------------------------------------------------------------------------*/
-/* --------- View: PROFILE ------------------------------------------------------------ */
+/* --------- View: PROFILE ----------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------*/
 #vw-profile .col-md-3 .thumbnail { border: 0; }
 #vw-profile .info h2 { margin-bottom: 0; }
@@ -178,3 +169,30 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 @media only screen and (max-width: 767px) {
     #vw-profile [data-followid] { display: block; width: auto; }   
 }
+
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- View: RECIPE DETAIL------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------*/
+#vw-recipedetail #fermentables .ing-panel-row-head div,
+    #vw-recipedetail #fermentables .ing-panel-row div,
+    #vw-recipedetail #fermentables .ing-panel-row-foot div { text-align: center; }
+#vw-recipedetail #fermentables .ing-panel-row-head div:nth-of-type(3),
+    #vw-recipedetail #fermentables .ing-panel-row div:nth-of-type(3) { text-align: left; }
+
+
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- ING Panel --------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
+.ing-panel .panel-heading { background-color: #888; border: solid 1px #888; color: #fff; font-size: 17px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
+.ing-panel .panel-body  { padding-top: 0; padding-bottom: 0; }
+.ing-panel-row-head { background-color: #eee; font-weight: bold; }
+.ing-panel-row-head div { padding: 2px 8px; }
+.ing-panel-row div { padding: 8px;  }
+.ing-panel-row { border-top: solid 1px #ddd; }
+
+.ing-panel-row:nth-of-type(odd) div { background-color: #eee; }
+.ing-panel-row-foot { background-color: #eee; border-top: solid 1px #ccc; }
+
+

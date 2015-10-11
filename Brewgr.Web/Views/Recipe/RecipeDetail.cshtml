@@ -1,13 +1,18 @@
-﻿@using Brewgr.Web
+﻿@using System.Linq
+@using Brewgr.Web
 @using Brewgr.Web.Core.Model
+@using ctorx.Core.Conversion
 @using ctorx.Core.Formatting
 
 @model RecipeDetailViewModel
 
 @{
-	ViewBag.Title = Model.GetTitle();
-	ViewBag.Description = Model.GetDescription();
+    ViewBag.Title = Model.GetTitle();
+    ViewBag.Description = Model.GetDescription();
     ViewBag.Canonical = Url.RecipeDetailUrl(Model.RecipeViewModel.RecipeId, Model.RecipeViewModel.Name, Model.RecipeViewModel.StyleName);
+
+
+    var fAmtUnitLabel = Model.RecipeViewModel.UnitType == "s" ? "lb" : "kg";
 }
 
 @*
@@ -17,67 +22,203 @@
     [data-unit=@Model.RecipeViewModel.UnitType] { display: inline; }
 </style>
 
-<script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher: "0f7ddcd9-683a-4651-b221-bdfcfc9d1497", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
+<div id="vw-recipedetail" class="container view">
+    <div class="row">
+        <div class="col-md-8">
 
-<div id="view-recipedetail" class="content">
-    
-    @if (ViewBag.ActiveUser == null)
-    {
-        <div class="ad-sense" style="width: 728px; margin: 0 auto 18px auto;">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- NotLoggedIn-Letterboard -->
-            <ins class="adsbygoogle"
-                 style="display: inline-block; width: 728px; height: 90px"
-                 data-ad-client="ca-pub-1415813402338064"
-                 data-ad-slot="5869356982"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            @* Recipe Info *@
+            <div class="panel panel-default">
+                <div class="panel-heading">Recipe Info</div>
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-left">
+                            <img src="@Url.RecipeDetailImageUrl(Model.RecipeViewModel.ImageUrlRoot, Model.RecipeViewModel.Srm)" alt="Recipe Image" width="200" height="200" />
+                        </div>
+                        <div class="media-body">
+                            <h2 class="media-heading">@Model.RecipeViewModel.Name</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            @* Fermentables *@
+            <div id="fermentables" class="panel panel-default ing-panel">
+                <div class="panel-heading">Fermentables</div>
+                <div class="panel-body">
+                    <div class="row ing-panel-row-head">
+                        <div class="col-md-1">%</div>
+                        <div class="col-md-1">@fAmtUnitLabel</div>
+                        <div class="col-md-6">fermentable</div>
+                        <div class="col-md-1">ppg</div>
+                        <div class="col-md-1">&deg;L</div>
+                        <div class="col-md-2">usage</div>
+                    </div>
+
+                    @foreach(var ing in Model.RecipeViewModel.Fermentables)
+                    {
+                        <div class="row ing-panel-row">
+                            <div class="col-md-1">@ing.Per%</div>
+                            <div class="col-md-1">@ing.Amt</div>
+                            <div class="col-md-6">@ing.Name</div>
+                            <div class="col-md-1">@ing.Ppg</div>
+                            <div class="col-md-1"><span class="srm @Html.SrmClass(Converter.Convert<int>(ing.L)) srm-disc"></span> @ing.L</div>
+                            <div class="col-md-2">@ing.Use</div>
+                        </div>
+                    }
+
+                    <div class="row ing-panel-row-foot">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-1">@Model.RecipeViewModel.Fermentables.Sum(x => Converter.Convert<double>(x.Amt)) @fAmtUnitLabel</div>
+                    </div>
+
+                </div>
+                @*<table class="table">
+                    @if (Model.RecipeViewModel.Fermentables != null && Model.RecipeViewModel.Fermentables.Any())
+                    {
+                        <thead>
+                            <tr>
+                                <td class="aligncenter">%</td>
+                                <td class="aligncenter">@(Model.RecipeViewModel.UnitType == "s" ? "lb" : "kg")</td>
+                                <td>fermentable</td>
+                                <td class="aligncenter">ppg <span class="helptip" original-title="PPG: Points per pound per gallon - This is the gravity points that you would get if you extracted 100% of the sugars from a pound of this malt into a gallon of water">&nbsp;</span></td>
+                                <td class="paddingleft40">L <span class="helptip" original-title="Degrees Lovibond is a measurement of the color that a malt or sugar will contribute to a batch of homebrew beer">&nbsp;</span></td>
+                                <td class="aligncenter">usage <span class="helptip" original-title="Indicates how the fermentable is used.  All grain brewers will typically select mash while extract brewers will typically select extract or steep.  For fermentables added late in the boil such as sugar, select late (late addition).">&nbsp;</span></td>
+                            </tr>
+                        </thead>
+                    }
+                    <tbody>
+                        @if (Model.RecipeViewModel.Fermentables == null || !Model.RecipeViewModel.Fermentables.Any())
+                        {
+                            <tr>
+                                <td colspan="6">
+                                    <div class="content">No fermentables in this recipe</div>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var recipeFermentable in Model.RecipeViewModel.Fermentables)
+                            {
+                                <tr>
+                                    <td class="aligncenter"><span data-name="f-percent">@recipeFermentable.Per%</span></td>
+                                    <td class="aligncenter">@(recipeFermentable.Amt.Trim().Length > 0 ? recipeFermentable.Amt : "0")</td>
+                                    <td><span class="bold" itemprop="ingredients">@recipeFermentable.Name</span></td>
+                                    <td class="aligncenter">@recipeFermentable.Ppg</td>
+                                    <td class="paddingleft40"><div class="srm-circ srm@(Converter.Convert<int>(recipeFermentable.L) > 40 ? "Black" : Converter.Convert<int>(recipeFermentable.L) == 1 ? "White" : recipeFermentable.L)"></div>   @recipeFermentable.L&deg;</td>
+                                    <td class="aligncenter">@HumanReadableFormatter.AddSpacesToPascalCaseString(recipeFermentable.Use)</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    @if (Model.RecipeViewModel.Fermentables != null && Model.RecipeViewModel.Fermentables.Any())
+                    {
+                        <tfoot>
+                            <tr>
+                                <td id="f-percent"></td>
+                                <td id="f-pound-total" class="aligncenter">@totalAmount.ToString().TrimEnd('0') @(Model.RecipeViewModel.UnitType == "s" ? "lb" : "kg")</td>
+                                <td colspan="4"></td>
+                            </tr>
+                        </tfoot>
+                    }
+                </table>*@
+
+                @*<div class="panel-footer">Panel footer</div>*@
+            </div>
+
+            @* Hops *@
+            @*<div class="panel panel-default">
+                <div class="panel-heading">Hops</div>
+                <div class="panel-body">
+
+                </div>
+                <div class="panel-footer">Panel footer</div>
+            </div>*@
+
+            @* Yeasts *@
+            @*<div class="panel panel-default">
+                <div class="panel-heading">Yeasts</div>
+                <div class="panel-body">
+
+                </div>
+                <div class="panel-footer">Panel footer</div>
+            </div>*@
+
+            @* Other Stuff *@
+            @*<div class="panel panel-default">
+                <div class="panel-heading">Other Stuff</div>
+                <div class="panel-body">
+
+                </div>
+                <div class="panel-footer">Panel footer</div>
+            </div>*@
+
         </div>
-    }
+        <div class="col-md-4">
+            @if (ViewBag.SimilarRecipes.Count > 0)
+            {
+                <div id="similar-recipes">
+                    <h3 class="green margintop20">Similar Homebrew Recipes</h3>
+                    @foreach (RecipeSummary recipeSummary in ViewBag.SimilarRecipes)
+                    {
+                        @Html.Partial("_RecipeWidget", recipeSummary)
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
-    <div class="primary builder" itemscope itemtype="http://schema.org/Recipe">
-        
+
+
+
+
+@*<script type="text/javascript">var switchTo5x = true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({ publisher: "0f7ddcd9-683a-4651-b221-bdfcfc9d1497", doNotHash: true, doNotCopy: true, hashAddressBar: false });</script>*@
+
+@*<div id="view-recipedetail" class="content">*@
+
+    @*<div class="primary builder" itemscope itemtype="http://schema.org/Recipe">
+
         @if (!string.IsNullOrWhiteSpace(Model.RecipeViewModel.StyleId))
         {
-            <span class="hidden" itemprop="recipeCuisine">@Model.RecipeViewModel.StyleName</span>    
-        }
-        
+            <span class="hidden" itemprop="recipeCuisine">@Model.RecipeViewModel.StyleName</span>
+        }*@
+
         @* Recipe Info *@
-        @Html.Partial("_RecipeDetailInfo", Model)
-        
+        @*@Html.Partial("_RecipeDetailInfo", Model)*@
+
         @* Fermentables *@
-        @Html.Partial("_RecipeDetailFermentables", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })
+        @*@Html.Partial("_RecipeDetailFermentables", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
 
         @* Hops *@
-        @Html.Partial("_RecipeDetailHops", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })
+        @*@Html.Partial("_RecipeDetailHops", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
 
         @* Yeast *@
-        @Html.Partial("_RecipeDetailYeasts", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })
+        @*@Html.Partial("_RecipeDetailYeasts", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
 
         @* Adjuncts *@
-        @Html.Partial("_RecipeDetailAdjuncts", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })
- 
+        @*@Html.Partial("_RecipeDetailAdjuncts", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
+
         @* MashSteps *@
-        @Html.Partial("_RecipeDetailMashSteps", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })
- 
+        @*@Html.Partial("_RecipeDetailMashSteps", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
+
         @* Recipe Steps *@
-        @Html.Partial("_RecipeDetailSteps", Model.RecipeViewModel)
-        
+        @*@Html.Partial("_RecipeDetailSteps", Model.RecipeViewModel)*@
+
         @* Tasting Notes *@
-        @Html.Partial("_TastingNoteList", Model.TastingNotes ?? new List<TastingNote>())
+        @*@Html.Partial("_TastingNoteList", Model.TastingNotes ?? new List<TastingNote>())*@
 
         @* Start Comments *@
-        @Html.Partial("_RecipeDetailComments", Model.RecipeViewModel)
-    </div>
+        @*@Html.Partial("_RecipeDetailComments", Model.RecipeViewModel)
+    </div>*@
 
     @* Nutrition Label *@
-    <div class="compliment">
-		
+    @*<div class="compliment">
+
         @Html.Partial("_RecipeFacts", Model.RecipeViewModel, new ViewDataDictionary(ViewData) { { "ShowInModal", false } })
-		
+
         @if (ViewBag.SendToShopSettings != null)
         {
             <a href="@Url.Action("Create", "SendToShop", new { RecipeId = Model.RecipeViewModel.RecipeId })" class="button button_black widebutton margintop10 ">Send to @ViewBag.SendToShopSettings.PartnerName</a>
@@ -88,50 +229,25 @@
         @if (!string.IsNullOrWhiteSpace(Model.RecipeViewModel.StyleId))
         {
             @Html.Partial("_RecipeStyleGuide", Model.RecipeViewModel)
-        }
+        }*@
 
         @* Similar Recipes *@
-        @if (ViewBag.SimilarRecipes.Count > 0)
-        {
-            <div id="similar-recipes">
-                <h3 class="green margintop20">Similar Homebrew Recipes</h3>
-                @foreach (RecipeSummary recipeSummary in ViewBag.SimilarRecipes)
-                {
-                    @Html.Partial("_RecipeWidget", recipeSummary)
-                }
-            </div>
-        }
+        
+    @*</div>
+</div>*@
 
-        @* Advertisement *@     
-        @if(ViewBag.ActiveUser == null)
-        {
-            <div class="ad-sense" style="width: 200px; margin: 12px auto;">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- SmallSquare -->
-                <ins class="adsbygoogle"
-                    style="display: inline-block; width: 200px; height: 200px"
-                    data-ad-client="ca-pub-1415813402338064"
-                    data-ad-slot="7206489386"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        }
-    </div>	  
-</div>
-
-<div id="RecipeJson" class="hidden">@Html.Raw(Model.RecipeViewModel.GetJson())</div>
+@*<div id="RecipeJson" class="hidden">@Html.Raw(Model.RecipeViewModel.GetJson())</div>*@
 
 @section Scripts
 {
-    <script type="text/javascript">
-        $(function() {
+    @*<script type="text/javascript">
+        $(function () {
             var recipe = getRecipe();
 
             // set up the style chart
             var targetStyle = StyleChart.GetStyle('@Model.RecipeViewModel.StyleId');
             StyleChart.create(targetStyle, recipe, $('#selected-style-chart'));
         });
-    </script>
+    </script>*@
 }
 
