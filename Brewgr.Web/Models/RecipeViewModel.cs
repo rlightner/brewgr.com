@@ -300,5 +300,13 @@ namespace Brewgr.Web.Models
 			var serializer = new JavaScriptSerializer();
 			return serializer.Serialize(this);
 		}
-	}
+
+        /// <summary>
+		/// Determines if the recipe was created by a specific user
+		/// </summary>
+		public bool WasCreatedBy(int userId)
+        {
+            return this.CreatedBy.Equals(userId);
+        }
+    }
 }

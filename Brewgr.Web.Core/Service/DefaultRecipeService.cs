@@ -76,6 +76,7 @@ namespace Brewgr.Web.Core.Service
                 .Include(x => x.BjcpStyleSummary)
 				.Include(x => x.Steps)
 				.Include(x => x.RecipeMetaData)
+                .Include(x => x.User.UserSummary)
 				.Where(x => x.IsActive)
 				.Where(x => x.IsPublic || (userId != null && x.CreatedBy == userId))
 				.FirstOrDefault(x => x.RecipeId == recipeId);

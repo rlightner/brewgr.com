@@ -42,6 +42,7 @@ namespace Brewgr.Web.Mappers
 			target.Srm = source.Srm;
 			target.ImageUrlRoot = source.ImageUrlRoot;
 			target.IsPublic = source.IsPublic;
+		    target.CreatedByUser = source.User.UserSummary;
 
 			if (source.RecipeMetaData != null)
 			{

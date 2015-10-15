@@ -45,7 +45,6 @@ function general_onReady() {
         return false;
     });
 
-
     // Following Button Toggle
     $('[data-followid]').on('mouseover mouseout click', function (event) {
         var btn = $(this);
@@ -276,6 +275,7 @@ function layout_onReady() {
         $('#navigation').hide();
         $('html, body').animate({ scrollTop: 0 }, 'fast');
         $('#search').slideDown();
+        $('#SearchTerm').focus();
     });
 
     $(window).scroll(function() {

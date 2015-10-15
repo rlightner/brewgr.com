@@ -116,6 +116,27 @@
       <HintPath>..\..\packages\FluentValidation.MVC3.5.0.0.3\lib\Net40\FluentValidation.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Glimpse.Ado">
+      <HintPath>..\..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Glimpse.AspNet, Version=1.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Glimpse.AspNet.1.9.2\lib\net45\Glimpse.AspNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Glimpse.Core">
+      <HintPath>..\..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Glimpse.EF6">
+      <HintPath>..\..\packages\Glimpse.EF6.1.6.5\lib\net45\Glimpse.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Glimpse.Mvc5">
+      <HintPath>..\..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ImageResizer">
       <HintPath>..\..\packages\ImageResizer.3.4.3\lib\ImageResizer.dll</HintPath>
       <Private>True</Private>
@@ -273,6 +294,7 @@
     <Compile Include="Email\NewAccountEmailMessage.cs" />
     <Compile Include="Email\PasswordResetEmailMessage.cs" />
     <Compile Include="Email\RecipeCommentEmailMessage.cs" />
+    <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2327,25 +2349,7 @@
     <Content Include="Views\Admin\_CustomIngredients.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Recipe\_RecipeDetailSteps.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Recipe\_RecipeDetailComments.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Recipe\_RecipeDetailAdjuncts.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Recipe\_RecipeDetailYeasts.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Recipe\_RecipeDetailHops.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Recipe\_RecipeDetailFermentables.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Recipe\_RecipeDetailInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\BrewSession\NewBrewSession.cshtml" />
@@ -2526,9 +2530,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Recipe\_BuilderMashStepTable.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Recipe\_RecipeDetailMashSteps.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Partner\Tools.cshtml" />

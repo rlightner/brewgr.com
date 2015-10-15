@@ -18,6 +18,7 @@
 .ad { margin: 18px 0; border: solid 1px #ccc; padding: 8px 8px; text-align: center; }
 abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by Default to prevent flashing */
 .subhead, .view .subhead { color: #779e00; }
+.fine-print { font-size: 11px; color: #aaa; } 
 
 /* ------------------------------------------------------------------------------------------*/
 /* --------- List ------------------------------------------------------------------- */
@@ -174,12 +175,47 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 /* ------------------------------------------------------------------------------------------*/
 /* --------- View: RECIPE DETAIL------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------*/
-#vw-recipedetail #fermentables .ing-panel-row-head div,
-    #vw-recipedetail #fermentables .ing-panel-row div,
-    #vw-recipedetail #fermentables .ing-panel-row-foot div { text-align: center; }
-#vw-recipedetail #fermentables .ing-panel-row-head div:nth-of-type(3),
-    #vw-recipedetail #fermentables .ing-panel-row div:nth-of-type(3) { text-align: left; }
+#vw-recipedetail #recinfo .panel-body { padding: 14px 8px; } 
+#vw-recipedetail #recinfo .media-heading { font-size: 22px; }
+#vw-recipedetail #recinfo .media-heading { margin-bottom: 0; line-height: 24px; }
+#vw-recipedetail #recinfo h2 { margin: 0 0 4px 0; }
+#vw-recipedetail #recinfo .specs { margin: 12px 0; }
+#vw-recipedetail #recinfo .specs .row div:first-of-type { font-weight: bold; }
 
+@media only screen and (min-width: 768px) {
+
+    /* Slight derivation from bootstrap cols */
+    #vw-recipedetail .image { margin-left: 8px; }
+    #vw-recipedetail .detail { margin-left: -8px; }
+
+    #vw-recipedetail  .ing-panel-row-head div,
+        #vw-recipedetail .ing-panel-row div,
+        #vw-recipedetail .ing-panel-row-foot div { text-align: center; } /* Default to Center */
+
+    #vw-recipedetail .ing-panel-row div:first-of-type { text-align: left; } /* Left align Name Cols */
+
+    #vw-recipedetail #fermentables .ing-panel-row-head div:nth-of-type(3),    /* Left Align Name Head Cols */
+        #vw-recipedetail #hops .ing-panel-row-head div:nth-of-type(2),
+        #vw-recipedetail #yeasts .ing-panel-row-head div:first-of-type,
+        #vw-recipedetail #others .ing-panel-row-head div:nth-of-type(3),
+        #vw-recipedetail #mashsteps .ing-panel-row-head div:first-of-type
+            { text-align: left; }    
+        
+    #vw-recipedetail #hops .panel-footer .row > div:last-of-type { text-align: right; }    
+}
+
+@media only screen and (max-width: 767px) { 
+
+    #vw-recipedetail [data-rating]:first-of-type { margin: -12px 0 6px 0; }
+
+    #vw-recipedetail .ing-panel-row { padding: 8px; }
+    #vw-recipedetail .ing-panel-row div { padding-bottom: 0; padding-top: 0; text-align: left ; }
+    #vw-recipedetail .ing-panel span.visible-xs { display: inline-block !important; }
+
+    /* Bold Ing Named for XS*/
+    #vw-recipedetail .ing-panel-row div:first-of-type { font-weight: bold; }    
+
+}
 
 
 /* ------------------------------------------------------------------------------------------*/
@@ -187,12 +223,13 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 /* ------------------------------------------------------------------------------------------*/
 .ing-panel .panel-heading { background-color: #888; border: solid 1px #888; color: #fff; font-size: 17px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
 .ing-panel .panel-body  { padding-top: 0; padding-bottom: 0; }
+.ing-panel .panel-body p, .ing-panel .panel-body ol { margin-top: 8px; }
+.ing-panel .panel-body ol { padding-left: 18px; }
 .ing-panel-row-head { background-color: #eee; font-weight: bold; }
 .ing-panel-row-head div { padding: 2px 8px; }
 .ing-panel-row div { padding: 8px;  }
 .ing-panel-row { border-top: solid 1px #ddd; }
-
-.ing-panel-row:nth-of-type(odd) div { background-color: #eee; }
-.ing-panel-row-foot { background-color: #eee; border-top: solid 1px #ccc; }
+.ing-panel-row:nth-of-type(odd) { background-color: #eee; }
+.ing-panel .panel-footer { background-color: #ddd; padding: 2px 15px; }
 
 

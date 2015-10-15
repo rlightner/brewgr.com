@@ -3,6 +3,7 @@
 @using Brewgr.Web.Core.Model
 @using ctorx.Core.Conversion
 @using ctorx.Core.Formatting
+@using System.Linq;
 
 @model RecipeDetailViewModel
 
@@ -13,6 +14,8 @@
 
 
     var fAmtUnitLabel = Model.RecipeViewModel.UnitType == "s" ? "lb" : "kg";
+    var hAmtUnitLabel = Model.RecipeViewModel.UnitType == "s" ? "oz" : "g";
+    var tempUnitLabel = Model.RecipeViewModel.UnitType == "s" ? "F" : "C";
 }
 
 @*
@@ -27,134 +30,358 @@
         <div class="col-md-8">
 
             @* Recipe Info *@
-            <div class="panel panel-default">
+            <div id="recinfo" class="panel panel-default ing-panel">
                 <div class="panel-heading">Recipe Info</div>
                 <div class="panel-body">
-                    <div class="media">
-                        <div class="media-left">
-                            <img src="@Url.RecipeDetailImageUrl(Model.RecipeViewModel.ImageUrlRoot, Model.RecipeViewModel.Srm)" alt="Recipe Image" width="200" height="200" />
+
+                    <div class="row">
+                        <div class="col-sm-4 image">
+                            <div class="thumbnail"><img src="@Url.RecipeDetailImageUrl(Model.RecipeViewModel.ImageUrlRoot, Model.RecipeViewModel.Srm)" alt="Recipe Image" width="200" height="200" /></div>                            
                         </div>
-                        <div class="media-body">
-                            <h2 class="media-heading">@Model.RecipeViewModel.Name</h2>
+                        <div class="col-md-8 detail">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="visible-xs keepsize" data-rating="@Model.RecipeViewModel.AverageRating"></div>
+                                    <h2>@Model.RecipeViewModel.Name</h2>
+                                    <div class="author">
+                                        <a href="@Url.UserProfileUrl(Model.RecipeViewModel.CreatedByUser.Username)"><img class="avatar keepsize" src="@UserAvatar.GetAvatar(16, Model.RecipeViewModel.CreatedByUser.EmailAddress)" alt=""/></a>
+                                        <a href="@Url.UserProfileUrl(Model.RecipeViewModel.CreatedByUser.Username)">@(ViewBag.ActiveUser != null && Model.RecipeViewModel.WasCreatedBy(ViewBag.ActiveUser.UserId) ? "you" : Model.RecipeViewModel.CreatedByUser.Username)</a>
+                                        <small><abbr class="timeago" title="@Model.RecipeViewModel.DateCreated.ToString("g")">@Model.RecipeViewModel.DateCreated</abbr></small>
+                                    </div>
+                                    <div class="specs">
+                                        <div class="row">
+                                            <div class="col-md-4 col-xs-6">Type:</div>
+                                            <div class="col-md-8 col-xs-6"><span itemprop="recipeCategory">@Model.RecipeViewModel.GetRecipeTypeName()</span></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 col-xs-6">Batch Size:</div>
+                                            <div class="col-md-8 col-xs-6"><span itemprop="recipeYield">@Model.RecipeViewModel.BatchSize.ToString() @(Model.RecipeViewModel.UnitType == "s" ? "Gallon" : "Liter")(s)</span></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 col-xs-6">Boil Size:</div>
+                                            <div class="col-md-8 col-xs-6">@Model.RecipeViewModel.BoilSize.ToString() @(Model.RecipeViewModel.UnitType == "s" ? "Gallon" : "Liter")(s)</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 col-xs-6" itemprop="cookTime" content="PT@(Model.RecipeViewModel.BoilTime)M">Boil Time:</div>
+                                            <div class="col-md-8 col-xs-6">@Model.RecipeViewModel.BoilTime min</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 col-xs-6">Efficiency:</div>
+                                            <div class="col-md-8 col-xs-6">@(Model.RecipeViewModel.Efficiency * 100)%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 hidden-xs">
+                                    <div class="rating">
+                                        <a href="#tastingnotes" class="keepsize">
+                                            <div id="recipe-rating" data-rating="@Model.RecipeViewModel.AverageRating"></div>
+                                        </a>
+                                        <span class="fine-print">from tasting notes</span>
+                                    </div>
+                                    <br/>
+                                    <b>TODO: Comments, Tasting Notes, Actions, Rich Snippets</b>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-11">
+                                    <div class="recipe-desc" itemprop="description">
+                                        @if (!string.IsNullOrWhiteSpace(Model.RecipeViewModel.Description))
+                                        {
+                                            @Html.Partial("_StringWithLineBreaks", Model.RecipeViewModel.Description)
+                                        }
+                                        else
+                                        {
+                                            @Model.GetInferredDescription()
+                                        }
+                                    </div>
+
+                                    @if (Model.RecipeViewModel.OriginalRecipe != null)
+                                    {
+                                        <text><br />This recipe was cloned from <a href="@Url.RecipeDetailUrl(Model.RecipeViewModel.OriginalRecipe.RecipeId, Model.RecipeViewModel.OriginalRecipe.Name, Model.RecipeViewModel.OriginalRecipe.StyleName)">@Model.RecipeViewModel.OriginalRecipe.Name</a>.</text>
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
+
+                    @*<div class="media">
+                        <div class="media-left">
+                            <img src="@Url.RecipeDetailImageUrl(Model.RecipeViewModel.ImageUrlRoot, Model.RecipeViewModel.Srm)" alt="Recipe Image" width="200" height="200"/>
+                        </div>
+                        <div class="media-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="visible-xs keepsize" data-rating="@Model.RecipeViewModel.AverageRating"></div>
+                                    <h2 class="media-heading">@Model.RecipeViewModel.Name</h2>
+                                    <div class="author">
+                                        <a href="@Url.UserProfileUrl(Model.RecipeViewModel.CreatedByUser.Username)"><img class="avatar keepsize" src="@UserAvatar.GetAvatar(16, Model.RecipeViewModel.CreatedByUser.EmailAddress)" alt=""/></a>
+                                        <a href="@Url.UserProfileUrl(Model.RecipeViewModel.CreatedByUser.Username)">@(ViewBag.ActiveUser != null && Model.RecipeViewModel.WasCreatedBy(ViewBag.ActiveUser.UserId) ? "you" : Model.RecipeViewModel.CreatedByUser.Username)</a>
+                                        <small><abbr class="timeago" title="@Model.RecipeViewModel.DateCreated.ToString("g")">@Model.RecipeViewModel.DateCreated</abbr></small>
+                                    </div>
+
+                                    <div class="specs">
+                                        <div class="row">
+                                            <div class="col-md-4 col-xs-6">Recipe Type:</div>
+                                            <div class="col-md-8 col-xs-6"><span itemprop="recipeCategory">@Model.RecipeViewModel.GetRecipeTypeName()</span></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 col-xs-6">Batch Size:</div>
+                                            <div class="col-md-8 col-xs-6"><span itemprop="recipeYield">@Model.RecipeViewModel.BatchSize.ToString() @(Model.RecipeViewModel.UnitType == "s" ? "Gallon" : "Liter")(s)</span></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 col-xs-6">Boil Size:</div>
+                                            <div class="col-md-8 col-xs-6">@Model.RecipeViewModel.BoilSize.ToString() @(Model.RecipeViewModel.UnitType == "s" ? "Gallon" : "Liter")(s)</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 col-xs-6" itemprop="cookTime" content="PT@(Model.RecipeViewModel.BoilTime)M">Boil Time:</div>
+                                            <div class="col-md-8 col-xs-6">@Model.RecipeViewModel.BoilTime min</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 col-xs-6">Efficiency:</div>
+                                            <div class="col-md-8 col-xs-6">@(Model.RecipeViewModel.Efficiency * 100)%</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4 hidden-xs">
+                                    <a href="#tastingnotes" class="keepsize">
+                                        <div id="recipe-rating" data-rating="@Model.RecipeViewModel.AverageRating"></div>
+                                    </a>
+                                    <span class="fine-print">from tasting notes</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-11">
+                                    <div class="recipe-desc" itemprop="description">
+                                        @if(!string.IsNullOrWhiteSpace(Model.RecipeViewModel.Description))
+                                        {
+                                            @Html.Partial("_StringWithLineBreaks", Model.RecipeViewModel.Description)
+                                        }
+                                        else
+                                        {
+                                            @Model.GetInferredDescription()
+                                        }
+                                    </div>
+
+                                    @if(Model.RecipeViewModel.OriginalRecipe != null)
+                                    {
+                                        <text><br/>This recipe was cloned from <a href="@Url.RecipeDetailUrl(Model.RecipeViewModel.OriginalRecipe.RecipeId, Model.RecipeViewModel.OriginalRecipe.Name, Model.RecipeViewModel.OriginalRecipe.StyleName)">@Model.RecipeViewModel.OriginalRecipe.Name</a>.</text>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
                 </div>
             </div>
-
 
             @* Fermentables *@
             <div id="fermentables" class="panel panel-default ing-panel">
                 <div class="panel-heading">Fermentables</div>
                 <div class="panel-body">
-                    <div class="row ing-panel-row-head">
-                        <div class="col-md-1">%</div>
-                        <div class="col-md-1">@fAmtUnitLabel</div>
-                        <div class="col-md-6">fermentable</div>
-                        <div class="col-md-1">ppg</div>
-                        <div class="col-md-1">&deg;L</div>
-                        <div class="col-md-2">usage</div>
-                    </div>
-
-                    @foreach(var ing in Model.RecipeViewModel.Fermentables)
+                    @if (!Model.RecipeViewModel.Fermentables.Any())
                     {
-                        <div class="row ing-panel-row">
-                            <div class="col-md-1">@ing.Per%</div>
-                            <div class="col-md-1">@ing.Amt</div>
-                            <div class="col-md-6">@ing.Name</div>
-                            <div class="col-md-1">@ing.Ppg</div>
-                            <div class="col-md-1"><span class="srm @Html.SrmClass(Converter.Convert<int>(ing.L)) srm-disc"></span> @ing.L</div>
-                            <div class="col-md-2">@ing.Use</div>
+                        <p>No fermentables in this recipe</p>
+                    }
+                    else
+                    {
+                        <div class="row ing-panel-row-head hidden-xs">
+                            <div class="col-sm-1">%</div>
+                            <div class="col-sm-2">@fAmtUnitLabel</div>
+                            <div class="col-sm-4">fermentable</div>
+                            <div class="col-sm-1">ppg</div>
+                            <div class="col-sm-2">&deg;L</div>
+                            <div class="col-sm-2">usage</div>
                         </div>
+
+                        foreach (var ing in Model.RecipeViewModel.Fermentables.OrderBy(x => x.Rank))
+                        {
+                            <div class="row ing-panel-row">
+                                <div class="col-sm-4 col-sm-push-3 col-xs-12 ">@ing.Name</div>
+                                <div class="col-sm-2 col-sm-push-6 col-xs-12"><span class="visible-xs">Usage:&nbsp;</span>@ing.Use</div>
+                                <div class="col-sm-2 col-sm-pull-5 col-xs-3">@ing.Amt <span class="visible-xs">@fAmtUnitLabel</span></div>
+                                <div class="col-sm-1 col-sm-pull-8 col-xs-2">@ing.Per%</div>
+                                <div class="col-sm-1 col-sm-pull-2 col-xs-3">@ing.Ppg <span class="visible-xs">ppg</span></div>
+                                <div class="col-sm-2 col-sm-pull-2 col-xs-4"><span class="srm @Html.SrmClass(Converter.Convert<int>(ing.L)) srm-disc"></span> @ing.L <span class="visible-xs">&deg;L</span></div>
+                            </div>
+                        }
                     }
-
-                    <div class="row ing-panel-row-foot">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-1">@Model.RecipeViewModel.Fermentables.Sum(x => Converter.Convert<double>(x.Amt)) @fAmtUnitLabel</div>
-                    </div>
-
                 </div>
-                @*<table class="table">
-                    @if (Model.RecipeViewModel.Fermentables != null && Model.RecipeViewModel.Fermentables.Any())
-                    {
-                        <thead>
-                            <tr>
-                                <td class="aligncenter">%</td>
-                                <td class="aligncenter">@(Model.RecipeViewModel.UnitType == "s" ? "lb" : "kg")</td>
-                                <td>fermentable</td>
-                                <td class="aligncenter">ppg <span class="helptip" original-title="PPG: Points per pound per gallon - This is the gravity points that you would get if you extracted 100% of the sugars from a pound of this malt into a gallon of water">&nbsp;</span></td>
-                                <td class="paddingleft40">L <span class="helptip" original-title="Degrees Lovibond is a measurement of the color that a malt or sugar will contribute to a batch of homebrew beer">&nbsp;</span></td>
-                                <td class="aligncenter">usage <span class="helptip" original-title="Indicates how the fermentable is used.  All grain brewers will typically select mash while extract brewers will typically select extract or steep.  For fermentables added late in the boil such as sugar, select late (late addition).">&nbsp;</span></td>
-                            </tr>
-                        </thead>
-                    }
-                    <tbody>
-                        @if (Model.RecipeViewModel.Fermentables == null || !Model.RecipeViewModel.Fermentables.Any())
-                        {
-                            <tr>
-                                <td colspan="6">
-                                    <div class="content">No fermentables in this recipe</div>
-                                </td>
-                            </tr>
-                        }
-                        else
-                        {
-                            foreach (var recipeFermentable in Model.RecipeViewModel.Fermentables)
-                            {
-                                <tr>
-                                    <td class="aligncenter"><span data-name="f-percent">@recipeFermentable.Per%</span></td>
-                                    <td class="aligncenter">@(recipeFermentable.Amt.Trim().Length > 0 ? recipeFermentable.Amt : "0")</td>
-                                    <td><span class="bold" itemprop="ingredients">@recipeFermentable.Name</span></td>
-                                    <td class="aligncenter">@recipeFermentable.Ppg</td>
-                                    <td class="paddingleft40"><div class="srm-circ srm@(Converter.Convert<int>(recipeFermentable.L) > 40 ? "Black" : Converter.Convert<int>(recipeFermentable.L) == 1 ? "White" : recipeFermentable.L)"></div>   @recipeFermentable.L&deg;</td>
-                                    <td class="aligncenter">@HumanReadableFormatter.AddSpacesToPascalCaseString(recipeFermentable.Use)</td>
-                                </tr>
-                            }
-                        }
-                    </tbody>
-                    @if (Model.RecipeViewModel.Fermentables != null && Model.RecipeViewModel.Fermentables.Any())
-                    {
-                        <tfoot>
-                            <tr>
-                                <td id="f-percent"></td>
-                                <td id="f-pound-total" class="aligncenter">@totalAmount.ToString().TrimEnd('0') @(Model.RecipeViewModel.UnitType == "s" ? "lb" : "kg")</td>
-                                <td colspan="4"></td>
-                            </tr>
-                        </tfoot>
-                    }
-                </table>*@
-
-                @*<div class="panel-footer">Panel footer</div>*@
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 small">
+                            <span class="visible-xs">Total:&nbsp;</span>
+                            @Model.RecipeViewModel.Fermentables.Sum(x => Converter.Convert<double>(x.Amt)) @fAmtUnitLabel
+                        </div>
+                    </div>
+                </div>
             </div>
 
             @* Hops *@
-            @*<div class="panel panel-default">
+            <div id="hops" class="panel panel-default ing-panel">
                 <div class="panel-heading">Hops</div>
                 <div class="panel-body">
+                    @if (!Model.RecipeViewModel.Hops.Any())
+                    {
+                        <p>No hops in this recipe</p>
+                    }
+                    else
+                    {
+                        <div class="row ing-panel-row-head hidden-xs">
+                            <div class="col-sm-1">@hAmtUnitLabel</div>
+                            <div class="col-sm-3">variety</div>
+                            <div class="col-sm-1">type</div>
+                            <div class="col-sm-2">usage</div>
+                            <div class="col-sm-2">time</div>
+                            <div class="col-sm-2">AA</div>
+                            <div class="col-sm-1">IBU</div>
+                        </div>
 
+                        foreach (var ing in Model.RecipeViewModel.Hops.OrderBy(x => x.Rank))
+                        {
+                            <div class="row ing-panel-row">
+                                <div class="col-sm-3 col-sm-push-1 col-xs-12">@ing.Name</div>
+                                <div class="col-sm-1 col-sm-pull-3 col-xs-6">@ing.Amt <span class="visible-xs">@hAmtUnitLabel</span></div>
+                                <div class="col-sm-1 col-xs-6">@HumanReadableFormatter.AddSpacesToPascalCaseString(ing.Type)</div>
+                                <div class="col-sm-2 col-sm-push-4 col-xs-6">@(Converter.Convert<double>(ing.AA).ToString("F1"))%<span class="visible-xs">&nbsp;AA</span></div>
+                                <div class="col-sm-1 col-sm-push-4 col-xs-6">@(Converter.Convert<double>(ing.Ibu).ToString("F1"))<span class="visible-xs">&nbsp;IBU</span></div>
+                                <div class="col-sm-2 col-sm-pull-3 col-xs-6"><span class="visible-xs">Usage:&nbsp;</span>@HumanReadableFormatter.AddSpacesToPascalCaseString(ing.Use)</div>
+                                <div class="col-sm-2 col-sm-pull-3 col-xs-6">@(ing.Use == "DryHop" ? ing.Day + " days" : ing.Min + " minutes")</div>
+                            </div>
+                        }
+                    }
                 </div>
-                <div class="panel-footer">Panel footer</div>
-            </div>*@
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-xs-5 col-md-4 small">
+                            <span class="visible-xs">Total:&nbsp;</span>
+                            @Model.RecipeViewModel.Hops.Sum(x => Converter.Convert<double>(x.Amt)) @hAmtUnitLabel
+                        </div>
+                        <div class="col-xs-7 col-md-8 small">
+                            <span class="hidden-xs">IBUs calculated using the</span>
+                            <span class="visible-xs">IBU Formula:&nbsp;</span>
+                            @Model.RecipeViewModel.GetIbuFormulaName()
+                            <span class="hidden-xs">formula</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             @* Yeasts *@
-            @*<div class="panel panel-default">
+            <div id="yeasts" class="panel panel-default ing-panel">
                 <div class="panel-heading">Yeasts</div>
                 <div class="panel-body">
+                    @if (!Model.RecipeViewModel.Hops.Any())
+                    {
+                        <p>No yeasts in this recipe</p>
+                    }
+                    else
+                    {
+                        <div class="row ing-panel-row-head hidden-xs">
+                            <div class="col-sm-8">name</div>
+                            <div class="col-sm-4">attenuation</div>
+                        </div>
 
+                        foreach (var ing in Model.RecipeViewModel.Yeasts.OrderBy(x => x.Rank))
+                        {
+                            <div class="row ing-panel-row">
+                                <div class="col-sm-8 col-xs-12">@ing.Name</div>
+                                <div class="col-sm-4 col-xs-12">@ing.GetAttenuationPercent()% <span class="visible-xs">&nbsp; Attenuation</span></div>
+                            </div>
+                        }
+                    }
                 </div>
-                <div class="panel-footer">Panel footer</div>
-            </div>*@
+                @*<div class="panel-footer"></div>*@
+            </div>
 
             @* Other Stuff *@
-            @*<div class="panel panel-default">
+            <div id="others" class="panel panel-default ing-panel">
                 <div class="panel-heading">Other Stuff</div>
                 <div class="panel-body">
+                    @if (!Model.RecipeViewModel.Others.Any())
+                    {
+                        <p>No other stuff in this recipe</p>
+                    }
+                    else
+                    {
+                        <div class="row ing-panel-row-head hidden-xs">
+                            <div class="col-sm-2">amount</div>
+                            <div class="col-sm-2">unit</div>
+                            <div class="col-sm-6">name</div>
+                            <div class="col-sm-2">usage</div>
+                        </div>
 
+                        foreach (var ing in Model.RecipeViewModel.Others.OrderBy(x => x.Rank))
+                        {
+                            <div class="row ing-panel-row">
+                                <div class="col-sm-6 col-sm-push-4 col-xs-12">@ing.Name</div>
+                                <div class="col-sm-2 col-sm-pull-6 col-xs-6"><span class="visible-xs">Amount:&nbsp;</span>@ing.Amt</div>
+                                <div class="col-sm-2 col-sm-pull-6 col-xs-6"><span class="visible-xs">Unit:&nbsp;</span>@ing.Unit</div>
+                                <div class="col-sm-2"><span class="visible-xs">Usage:&nbsp;</span>@HumanReadableFormatter.AddSpacesToPascalCaseString(ing.Use)</div>
+                            </div>
+                        }
+                    }
                 </div>
-                <div class="panel-footer">Panel footer</div>
-            </div>*@
+                @*<div class="panel-footer"></div>*@
+            </div>
+
+            @* Mash Steps *@
+            <div id="mashsteps" class="panel panel-default ing-panel">
+                <div class="panel-heading">Mash Steps</div>
+                <div class="panel-body">
+                    @if (!Model.RecipeViewModel.MashSteps.Any())
+                    {
+                        <p>No Mash Steps for this recipe</p>
+                    }
+                    else
+                    {
+                        <div class="row ing-panel-row-head hidden-xs">
+                            <div class="col-sm-5">type</div>
+                            <div class="col-sm-2">heat</div>
+                            <div class="col-sm-2">temp</div>
+                            <div class="col-sm-3">time</div>
+                        </div>
+
+                        foreach (var ing in Model.RecipeViewModel.MashSteps.OrderBy(x => x.Rank))
+                        {
+                            <div class="row ing-panel-row">
+                                <div class="col-sm-5 col-xs-12">@ing.Name</div>
+                                <div class="col-sm-2 col-xs-6">@ing.Heat</div>
+                                <div class="col-sm-2 col-xs-6">@ing.Temp &deg;@tempUnitLabel</div>
+                                <div class="col-sm-12">@ing.Time minutes</div>
+                            </div>
+                        }
+                    }
+                </div>
+                @*<div class="panel-footer"></div>*@
+            </div>
+
+
+            @* Special Instructions *@
+            <div id="steps" class="panel panel-default ing-panel">
+                <div class="panel-heading">Special Instructions</div>
+                <div class="panel-body">
+                    @if (!Model.RecipeViewModel.Steps.Any())
+                    {
+                        <p>No special instructions for this recipe</p>
+                    }
+                    else
+                    {
+                        <ol>
+                            @foreach (var step in Model.RecipeViewModel.Steps.OrderBy(x => x.Rank))
+                            {
+                                <li>@step.Text</li>
+                            }
+                        </ol>
+                    }
+                </div>
+                @*<div class="panel-footer"></div>*@
+            </div>
+
 
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 hidden-xs">
             @if (ViewBag.SimilarRecipes.Count > 0)
             {
                 <div id="similar-recipes">
@@ -174,80 +401,80 @@
 
 
 @*<script type="text/javascript">var switchTo5x = true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({ publisher: "0f7ddcd9-683a-4651-b221-bdfcfc9d1497", doNotHash: true, doNotCopy: true, hashAddressBar: false });</script>*@
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({ publisher: "0f7ddcd9-683a-4651-b221-bdfcfc9d1497", doNotHash: true, doNotCopy: true, hashAddressBar: false });</script>*@
 
 @*<div id="view-recipedetail" class="content">*@
 
-    @*<div class="primary builder" itemscope itemtype="http://schema.org/Recipe">
+@*<div class="primary builder" itemscope itemtype="http://schema.org/Recipe">
 
-        @if (!string.IsNullOrWhiteSpace(Model.RecipeViewModel.StyleId))
-        {
-            <span class="hidden" itemprop="recipeCuisine">@Model.RecipeViewModel.StyleName</span>
-        }*@
+    @if (!string.IsNullOrWhiteSpace(Model.RecipeViewModel.StyleId))
+    {
+        <span class="hidden" itemprop="recipeCuisine">@Model.RecipeViewModel.StyleName</span>
+    }*@
 
-        @* Recipe Info *@
-        @*@Html.Partial("_RecipeDetailInfo", Model)*@
+@* Recipe Info *@
+@*@Html.Partial("_RecipeDetailInfo", Model)*@
 
-        @* Fermentables *@
-        @*@Html.Partial("_RecipeDetailFermentables", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
+@* Fermentables *@
+@*@Html.Partial("_RecipeDetailFermentables", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
 
-        @* Hops *@
-        @*@Html.Partial("_RecipeDetailHops", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
+@* Hops *@
+@*@Html.Partial("_RecipeDetailHops", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
 
-        @* Yeast *@
-        @*@Html.Partial("_RecipeDetailYeasts", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
+@* Yeast *@
+@*@Html.Partial("_RecipeDetailYeasts", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
 
-        @* Adjuncts *@
-        @*@Html.Partial("_RecipeDetailAdjuncts", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
+@* Adjuncts *@
+@*@Html.Partial("_RecipeDetailAdjuncts", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
 
-        @* MashSteps *@
-        @*@Html.Partial("_RecipeDetailMashSteps", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
+@* MashSteps *@
+@*@Html.Partial("_RecipeDetailMashSteps", Model.RecipeViewModel, new ViewDataDictionary(this.ViewData) { { "UnitType", Model.RecipeViewModel.UnitType } })*@
 
-        @* Recipe Steps *@
-        @*@Html.Partial("_RecipeDetailSteps", Model.RecipeViewModel)*@
+@* Recipe Steps *@
+@*@Html.Partial("_RecipeDetailSteps", Model.RecipeViewModel)*@
 
-        @* Tasting Notes *@
-        @*@Html.Partial("_TastingNoteList", Model.TastingNotes ?? new List<TastingNote>())*@
+@* Tasting Notes *@
+@*@Html.Partial("_TastingNoteList", Model.TastingNotes ?? new List<TastingNote>())*@
 
-        @* Start Comments *@
-        @*@Html.Partial("_RecipeDetailComments", Model.RecipeViewModel)
+@* Start Comments *@
+@*@Html.Partial("_RecipeDetailComments", Model.RecipeViewModel)
     </div>*@
 
-    @* Nutrition Label *@
-    @*<div class="compliment">
+@* Nutrition Label *@
+@*<div class="compliment">
 
-        @Html.Partial("_RecipeFacts", Model.RecipeViewModel, new ViewDataDictionary(ViewData) { { "ShowInModal", false } })
+    @Html.Partial("_RecipeFacts", Model.RecipeViewModel, new ViewDataDictionary(ViewData) { { "ShowInModal", false } })
 
-        @if (ViewBag.SendToShopSettings != null)
-        {
-            <a href="@Url.Action("Create", "SendToShop", new { RecipeId = Model.RecipeViewModel.RecipeId })" class="button button_black widebutton margintop10 ">Send to @ViewBag.SendToShopSettings.PartnerName</a>
-        }
+    @if (ViewBag.SendToShopSettings != null)
+    {
+        <a href="@Url.Action("Create", "SendToShop", new { RecipeId = Model.RecipeViewModel.RecipeId })" class="button button_black widebutton margintop10 ">Send to @ViewBag.SendToShopSettings.PartnerName</a>
+    }
 
-        <a href="@Url.RecipeCloneUrl(Model.RecipeViewModel.RecipeId)" rel="nofollow" class="button button_green widebutton margintop10" rel="nofollow">Clone This Recipe</a>
+    <a href="@Url.RecipeCloneUrl(Model.RecipeViewModel.RecipeId)" rel="nofollow" class="button button_green widebutton margintop10" rel="nofollow">Clone This Recipe</a>
 
-        @if (!string.IsNullOrWhiteSpace(Model.RecipeViewModel.StyleId))
-        {
-            @Html.Partial("_RecipeStyleGuide", Model.RecipeViewModel)
-        }*@
+    @if (!string.IsNullOrWhiteSpace(Model.RecipeViewModel.StyleId))
+    {
+        @Html.Partial("_RecipeStyleGuide", Model.RecipeViewModel)
+    }*@
 
-        @* Similar Recipes *@
-        
-    @*</div>
-</div>*@
+@* Similar Recipes *@
+
+@*</div>
+    </div>*@
 
 @*<div id="RecipeJson" class="hidden">@Html.Raw(Model.RecipeViewModel.GetJson())</div>*@
 
 @section Scripts
 {
     @*<script type="text/javascript">
-        $(function () {
-            var recipe = getRecipe();
+            $(function () {
+                var recipe = getRecipe();
 
-            // set up the style chart
-            var targetStyle = StyleChart.GetStyle('@Model.RecipeViewModel.StyleId');
-            StyleChart.create(targetStyle, recipe, $('#selected-style-chart'));
-        });
-    </script>*@
+                // set up the style chart
+                var targetStyle = StyleChart.GetStyle('@Model.RecipeViewModel.StyleId');
+                StyleChart.create(targetStyle, recipe, $('#selected-style-chart'));
+            });
+        </script>*@
 }
 
