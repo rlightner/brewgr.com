@@ -19,6 +19,7 @@
 abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by Default to prevent flashing */
 .subhead, .view .subhead { color: #779e00; }
 .fine-print { font-size: 11px; color: #aaa; } 
+[data-rating] { width: 100px; height: 21px; }
 
 /* ------------------------------------------------------------------------------------------*/
 /* --------- List ------------------------------------------------------------------- */
@@ -82,7 +83,6 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 .srm38 { background: #3B0607; } .srm39 { background: #3A070B; } 
 .srm40 { background: #36080A; } .srm00 { background: #000000; }
 .srm-disc { display: inline-block; width: 16px; height: 16px; border-radius: 50%; }
-
 
 /* ------------------------------------------------------------------------------------------*/
 /* --------- Flash Elements ---------------------------------------------------------------- */
@@ -176,13 +176,16 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 /* --------- View: RECIPE DETAIL------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------*/
 #vw-recipedetail #recinfo .panel-body { padding: 14px 8px; } 
-#vw-recipedetail #recinfo .media-heading { font-size: 22px; }
-#vw-recipedetail #recinfo .media-heading { margin-bottom: 0; line-height: 24px; }
+#vw-recipedetail #recinfo .media-heading { font-size: 22px; margin-bottom: 0; line-height: 24px; }
 #vw-recipedetail #recinfo h2 { margin: 0 0 4px 0; }
 #vw-recipedetail #recinfo .specs { margin: 12px 0; }
 #vw-recipedetail #recinfo .specs .row div:first-of-type { font-weight: bold; }
+#vw-recipedetail #recinfo .menu { position: absolute; }
+#vw-recipedetail #recinfo [data-rating] { margin-bottom: 4px; }
 
 @media only screen and (min-width: 768px) {
+
+    #vw-recipedetail #recinfo .menu button { width: 125px; }
 
     /* Slight derivation from bootstrap cols */
     #vw-recipedetail .image { margin-left: 8px; }
@@ -214,6 +217,9 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 
     /* Bold Ing Named for XS*/
     #vw-recipedetail .ing-panel-row div:first-of-type { font-weight: bold; }    
+
+    /* reposition actions */
+    #vw-recipedetail #recinfo .menu { top: -208px; right: 17px; }
 
 }
 

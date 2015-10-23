@@ -41,7 +41,7 @@
                         <div class="col-md-8 detail">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <div class="visible-xs keepsize" data-rating="@Model.RecipeViewModel.AverageRating"></div>
+                                    <div class="keepsize" data-rating="@Model.RecipeViewModel.AverageRating"></div>
                                     <h2>@Model.RecipeViewModel.Name</h2>
                                     <div class="author">
                                         <a href="@Url.UserProfileUrl(Model.RecipeViewModel.CreatedByUser.Username)"><img class="avatar keepsize" src="@UserAvatar.GetAvatar(16, Model.RecipeViewModel.CreatedByUser.EmailAddress)" alt=""/></a>
@@ -71,20 +71,41 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 hidden-xs">
-                                    <div class="rating">
-                                        <a href="#tastingnotes" class="keepsize">
-                                            <div id="recipe-rating" data-rating="@Model.RecipeViewModel.AverageRating"></div>
-                                        </a>
-                                        <span class="fine-print">from tasting notes</span>
+                                <div class="col-md-4">
+                                    <div class="menu">
+                                        <button class="hidden-xs btn btn-default dropdown-toggle hidden-xs" type="button" data-toggle="dropdown">
+                                            <span class="hidden-xs">Actions</span>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <button class="visible-xs btn btn-default dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                                            <span class="glyphicon glyphicon-menu-down"></span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="@Url.RecipeCloneUrl(Model.RecipeViewModel.RecipeId)" rel="nofollow">Clone</a></li>
+                                            @if(Model.RecipeViewModel.BrewSessionCount > 0)
+                                            {
+                                                <li><a href="@Url.RecipeBrewSessionsUrl(Model.RecipeViewModel.RecipeId, Model.RecipeViewModel.Name)">Brew Sessions</a></li>
+                                            }
+                                            @if(ViewBag.ActiveUser != null && Model.RecipeViewModel.WasCreatedBy(ViewBag.ActiveUser.UserId))
+                                            {
+                                                if(Model.RecipeViewModel.IsPublic)
+                                                {
+                                                    <li><a href="@Url.NewBrewSessionUrl(Model.RecipeViewModel.RecipeId)">New Brew Session</a></li>
+                                                }
+                                                <li><a href="@Url.RecipeEditUrl(Model.RecipeViewModel.RecipeId)">Edit</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="#" data-recipeid="@Model.RecipeViewModel.RecipeId">Delete</a></li>
+                                            }
+                                        </ul>
                                     </div>
-                                    <br/>
-                                    <b>TODO: Comments, Tasting Notes, Actions, Rich Snippets</b>
+
+                                    <a href="#" class="btn btn-default" style="margin-top: 20px; "><span class="glyphicon glyphicon-print"></span> Print</a>
+
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12 col-sm-11">
-                                    <div class="recipe-desc" itemprop="description">
+                                <div class="col-xs-12 col-sm-12">
+                                    <p class="recipe-desc" itemprop="description">
                                         @if (!string.IsNullOrWhiteSpace(Model.RecipeViewModel.Description))
                                         {
                                             @Html.Partial("_StringWithLineBreaks", Model.RecipeViewModel.Description)
@@ -93,86 +114,16 @@
                                         {
                                             @Model.GetInferredDescription()
                                         }
-                                    </div>
+                                    </p>
 
                                     @if (Model.RecipeViewModel.OriginalRecipe != null)
                                     {
-                                        <text><br />This recipe was cloned from <a href="@Url.RecipeDetailUrl(Model.RecipeViewModel.OriginalRecipe.RecipeId, Model.RecipeViewModel.OriginalRecipe.Name, Model.RecipeViewModel.OriginalRecipe.StyleName)">@Model.RecipeViewModel.OriginalRecipe.Name</a>.</text>
+                                        <p>This recipe was cloned from <a href="@Url.RecipeDetailUrl(Model.RecipeViewModel.OriginalRecipe.RecipeId, Model.RecipeViewModel.OriginalRecipe.Name, Model.RecipeViewModel.OriginalRecipe.StyleName)">@Model.RecipeViewModel.OriginalRecipe.Name</a>.</p>
                                     }
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
-                    @*<div class="media">
-                        <div class="media-left">
-                            <img src="@Url.RecipeDetailImageUrl(Model.RecipeViewModel.ImageUrlRoot, Model.RecipeViewModel.Srm)" alt="Recipe Image" width="200" height="200"/>
-                        </div>
-                        <div class="media-body">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="visible-xs keepsize" data-rating="@Model.RecipeViewModel.AverageRating"></div>
-                                    <h2 class="media-heading">@Model.RecipeViewModel.Name</h2>
-                                    <div class="author">
-                                        <a href="@Url.UserProfileUrl(Model.RecipeViewModel.CreatedByUser.Username)"><img class="avatar keepsize" src="@UserAvatar.GetAvatar(16, Model.RecipeViewModel.CreatedByUser.EmailAddress)" alt=""/></a>
-                                        <a href="@Url.UserProfileUrl(Model.RecipeViewModel.CreatedByUser.Username)">@(ViewBag.ActiveUser != null && Model.RecipeViewModel.WasCreatedBy(ViewBag.ActiveUser.UserId) ? "you" : Model.RecipeViewModel.CreatedByUser.Username)</a>
-                                        <small><abbr class="timeago" title="@Model.RecipeViewModel.DateCreated.ToString("g")">@Model.RecipeViewModel.DateCreated</abbr></small>
-                                    </div>
-
-                                    <div class="specs">
-                                        <div class="row">
-                                            <div class="col-md-4 col-xs-6">Recipe Type:</div>
-                                            <div class="col-md-8 col-xs-6"><span itemprop="recipeCategory">@Model.RecipeViewModel.GetRecipeTypeName()</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 col-xs-6">Batch Size:</div>
-                                            <div class="col-md-8 col-xs-6"><span itemprop="recipeYield">@Model.RecipeViewModel.BatchSize.ToString() @(Model.RecipeViewModel.UnitType == "s" ? "Gallon" : "Liter")(s)</span></div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 col-xs-6">Boil Size:</div>
-                                            <div class="col-md-8 col-xs-6">@Model.RecipeViewModel.BoilSize.ToString() @(Model.RecipeViewModel.UnitType == "s" ? "Gallon" : "Liter")(s)</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 col-xs-6" itemprop="cookTime" content="PT@(Model.RecipeViewModel.BoilTime)M">Boil Time:</div>
-                                            <div class="col-md-8 col-xs-6">@Model.RecipeViewModel.BoilTime min</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4 col-xs-6">Efficiency:</div>
-                                            <div class="col-md-8 col-xs-6">@(Model.RecipeViewModel.Efficiency * 100)%</div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-4 hidden-xs">
-                                    <a href="#tastingnotes" class="keepsize">
-                                        <div id="recipe-rating" data-rating="@Model.RecipeViewModel.AverageRating"></div>
-                                    </a>
-                                    <span class="fine-print">from tasting notes</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-11">
-                                    <div class="recipe-desc" itemprop="description">
-                                        @if(!string.IsNullOrWhiteSpace(Model.RecipeViewModel.Description))
-                                        {
-                                            @Html.Partial("_StringWithLineBreaks", Model.RecipeViewModel.Description)
-                                        }
-                                        else
-                                        {
-                                            @Model.GetInferredDescription()
-                                        }
-                                    </div>
-
-                                    @if(Model.RecipeViewModel.OriginalRecipe != null)
-                                    {
-                                        <text><br/>This recipe was cloned from <a href="@Url.RecipeDetailUrl(Model.RecipeViewModel.OriginalRecipe.RecipeId, Model.RecipeViewModel.OriginalRecipe.Name, Model.RecipeViewModel.OriginalRecipe.StyleName)">@Model.RecipeViewModel.OriginalRecipe.Name</a>.</text>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>*@
                 </div>
             </div>
 
@@ -349,7 +300,7 @@
                                 <div class="col-sm-5 col-xs-12">@ing.Name</div>
                                 <div class="col-sm-2 col-xs-6">@ing.Heat</div>
                                 <div class="col-sm-2 col-xs-6">@ing.Temp &deg;@tempUnitLabel</div>
-                                <div class="col-sm-12">@ing.Time minutes</div>
+                                <div class="col-xs-12 col-sm-3">@ing.Time minutes</div>
                             </div>
                         }
                     }
