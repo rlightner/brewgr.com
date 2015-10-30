@@ -4,7 +4,7 @@ Brewgr is a free home brewing web application located at http://brewgr.com.  It 
 
 Getting Started
 ----------------------------
-If you're interested in contributing to Brewgr (and we hope you do), please pick something that interests you from the [Issue List](https://github.com/ctorx/brewgr/issues) and get started.  We'll try our best to merge any pull-requests that add value, but please, before embarking on a major new feature, please post it as an issue to get discussion going first.
+If you're interested in contributing to Brewgr (and we hope you do), please pick something that interests you from the [Issue List](https://github.com/ctorx/brewgr.com/issues) and get started.  We'll try our best to merge any pull-requests that add value, but please, before embarking on a major new feature, please post it as an issue to get discussion going first.
 
 Development Environment Setup
 ========
