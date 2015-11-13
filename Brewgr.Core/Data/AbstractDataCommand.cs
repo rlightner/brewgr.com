@@ -5,10 +5,11 @@ using System.Linq;
 
 namespace ctorx.Core.Data
 {
-	public abstract class AbstractDataCommand : IDataCommand, IDisposable
+	public abstract class AbstractDataCommand : IDataCommand
 	{
 		string ConnectionString;
 		SqlCommand Command;
+	    bool IsDisposed = false;
 
 		/// <summary>
 		/// ctor the Mighty
@@ -137,12 +138,28 @@ namespace ctorx.Core.Data
 				.FirstOrDefault();
 		}
 
-		/// <summary>
-		/// Disposes the object
-		/// </summary>
-		public void Dispose()
-		{
-			this.Command.Dispose();
-		}
+
+        /// <summary>
+        /// Disposes the instance
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+	    protected virtual void Dispose(bool disposing)
+	    {
+	        if(!this.IsDisposed)
+	        {
+	            if(disposing)
+	            {
+	                this.Command.Dispose();
+	            }
+
+	            // Indicate that the instance has been disposed.
+	            this.IsDisposed = true;
+	        }
+	    }
 	}
 }

@@ -54,11 +54,11 @@ namespace ctorx.Core.Data
 		/// </summary>
 		protected virtual void Dispose(bool disposing)
 		{
-			if (IsDisposed)
+			if (!IsDisposed)
 			{
 				if (disposing)
 				{
-					this.DbContextResolver = null;
+					this.DbContextResolver.Dispose();
 				}
 
 				this.IsDisposed = true;

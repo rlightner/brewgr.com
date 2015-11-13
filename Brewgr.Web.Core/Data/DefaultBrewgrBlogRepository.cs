@@ -51,22 +51,24 @@ namespace Brewgr.Web.Core.Data
 				"ORDER BY " +
 				"	DateCreated DESC";
 
-			var results = SqlQueryCommand.Make(query)
-				.UsingConnection(this.BrewgrBlogConnection.ConnectionString)
-				.WithParam("@SearchTerm", searchTerm)
-				.GetDataSet();
+		    using(var command = SqlQueryCommand.Make(query)
+		        .UsingConnection(this.BrewgrBlogConnection.ConnectionString)
+		        .WithParam("@SearchTerm", searchTerm))
+		    {
+                var results = command.GetDataSet();
 
-			foreach(DataRow dataRow in results.Tables[0].Rows)
-			{
-				yield return new BlogPost
-				{
-					Slug = dataRow["Slug"].ToString(),
-					Title = dataRow["Title"].ToString(),
-					Author = dataRow["Author"].ToString(),
-					PostContent = StringCleaner.CleanForPreviewText(dataRow["PostContent"].ToString(), 400),
-					DateCreated = Convert.ToDateTime(dataRow["DateCreated"])
-				};
-			}
+                foreach (DataRow dataRow in results.Tables[0].Rows)
+                {
+                    yield return new BlogPost
+                    {
+                        Slug = dataRow["Slug"].ToString(),
+                        Title = dataRow["Title"].ToString(),
+                        Author = dataRow["Author"].ToString(),
+                        PostContent = StringCleaner.CleanForPreviewText(dataRow["PostContent"].ToString(), 400),
+                        DateCreated = Convert.ToDateTime(dataRow["DateCreated"])
+                    };
+                }
+            }
 		}
 	}
 }
