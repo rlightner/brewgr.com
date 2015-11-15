@@ -65,7 +65,6 @@ namespace ctorx.Core.Data
 					this.DestroyContext();
 				}
 
-				this.DataContextFactory = null;
 				this.IsDisposed = true;
 			}
 		}

@@ -58,7 +58,7 @@ namespace ctorx.Core.Data
 			{
 				if (disposing)
 				{
-					this.DbContextResolver.Dispose();
+					this.DbContextResolver.DestroyContext();;
 				}
 
 				this.IsDisposed = true;
