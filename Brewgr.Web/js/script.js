@@ -985,7 +985,7 @@ function dashboard_onReady() {
                     $('#tabsessions').html(response);
                     if (response.indexOf('NoDashboardItems') > 0) {
                         $('.dashboard-nomore').hide();
-                        $('.dashboard-nomorebrewsessions').removeClass("hidden");
+                        //$('.dashboard-nomorebrewsessions').removeClass("hidden");
                         $('.dashboard-nomorebrewsessions').show();
                     }
 

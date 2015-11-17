@@ -90,6 +90,7 @@ namespace Brewgr.Web.Controllers
             var dashboardItemHolder = this.RecipeService.GetDashboardItems(this.ActiveUser.UserId, searchOlderThan, (int)numberToReturn);
 
             var dashboardViewModel = new DashboardViewModel();
+            dashboardViewModel.ShowMore = true;
             dashboardViewModel.DashboardItems = new List<IDashboardItem>();
 
             // Recipes
@@ -162,8 +163,9 @@ namespace Brewgr.Web.Controllers
 				var recipeSummaryViewModel = Mapper.Map(recipeSummary, new RecipeSummaryViewModel());
 				recipeSummaryViewModel.ShowAddedBy = false;
 				recipeSummaryViewModel.CommentWrapperViewModel = commentWrapperViewModel;
-				dashboardViewModel.DashboardItems.Add(new DashboardItem { Item = recipeSummaryViewModel });
-			}
+				dashboardViewModel.DashboardItems.Add(new DashboardItem { Item = recipeSummaryViewModel, DateCreated = recipeSummaryViewModel.DateCreated });
+                dashboardViewModel.ShowMore = false;
+            }
 
 			return View("_DashboardList", dashboardViewModel);
 		}
@@ -187,7 +189,8 @@ namespace Brewgr.Web.Controllers
 				var brewSessionSummaryViewModel = Mapper.Map(brewSessionSummary, new BrewSessionSummaryViewModel());
 				brewSessionSummaryViewModel.CommentWrapperViewModel = commentWrapperViewModel;
 				brewSessionSummaryViewModel.ShowAddedBy = false;
-				dashboardViewModel.DashboardItems.Add(new DashboardItem { Item = brewSessionSummaryViewModel });
+				dashboardViewModel.DashboardItems.Add(new DashboardItem { Item = brewSessionSummaryViewModel, DateCreated = brewSessionSummaryViewModel.DateCreated });
+                dashboardViewModel.ShowMore = false;
 			}
 
 			return View("_DashboardList", dashboardViewModel);

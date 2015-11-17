@@ -484,14 +484,16 @@ namespace Brewgr.Web.Core.Service
 				throw new ArgumentOutOfRangeException("userId");
 			}
 
-			return this.Repository.GetSet<BrewSessionSummary>()
+            var result = this.Repository.GetSet<BrewSessionSummary>()
                 .Include(x => x.BrewSessionComments)
-				.Where(x => x.IsActive)
-				.Where(x => x.IsPublic)
-				.Where(x => x.BrewedBy == userId)
-				.OrderByDescending(x => x.BrewDate)
-				.ToList();
-		}
+                .Where(x => x.IsActive)
+                .Where(x => x.IsPublic)
+                .Where(x => x.BrewedBy == userId)
+                .OrderByDescending(x => x.BrewDate)
+                .ToList();
+
+            return result;
+        }
 
 		/// <summary>
 		/// Deletes a BrewSession

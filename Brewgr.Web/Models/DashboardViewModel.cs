@@ -33,6 +33,9 @@ namespace Brewgr.Web.Models
         /// </summary>
         public DashboardStatsViewModel DashboardStatsViewModel { get; set; }
 
-
+        /// <summary>
+        /// Gets or sets the ShowMore
+        /// </summary>
+        public bool ShowMore { get; set; }
     }
 }

@@ -22,7 +22,7 @@
     }
 }
 
-@if(Model.DashboardItems.Any())
+@if(Model.DashboardItems.Any() && Model.ShowMore)
 {
     <div class="dashboard-more-holder">
     <a href="#" class="btn btn-grey btn-lg dashboard-more" data-dateoflast="@Url.Encode(Model.DashboardItems.OrderByDescending(x => x.DateCreated).Last().DateCreated.ToString())" data-numbertoreturn="10">More</a>
