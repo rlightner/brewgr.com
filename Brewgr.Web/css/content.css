@@ -10,7 +10,7 @@
 .page-header { margin: 0 0 20px 0; padding-bottom: 15px; }
 .nav-tabs > li.active > a { font-weight: bold; }
 .page-header.small { font-size: 20px; margin-bottom: 10px; }
-
+.btn-grey { color: #fff; background-color: #c0c0c0; border-color: #c0c0c0; }
 
 /* ------------------------------------------------------------------------------------------*/
 /* --------- Components -------------------------------------------------------------------- */
@@ -35,6 +35,18 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 @media only screen and (max-width: 767px) {
     .list h3.media-heading { padding-right: 48px; }
 }
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- Comments ---------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
+.comments-wrapper { width: 90%; }
+.comments-wrapper .comment-list { padding: 0; list-style: none; }
+.comments-wrapper .comment-list li { margin: 0; margin-top: 10px; }
+.comments-wrapper .comment-list li > div { display: table-cell; }
+.comments-wrapper .commenter-image { width: 30px; margin-right: 5px; height: 100%; float: left; }
+.comments-wrapper .commenter-image img { width: 100%; border-radius: 50%; }
+.comments-wrapper .comment-text p { margin: 0; }
+.comments-wrapper .sub-text { color: #aaa; font-family: verdana; font-size: 11px; }
 
 
 /* ------------------------------------------------------------------------------------------*/
@@ -239,3 +251,10 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 .ing-panel .panel-footer { background-color: #ddd; padding: 2px 15px; }
 
 
+/* ------------------------------------------------------------------------------------------*/
+/* --------- Dashboard --------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
+#dashboard .row .create-recipe { display: table; margin: 20px auto; }
+#dashboard .dashboard-more { width: 70%; display: table; margin: 10px auto; }
+#dashboard .tab-content { padding-top: 20px; }
+#dashboard .list h5 { color:#aaa; margin-bottom:15px; }

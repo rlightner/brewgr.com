@@ -9,6 +9,7 @@ using Brewgr.Web.Core.Model;
 using Brewgr.Web.Core.Service;
 using Brewgr.Web.Mappers;
 using Brewgr.Web.Models;
+using System.Collections.Generic;
 
 namespace Brewgr.Web.Controllers
 {
@@ -268,17 +269,21 @@ namespace Brewgr.Web.Controllers
 			}
 
 			// Recipes
-            userProfileViewModel.Recipes = this.RecipeService.GetUserRecipes(user.UserId)
+            var recipeSummaries = this.RecipeService.GetUserRecipes(user.UserId)
 				.Where(x => x.IsPublic)
 				.ToList();
 
-			// Brew Summaries
-			userProfileViewModel.BrewSessionSummaries = this.RecipeService.GetUserBrewSessions(user.UserId)
+            userProfileViewModel.Recipes = Mapper.Map(recipeSummaries, new List<RecipeSummaryViewModel>());
+        
+            // Brew Summaries
+            var brewSessionSummaries = this.RecipeService.GetUserBrewSessions(user.UserId)
 				.OrderByDescending(x => x.BrewDate)
 				.ToList();
 
-			// Followers
-			userProfileViewModel.Followers = this.UserRelationService.GetFollowersOf(user.UserId);
+            userProfileViewModel.BrewSessionSummaries = Mapper.Map(brewSessionSummaries, new List<BrewSessionSummaryViewModel>());
+
+            // Followers
+            userProfileViewModel.Followers = this.UserRelationService.GetFollowersOf(user.UserId);
 
 			// Followed
 			userProfileViewModel.Follows = this.UserRelationService.GetFollowedBy(user.UserId);

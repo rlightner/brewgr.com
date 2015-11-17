@@ -14,12 +14,12 @@ namespace Brewgr.Web.Models
         /// <summary>
         /// Gets or set users recipes
         /// </summary>
-        public IList<RecipeSummary> Recipes { get; set; }
+        public IList<RecipeSummaryViewModel> Recipes { get; set; }
 
     	/// <summary>
     	/// Gets or sets the BrewSessionSummaries
     	/// </summary>
-    	public IList<BrewSessionSummary> BrewSessionSummaries { get; set; }
+    	public IList<BrewSessionSummaryViewModel> BrewSessionSummaries { get; set; }
 
 	    /// <summary>
 	    /// Gets or sets the Followers

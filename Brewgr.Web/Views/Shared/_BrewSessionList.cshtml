@@ -2,76 +2,11 @@
 @using Brewgr.Web.Core.Configuration
 @using Brewgr.Web.Core.Model
 @using ctorx.Core.Formatting
-@model IList<Brewgr.Web.Core.Model.BrewSessionSummary>
-
+@model IList<Brewgr.Web.Models.BrewSessionSummaryViewModel>
 
 <div class="list list-session">
     @foreach (var session in Model)
     {
-        <div class="media">
-            <div class="media-left hidden-xs">
-                <a href="@Url.BrewSessionDetailUrl(session.RecipeId, session.RecipeName)" class="media-object"><img src="@Url.RecipeThumbnailUrl(session.RecipeImageUrlRoot, session.RecipeSrm)" alt="@session.RecipeName" height="80" width="80" /></a>
-            </div>
-            <div class="media-body">
-                <h3 class="media-heading">
-                    <a href="@Url.BrewSessionDetailUrl(session.RecipeId, session.RecipeName)">Brew Session: @session.RecipeName</a>
-                </h3>
-                <span>
-                    <a href="@Url.UserProfileUrl(session.BrewedByUsername)"><img class="avatar" src="@UserAvatar.GetAvatar(16, session.BrewedByUserEmail)" alt="" /></a>
-                    <a href="@Url.UserProfileUrl(session.BrewedByUsername)">@(ViewBag.ActiveUser != null && session.WasBrewedBy(ViewBag.ActiveUser.UserId) ? "you" : session.BrewedByUsername)</a>
-                    <small><abbr class="timeago" title="@session.BrewDate.ToString("g")">@session.BrewDate</abbr></small>
-                </span>
-
-                <ul class="list-unstyled list-inline">
-                    @if (session.HasWaterInfusion)
-                    {
-                        <li><span class="badge"><span class="glyphicon glyphicon-check"></span> Water Infusion</span></li>
-                    }
-                    @if (session.HasMashBoil)
-                    {
-                        <li><span class="badge"><span class="glyphicon glyphicon-check"></span> @(session.GetRecipeType() == RecipeType.Extract ? "Boil" : "Mash/Boil")</span></li>
-                    }
-                    @if (session.HasFermentation)
-                    {
-                        <li><span class="badge"><span class="glyphicon glyphicon-check"></span> Fermentation</span></li>
-                    }
-                    @if (session.HasConditioning)
-                    {
-                        <li><span class="badge"><span class="glyphicon glyphicon-check"></span> Conditioning</span></li>
-                    }
-                    @if (session.HasTastingNotes)
-                    {
-                        <li><span class="badge"><span class="glyphicon glyphicon-check"></span> Tasting Notes</span></li>
-                    }
-                </ul>
-                @if(!string.IsNullOrWhiteSpace(session.Summary))
-                {
-                    <p>
-                        @StringCleaner.CleanForPreviewText(session.Summary, 500)
-                        @(session.Summary.Length > 500 ? "..." : "")
-                    </p>
-                }
-                <div class="menu">
-                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="glyphicon glyphicon-menu-down"></span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="@Url.RecipeDetailUrl(session.RecipeId, session.RecipeName, session.RecipeBjcpStyleName)">Details</a></li>
-                        <li><a href="@Url.RecipeDetailUrl(session.RecipeId, session.RecipeName, !string.IsNullOrWhiteSpace(session.RecipeBjcpStyleSubCategoryId) ? session.RecipeBjcpStyleName : null)">Go To Recipe</a></li>
-                        @if (ViewBag.ActiveUser != null && session.WasBrewedBy(ViewBag.ActiveUser.UserId))
-                        {
-                            <li><a href="@Url.EditBrewSessionUrl(session.BrewSessionId)">Edit</a></li>
-                            
-                        }
-
-                        @if (ViewBag.ActiveUser != null && session.WasBrewedBy(ViewBag.ActiveUser.UserId))
-                        {
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#" data-brewsessionid="@session.BrewSessionId">Delete</a></li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </div>
+        @Html.Partial("_BrewSessionListSingleBrewSession", session)
     }
 </div>

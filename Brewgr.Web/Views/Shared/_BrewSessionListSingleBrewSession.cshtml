@@ -5,7 +5,83 @@
 @model BrewSessionSummaryViewModel
 
 
-<div class="dashboard-item">
+<div class="media">
+    @if (Model.ShowAddedBy)
+    {
+        <h5>@Model.BrewedByUsername added a brew session on @Model.DateCreated</h5>
+    }
+    <div class="media-left hidden-xs">
+        <a href="@Url.BrewSessionDetailUrl(Model.RecipeId, Model.RecipeName)" class="media-object"><img src="@Url.RecipeThumbnailUrl(Model.RecipeImageUrlRoot, Model.RecipeSrm)" alt="@Model.RecipeName" height="80" width="80" /></a>
+    </div>
+    <div class="media-body">
+        <h3 class="media-heading">
+            <a href="@Url.BrewSessionDetailUrl(Model.RecipeId, Model.RecipeName)">Brew Session: @Model.RecipeName</a>
+        </h3>
+        <span>
+            <a href="@Url.UserProfileUrl(Model.BrewedByUsername)"><img class="avatar" src="@UserAvatar.GetAvatar(16, Model.BrewedByUserEmail)" alt="" /></a>
+            <a href="@Url.UserProfileUrl(Model.BrewedByUsername)">@(ViewBag.ActiveUser != null && Model.WasBrewedBy(ViewBag.ActiveUser.UserId) ? "you" : Model.BrewedByUsername)</a>
+            <small><abbr class="timeago" title="@Model.BrewDate.ToString("g")">@Model.BrewDate</abbr></small>
+        </span>
+
+        <ul class="list-unstyled list-inline">
+            @if (Model.HasWaterInfusion)
+            {
+                <li><span class="badge"><span class="glyphicon glyphicon-check"></span> Water Infusion</span></li>
+            }
+            @if (Model.HasMashBoil)
+            {
+                <li><span class="badge"><span class="glyphicon glyphicon-check"></span> @(Model.GetRecipeType() == RecipeType.Extract ? "Boil" : "Mash/Boil")</span></li>
+            }
+            @if (Model.HasFermentation)
+            {
+                <li><span class="badge"><span class="glyphicon glyphicon-check"></span> Fermentation</span></li>
+            }
+            @if (Model.HasConditioning)
+            {
+                <li><span class="badge"><span class="glyphicon glyphicon-check"></span> Conditioning</span></li>
+            }
+            @if (Model.HasTastingNotes)
+            {
+                <li><span class="badge"><span class="glyphicon glyphicon-check"></span> Tasting Notes</span></li>
+            }
+        </ul>
+        @if (!string.IsNullOrWhiteSpace(Model.Summary))
+        {
+            <p>
+                @StringCleaner.CleanForPreviewText(Model.Summary, 500)
+                @(Model.Summary.Length > 500 ? "..." : "")
+            </p>
+        }
+        <div class="menu">
+            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-menu-down"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a href="@Url.RecipeDetailUrl(Model.RecipeId, Model.RecipeName, Model.RecipeBjcpStyleName)">Details</a></li>
+                <li><a href="@Url.RecipeDetailUrl(Model.RecipeId, Model.RecipeName, !string.IsNullOrWhiteSpace(Model.RecipeBjcpStyleSubCategoryId) ? Model.RecipeBjcpStyleName : null)">Go To Recipe</a></li>
+                @if (ViewBag.ActiveUser != null && Model.WasBrewedBy(ViewBag.ActiveUser.UserId))
+                {
+                    <li><a href="@Url.EditBrewSessionUrl(Model.BrewSessionId)">Edit</a></li>
+
+                }
+
+                @if (ViewBag.ActiveUser != null && Model.WasBrewedBy(ViewBag.ActiveUser.UserId))
+                {
+                    <li role="separator" class="divider"></li>
+                            <li><a href="#" data-brewsessionid="@Model.BrewSessionId">Delete</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+@*<div class="dashboard-item">
     @if (Model.ShowAddedBy)
     {
         <div class="image">
@@ -71,7 +147,7 @@
 					<a href="@Url.RecipeDetailUrl(Model.RecipeId, Model.RecipeName, !string.IsNullOrWhiteSpace(Model.RecipeBjcpStyleSubCategoryId) ? Model.RecipeBjcpStyleName : null)" class="button button_gray button_small">Go To Recipe</a>
 				</div>
                 
-                @* Start Comments *@
+                @* Start Comments *
                 @Html.Partial("_Comments", Model.CommentWrapperViewModel)
 
             </div>
@@ -80,4 +156,4 @@
 
     </div>
 </div>
-<div class="clearall"></div>
+<div class="clearall"></div>*@

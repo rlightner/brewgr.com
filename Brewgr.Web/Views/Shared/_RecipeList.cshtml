@@ -1,66 +1,11 @@
 ﻿@using Brewgr.Web
 @using Brewgr.Web.Core.Model
 @using ctorx.Core.Formatting
-@model IList<Brewgr.Web.Core.Model.RecipeSummary>
+@model IList<Brewgr.Web.Models.RecipeSummaryViewModel>
 
 <div class="list list-recipe">
     @foreach (var recipe in Model)
     {
-        <div class="media">
-            <div class="media-left hidden-xs">
-                <a href="@Url.RecipeDetailUrl(recipe.RecipeId, recipe.RecipeName, recipe.BJCPStyleName)" class="media-object"><img src="@Url.RecipeThumbnailUrl(recipe.ImageUrlRoot, recipe.Srm)" alt="@recipe.RecipeName" height="80" width="80" /></a>
-            </div>
-            <div class="media-body">
-                <div data-rating="@recipe.AverageRating" data-readonly="true" class="keepsize"></div>
-                <h3 class="media-heading">
-                    <a href="@Url.RecipeDetailUrl(recipe.RecipeId, recipe.RecipeName, recipe.BJCPStyleName)">@recipe.RecipeName</a>
-                </h3>
-                <span>
-                    <a href="@Url.UserProfileUrl(recipe.CreatedByUserName)"><img class="avatar" src="@UserAvatar.GetAvatar(16, recipe.CreatedByUserEmail)" alt="" /></a>
-                    <a href="@Url.UserProfileUrl(recipe.CreatedByUserName)">@(ViewBag.ActiveUser != null && recipe.WasCreatedBy(ViewBag.ActiveUser.UserId) ? "you" : recipe.CreatedByUserName)</a>
-                    <small><abbr class="timeago" title="@recipe.DateCreated.ToString("g")">@recipe.DateCreated</abbr></small>
-                </span>
-                
-                <ul class="list-unstyled list-inline">
-                    <li><span class="badge"><span class="srm @Html.SrmClass(recipe.Srm)"></span> @Html.Srm(recipe.Srm)</span></li>
-                    <li><span class="badge">@recipe.GetRecipeTypeName()</span></li>
-                    <li><span class="badge">@recipe.BatchSize @(recipe.GetUnitType() == UnitType.USStandard ? "Gallon" : "Liter")(s)</span></li>
-                    <li><span class="badge">@(!string.IsNullOrWhiteSpace(recipe.BJCPStyleName) ? recipe.BJCPStyleName : "Unknown Style")</span></li>
-                    <li><span class="badge">@recipe.Ibu.ToString("0") IBU</span></li>
-                    <li><span class="badge">@recipe.Abv.ToString("F1") % ABV</span></li>
-                </ul>
-                @if(!string.IsNullOrWhiteSpace(recipe.Description))
-                {
-                    <p>
-                        @StringCleaner.CleanForPreviewText(recipe.Description, 500)
-                        @(recipe.Description.Length > 500 ? "..." : "")
-                    </p>
-                }
-                <div class="menu">
-                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="glyphicon glyphicon-menu-down"></span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="@Url.RecipeDetailUrl(recipe.RecipeId, recipe.RecipeName, recipe.BJCPStyleName)">Details</a></li>
-                        <li><a href="@Url.RecipeCloneUrl(recipe.RecipeId)" rel="nofollow">Clone</a></li>
-                        @if(recipe.BrewSessionCount > 0)
-                        {
-                            <li><a href="@Url.RecipeBrewSessionsUrl(recipe.RecipeId, recipe.RecipeName)">Brew Sessions</a></li>
-                        }
-                        @if(ViewBag.ActiveUser != null && recipe.WasCreatedBy(ViewBag.ActiveUser.UserId))
-                        {
-                            if(recipe.IsPublic)
-                            {
-                                <li><a href="@Url.NewBrewSessionUrl(recipe.RecipeId)">New Brew Session</a></li>
-                            }
-                            <li><a href="@Url.RecipeEditUrl(recipe.RecipeId)">Edit</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#" data-recipeid="@recipe.RecipeId">Delete</a></li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </div>
+        @Html.Partial("_RecipeListSingleRecipe", recipe)
     }
 </div>
-

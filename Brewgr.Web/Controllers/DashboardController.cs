@@ -99,10 +99,11 @@ namespace Brewgr.Web.Controllers
                 commentWrapperViewModel.CommentViewModels = Mapper.Map(recipeSummary.RecipeComments, new List<CommentViewModel>());
                 commentWrapperViewModel.GenericId = recipeSummary.RecipeId;
                 commentWrapperViewModel.CommentType = CommentType.Recipe;
-                
-				var recipeSummaryViewModel = Mapper.Map(recipeSummary, new RecipeSummaryViewModel());
+
+                var recipeSummaryViewModel = Mapper.Map(recipeSummary, new RecipeSummaryViewModel());
                 recipeSummaryViewModel.ShowAddedBy = true;
                 recipeSummaryViewModel.CommentWrapperViewModel = commentWrapperViewModel;
+
                 dashboardViewModel.DashboardItems.Add(new DashboardItem
                 {
                     Item = recipeSummaryViewModel,
@@ -137,6 +138,7 @@ namespace Brewgr.Web.Controllers
 					DateCreated = tastingNoteSummary.DateCreated
 				});
 	        }
+            
 
             return View("_DashboardList", dashboardViewModel);
         }

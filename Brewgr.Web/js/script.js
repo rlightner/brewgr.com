@@ -870,7 +870,7 @@ function comment_onReady() {
         });
 
         $('body').on('click', '.AddComment', function (e) {
-            if (!$(this).prev('.CommentText').val() || $.trim($(this).prev('.CommentText').val()).length == 0 || $.trim($(this).prev('.CommentText').val()) == 'Write a comment...') {
+            if (!$(this).parent().prev('.CommentText').val() || $.trim($(this).parent().prev('.CommentText').val()).length == 0 || $.trim($(this).parent().prev('.CommentText').val()) == 'Write a comment...') {
                 return false;
             }
 
@@ -879,15 +879,15 @@ function comment_onReady() {
             $.ajax({
                 url: '/AddComment',
                 type: 'post',
-                data: { CommentText: $('<div/>').text(self.prev('.CommentText').val()).html(), GenericId: $(this).attr('data-genericid'), CommentType: $(this).attr('data-commenttype') },
+                data: { CommentText: $('<div/>').text(self.parent().prev('.CommentText').val()).html(), GenericId: $(this).attr('data-genericid'), CommentType: $(this).attr('data-commenttype') },
                 success: function (response) {
-                    self.closest('.comments-wrapper').find('.actual-comments').append(response);
+                    self.closest('.comments-wrapper').find('.comment-list').append(response);
 
                     // Recreate autosize to re-adjust size after clearing
                     // Required a modification to the autosize.js library
                     // Could not upgrade at this time -- it is EMCA6 and gets bundled
                     // with all of the JS -- would have to extract and not worth the effort at this time
-                    self.prev('.CommentText').val('').autosize();
+                    self.parent().prev('.CommentText').val('').autosize();
 
                     jQuery("abbr.timeago").timeago();
                     return false;
@@ -985,6 +985,7 @@ function dashboard_onReady() {
                     $('#tabsessions').html(response);
                     if (response.indexOf('NoDashboardItems') > 0) {
                         $('.dashboard-nomore').hide();
+                        $('.dashboard-nomorebrewsessions').removeClass("hidden");
                         $('.dashboard-nomorebrewsessions').show();
                     }
 
