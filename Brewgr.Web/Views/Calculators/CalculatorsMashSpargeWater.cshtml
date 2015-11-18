@@ -8,24 +8,22 @@
     ViewBag.ViewId = "vw-watercalc";
 }
 
-<div id="water-calc">
-        <h2 class="page-header">Mash and Sparge Water Infusion Calculator</h2>
-        
-        <div class="clearall"></div>
-                <span><h3>Water Infusion</h3></span>
-                    <div>
-                        <h3>Calculator Options</h3>
-                        <div>
-                            <label for="unit">Measurement</label>
-                            <select name="unit" data-name="s_UnitType">
-                                <option value="s" selected="selected">US</option>
-                                <option value="m">Metric</option>
-                            </select>
-                        </div>
-                    </div>
 
-                    @Html.Partial("~/Views/BrewSession/_WaterInfusionCalculator.cshtml", Model)
+<h2 class="page-header visible-md visible-lg">Mash and Sparge Water Infusion Calculator</h2>
 
+@*<div class="form-group">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Temperature Scale</label>
+                <select id="scale" class="form-control">
+                    <option value="f" selected="selected">F (Fahrenheit)</option>
+                    <option value="c">C (Celcius)</option>
+                </select>
             </div>
         </div>
-</div>
+    </div>*@
+    
+    @Html.Partial("~/Views/BrewSession/_WaterInfusionCalculator.cshtml", Model)
+
+@*</div>*@
