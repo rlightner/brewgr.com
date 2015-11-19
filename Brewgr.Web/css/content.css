@@ -258,3 +258,10 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 #dashboard .dashboard-more { width: 70%; display: table; margin: 10px auto; }
 #dashboard .tab-content { padding-top: 20px; }
 #dashboard .list h5 { color:#aaa; margin-bottom:15px; }
+
+
+/* ------------------------------------------------------------------------------------------*/
+/* --------- Water Calculator -------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------*/
+#water-calc span[data-unit].active { display: inline-block; }
+#water-calc [data-unit] { display: none; }

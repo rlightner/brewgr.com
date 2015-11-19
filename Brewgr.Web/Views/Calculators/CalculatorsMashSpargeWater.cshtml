@@ -11,19 +11,23 @@
 
 <h2 class="page-header visible-md visible-lg">Mash and Sparge Water Infusion Calculator</h2>
 
-@*<div class="form-group">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="form-group">
-                <label>Temperature Scale</label>
-                <select id="scale" class="form-control">
-                    <option value="f" selected="selected">F (Fahrenheit)</option>
-                    <option value="c">C (Celcius)</option>
-                </select>
+<div id="water-calc" class="calculations builder session">
+
+    @*<div class="form-group">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Temperature Scale</label>
+                    <select id="scale" class="form-control">
+                        <option value="f" selected="selected">F (Fahrenheit)</option>
+                        <option value="c">C (Celcius)</option>
+                    </select>
+                </div>
             </div>
-        </div>
-    </div>*@
-    
+        </div>*@
+
     @Html.Partial("~/Views/BrewSession/_WaterInfusionCalculator.cshtml", Model)
 
-@*</div>*@
+    @*</div>*@
+
+</div>
