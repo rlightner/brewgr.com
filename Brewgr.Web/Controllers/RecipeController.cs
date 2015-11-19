@@ -112,9 +112,10 @@ namespace Brewgr.Web.Controllers
 
 			var pager = new Pager { CurrentPage = page ?? 1, ItemsPerPage = this.WebSettings.DefaultRecipesPerPage };
 			
-			var styleRecipes = this.BeerStyleService.GetStyleRecipesPage(style.SubCategoryId, pager);
+			var recipes = this.BeerStyleService.GetStyleRecipesPage(style.SubCategoryId, pager);
+            var styleRecipes = Mapper.Map(recipes, new List<RecipeSummaryViewModel>());
 
-			if(styleRecipes.Any() && !pager.IsInRange())
+            if (styleRecipes.Any() && !pager.IsInRange())
 			{
 				return this.Issue404();
 			}
