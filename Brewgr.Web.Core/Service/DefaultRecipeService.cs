@@ -841,38 +841,38 @@ namespace Brewgr.Web.Core.Service
                 throw new ArgumentOutOfRangeException("userId");
             }
 
-            var results = StoredProcedureCommand.Make("GetObjectIdsForDashboard")
-                .UsingConnection(this.DataContextActivationInfo.ConnectionString)
-                .WithParam("@UserId", userId)
-                .WithParam("@Amount", numberToReturn)
-                .WithParam("@OlderThanDate", searchOlderThan)
-                .GetDataSet();
+		    using(var command = StoredProcedureCommand.Make("GetObjectIdsForDashboard")
+		        .UsingConnection(this.DataContextActivationInfo.ConnectionString)
+		        .WithParam("@UserId", userId)
+		        .WithParam("@Amount", numberToReturn)
+		        .WithParam("@OlderThanDate", searchOlderThan))
+		    {
+                var results = command.GetDataSet();
 
-            var dictionary = new Dictionary<string, List<int>>();
+                var dictionary = new Dictionary<string, List<int>>();
 
-            // if no results just grab the newest recipes and brews
-            if (results.Tables[0].Rows.Count < 1)
-            {
-                var resultsNewest = StoredProcedureCommand.Make("GetObjectIdsForDashboardNewest")
-                    .UsingConnection(this.DataContextActivationInfo.ConnectionString)
-                    .WithParam("@Amount", numberToReturn)
-                    .WithParam("@OlderThanDate", searchOlderThan)
-                    .GetDataSet();
+                // if no results just grab the newest recipes and brews
+                if (results.Tables[0].Rows.Count < 1)
+                {
+                    var resultsNewest = StoredProcedureCommand.Make("GetObjectIdsForDashboardNewest")
+                        .UsingConnection(this.DataContextActivationInfo.ConnectionString)
+                        .WithParam("@Amount", numberToReturn)
+                        .WithParam("@OlderThanDate", searchOlderThan)
+                        .GetDataSet();
 
-                dictionary.Add("Recipe", resultsNewest.Tables[0].Rows.Cast<DataRow>().Where(x => x["Type"].ToString() == "Recipe").Select(x => Convert.ToInt32(x["Id"])).ToList());
-                dictionary.Add("BrewSession", resultsNewest.Tables[0].Rows.Cast<DataRow>().Where(x => x["Type"].ToString() == "BrewSession").Select(x => Convert.ToInt32(x["Id"])).ToList());
-                dictionary.Add("TastingNote", resultsNewest.Tables[0].Rows.Cast<DataRow>().Where(x => x["Type"].ToString() == "TastingNote").Select(x => Convert.ToInt32(x["Id"])).ToList());
-            }
-            else
-            {
-                dictionary.Add("Recipe", results.Tables[0].Rows.Cast<DataRow>().Where(x => x["Type"].ToString() == "Recipe").Select(x => Convert.ToInt32(x["Id"])).ToList());
-                dictionary.Add("BrewSession", results.Tables[0].Rows.Cast<DataRow>().Where(x => x["Type"].ToString() == "BrewSession").Select(x => Convert.ToInt32(x["Id"])).ToList());
-                dictionary.Add("TastingNote", results.Tables[0].Rows.Cast<DataRow>().Where(x => x["Type"].ToString() == "TastingNote").Select(x => Convert.ToInt32(x["Id"])).ToList());
-            }
+                    dictionary.Add("Recipe", resultsNewest.Tables[0].Rows.Cast<DataRow>().Where(x => x["Type"].ToString() == "Recipe").Select(x => Convert.ToInt32(x["Id"])).ToList());
+                    dictionary.Add("BrewSession", resultsNewest.Tables[0].Rows.Cast<DataRow>().Where(x => x["Type"].ToString() == "BrewSession").Select(x => Convert.ToInt32(x["Id"])).ToList());
+                    dictionary.Add("TastingNote", resultsNewest.Tables[0].Rows.Cast<DataRow>().Where(x => x["Type"].ToString() == "TastingNote").Select(x => Convert.ToInt32(x["Id"])).ToList());
+                }
+                else
+                {
+                    dictionary.Add("Recipe", results.Tables[0].Rows.Cast<DataRow>().Where(x => x["Type"].ToString() == "Recipe").Select(x => Convert.ToInt32(x["Id"])).ToList());
+                    dictionary.Add("BrewSession", results.Tables[0].Rows.Cast<DataRow>().Where(x => x["Type"].ToString() == "BrewSession").Select(x => Convert.ToInt32(x["Id"])).ToList());
+                    dictionary.Add("TastingNote", results.Tables[0].Rows.Cast<DataRow>().Where(x => x["Type"].ToString() == "TastingNote").Select(x => Convert.ToInt32(x["Id"])).ToList());
+                }
 
-            return dictionary;
+                return dictionary;
+            }            
         }
-
-
 	}
 }

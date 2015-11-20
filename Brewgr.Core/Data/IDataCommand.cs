@@ -3,8 +3,8 @@ using System.Data;
 
 namespace ctorx.Core.Data
 {
-	public interface IDataCommand
-	{
+	public interface IDataCommand : IDisposable
+    {
 		/// <summary>
 		/// Sets the connection string to be used
 		/// </summary>

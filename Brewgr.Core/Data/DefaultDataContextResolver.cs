@@ -58,14 +58,13 @@ namespace ctorx.Core.Data
 		/// </summary>
 		protected virtual void Dispose(bool disposing)
 		{
-			if (IsDisposed)
+			if (!IsDisposed)
 			{
 				if (disposing)
 				{
 					this.DestroyContext();
 				}
 
-				this.DataContextFactory = null;
 				this.IsDisposed = true;
 			}
 		}
