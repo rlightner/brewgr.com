@@ -192,12 +192,10 @@ abbr.timeago { display: none; border: 0; cursor: default; } /* Hide TimeAgo by D
 #vw-recipedetail #recinfo h2 { margin: 0 0 4px 0; }
 #vw-recipedetail #recinfo .specs { margin: 12px 0; }
 #vw-recipedetail #recinfo .specs .row div:first-of-type { font-weight: bold; }
-#vw-recipedetail #recinfo .menu { position: absolute; }
+#vw-recipedetail #recinfo .menu { position: absolute; right: 25px; }
 #vw-recipedetail #recinfo [data-rating] { margin-bottom: 4px; }
 
 @media only screen and (min-width: 768px) {
-
-    #vw-recipedetail #recinfo .menu button { width: 125px; }
 
     /* Slight derivation from bootstrap cols */
     #vw-recipedetail .image { margin-left: 8px; }

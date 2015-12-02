@@ -38,9 +38,9 @@
                         <div class="col-sm-4 image">
                             <div class="thumbnail"><img src="@Url.RecipeDetailImageUrl(Model.RecipeViewModel.ImageUrlRoot, Model.RecipeViewModel.Srm)" alt="Recipe Image" width="200" height="200" /></div>                            
                         </div>
-                        <div class="col-md-8 detail">
+                        <div class="col-sm-8 detail">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-sm-8">
                                     <div class="keepsize" data-rating="@Model.RecipeViewModel.AverageRating"></div>
                                     <h2>@Model.RecipeViewModel.Name</h2>
                                     <div class="author">
@@ -50,28 +50,28 @@
                                     </div>
                                     <div class="specs">
                                         <div class="row">
-                                            <div class="col-md-4 col-xs-6">Type:</div>
-                                            <div class="col-md-8 col-xs-6"><span itemprop="recipeCategory">@Model.RecipeViewModel.GetRecipeTypeName()</span></div>
+                                            <div class="col-md-5 col-xs-6">Type:</div>
+                                            <div class="col-md-7 col-xs-6"><span itemprop="recipeCategory">@Model.RecipeViewModel.GetRecipeTypeName()</span></div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-4 col-xs-6">Batch Size:</div>
-                                            <div class="col-md-8 col-xs-6"><span itemprop="recipeYield">@Model.RecipeViewModel.BatchSize.ToString() @(Model.RecipeViewModel.UnitType == "s" ? "Gallon" : "Liter")(s)</span></div>
+                                            <div class="col-md-5 col-xs-6">Batch Size:</div>
+                                            <div class="col-md-7 col-xs-6"><span itemprop="recipeYield">@Model.RecipeViewModel.BatchSize.ToString() @(Model.RecipeViewModel.UnitType == "s" ? "Gallon" : "Liter")(s)</span></div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-4 col-xs-6">Boil Size:</div>
-                                            <div class="col-md-8 col-xs-6">@Model.RecipeViewModel.BoilSize.ToString() @(Model.RecipeViewModel.UnitType == "s" ? "Gallon" : "Liter")(s)</div>
+                                            <div class="col-md-5 col-xs-6">Boil Size:</div>
+                                            <div class="col-md-7 col-xs-6">@Model.RecipeViewModel.BoilSize.ToString() @(Model.RecipeViewModel.UnitType == "s" ? "Gallon" : "Liter")(s)</div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-4 col-xs-6" itemprop="cookTime" content="PT@(Model.RecipeViewModel.BoilTime)M">Boil Time:</div>
-                                            <div class="col-md-8 col-xs-6">@Model.RecipeViewModel.BoilTime min</div>
+                                            <div class="col-md-5 col-xs-6" itemprop="cookTime" content="PT@(Model.RecipeViewModel.BoilTime)M">Boil Time:</div>
+                                            <div class="col-md-7 col-xs-6">@Model.RecipeViewModel.BoilTime min</div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-4 col-xs-6">Efficiency:</div>
-                                            <div class="col-md-8 col-xs-6">@(Model.RecipeViewModel.Efficiency * 100)%</div>
+                                            <div class="col-md-5 col-xs-6">Efficiency:</div>
+                                            <div class="col-md-7 col-xs-6">@(Model.RecipeViewModel.Efficiency * 100)%</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-sm-4">
                                     <div class="menu">
                                         <button class="hidden-xs btn btn-default dropdown-toggle hidden-xs" type="button" data-toggle="dropdown">
                                             <span class="hidden-xs">Actions</span>
@@ -82,6 +82,7 @@
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li><a href="@Url.RecipeCloneUrl(Model.RecipeViewModel.RecipeId)" rel="nofollow">Clone</a></li>
+                                            <li><a href="@Url.RecipePrintUrl(Model.RecipeViewModel.RecipeId)" rel="nofollow" target="_blank">Print</a></li>
                                             @if(Model.RecipeViewModel.BrewSessionCount > 0)
                                             {
                                                 <li><a href="@Url.RecipeBrewSessionsUrl(Model.RecipeViewModel.RecipeId, Model.RecipeViewModel.Name)">Brew Sessions</a></li>
@@ -98,9 +99,6 @@
                                             }
                                         </ul>
                                     </div>
-
-                                    <a href="#" class="btn btn-default" style="margin-top: 20px; "><span class="glyphicon glyphicon-print"></span> Print</a>
-
                                 </div>
                             </div>
                             <div class="row">
