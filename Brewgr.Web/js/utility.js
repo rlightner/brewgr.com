@@ -203,5 +203,15 @@ var util =
     /// Converts tsp to ml
     tsp_To_ml: function (tsp) {
         return tsp * 4.92892;
+    },
+
+    /// Converts qt/lb to l/kg
+    qt_per_lb_To_l_per_kg (qtPerLb) {
+        return qtPerLb * 2.08635;
+    },
+
+    /// Converts l/kg to qt/lb
+    l_per_kg_To_qt_per_lb (lPerKg) {
+        return lPerKg * 0.47931;
     }
 };

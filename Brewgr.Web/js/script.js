@@ -716,7 +716,7 @@ var WaterCalc =
         util.convert('[data-name=s_GrainTemp]', prevUnit, util.c_To_f, util.f_To_c);
         util.convert('[data-name=s_FermentVolume]', prevUnit, util.l_To_gal, util.gal_To_l);
         util.convert('[data-name=s_TargetMashTemp]', prevUnit, util.c_To_f, util.f_To_c);
-        util.convert('[data-name=s_MashThickness]', prevUnit, util.l_To_qt, util.qt_To_l);
+        util.convert('[data-name=s_MashThickness]', prevUnit, util.l_per_kg_To_qt_per_lb, util.qt_per_lb_To_l_per_kg);
 
         util.convert('[data-name=s_BrewKettleLoss]', prevUnit, util.l_To_gal, util.gal_To_l);
         util.convert('[data-name=s_WortShrinkage]', prevUnit, util.l_To_gal, util.gal_To_l);
