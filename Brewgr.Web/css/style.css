@@ -74,7 +74,7 @@ p{line-height:20px}
 .viewPro a:hover{color:#e1ff7b}
 
 /*------------------------- HEADER -------------------------*/
-#announcement { padding: 12px; width: 100%; font-size: 20px; color: #fff; text-align: center; background-color: #f79646; }
+#announcement { padding: 12px; font-size: 20px; color: #fff; text-align: center; background-color: #f79646; }
 #announcement a { color: #fff; text-decoration: underline; }
 #announcement a:hover { text-decoration: none; }
 
