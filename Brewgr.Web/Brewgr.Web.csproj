@@ -30,7 +30,7 @@
     <AssemblyName>Brewgr.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -373,6 +373,10 @@
     <Content Include="js\jquery.timeago.js" />
     <Content Include="js\jquery.tmpl.min.js" />
     <Content Include="js\layout.js" />
+    <Content Include="js\linkify-jquery.js" />
+    <Content Include="js\linkify-jquery.min.js" />
+    <Content Include="js\linkify.js" />
+    <Content Include="js\linkify.min.js" />
     <Content Include="js\partners.js" />
     <Content Include="js\sendtoshop.js" />
     <Content Include="js\session.js" />

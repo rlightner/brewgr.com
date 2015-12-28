@@ -19,19 +19,25 @@
                     <div id="tab-tab-1" class="tab">
                         <div class="content">
                             <div class="dashboard-list">
-                               @* @Html.Partial("_DashboardList", Model)*@
-                                <div class="spinner-dashboard"><img src="/img/ajax-spinner.gif" class="dashboard-spinner" /> Loading Dashboard</div>
+                                @* @Html.Partial("_DashboardList", Model)*@
+                                <div class="spinner-dashboard">
+                                    <img src="/img/ajax-spinner.gif" class="dashboard-spinner" /> Loading Dashboard
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div id="tab-tab-2" class="tab">
                         <div class="content">
-                            <div class="spinner-recipe"><img src="/img/ajax-spinner.gif" class="dashboard-spinner" /> Loading Recipes</div>
+                            <div class="spinner-recipe">
+                                <img src="/img/ajax-spinner.gif" class="dashboard-spinner" /> Loading Recipes
+                            </div>
                         </div>
                     </div>
                     <div id="tab-tab-3" class="tab">
                         <div class="content">
-                            <div class="spinner-sessions"><img src="/img/ajax-spinner.gif" class="dashboard-spinner" /> Loading Brew Sessions</div>
+                            <div class="spinner-sessions">
+                                <img src="/img/ajax-spinner.gif" class="dashboard-spinner" /> Loading Brew Sessions
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -45,27 +51,26 @@
         <a href="@Url.Action("homebrew-recipe-calculator", "Recipe", null, Url.Https())" class="button button_green bold margintop10 create-recipe">Create a New Recipe</a>
 
         @* Following *@
-        @if(Model.Following.Count > 0)
+        @if (Model.Following.Count > 0)
         {
             <div class="dashboard-gutteritem">
 
                 <div class="dashboardfollowing">
                     <h2>You're Following <a href="@Url.UserProfileUrl(Model.Username)#tab-tab-4" class="hlink">(@Model.FollowingCount)</a></h2>
                     <ul class="grid">
-                    @foreach (MiniUserSummary miniUserSummary in Model.Following.Take(4).ToList())
-                    { 
-                        <li>
-                            <a href="@Url.UserProfileUrl(miniUserSummary.Username)" class="avatar medium">
-                                <img alt="@miniUserSummary.Username" class="" src="@miniUserSummary.GetAvatar(60)">
-                            </a>
-                        </li>
-                    }
+                        @foreach (MiniUserSummary miniUserSummary in Model.Following.Take(4).ToList())
+                        {
+                            <li>
+                                <a href="@Url.UserProfileUrl(miniUserSummary.Username)" class="avatar medium">
+                                    <img alt="@miniUserSummary.Username" class="" src="@miniUserSummary.GetAvatar(60)">
+                                </a>
+                            </li>
+                        }
                     </ul>
                     <a href="@Url.UserProfileUrl(Model.Username)#tab-tab-4" class="viewall">View All</a>
                 </div>
             </div>
         }
-
         @* News *@
         @Html.Partial("_NewsUpdates")
 

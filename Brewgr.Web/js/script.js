@@ -866,7 +866,13 @@ function dashboard_onReady() {
             type: 'get',
             success: function (response) {
                 $('.spinner-dashboard').html(response);
-                $('[data-raty-rating]').each(function(i, e) { wireRatyStar(e); });
+
+                $('[data-raty-rating]').each(function (i, e) {
+                    wireRatyStar(e);
+                });
+
+                $('div.commenttext').linkify();
+
                 comment_onReady();
             }
         });
@@ -881,7 +887,9 @@ function dashboard_onReady() {
                 success: function (response) {
                     $('.dashboard-morespinner').hide();
                     $('#dashboardlist-moreplaceholder').replaceWith(response);
-                    $('[data-raty-rating]').each(function (i, e) { wireRatyStar(e); });
+                    $('[data-raty-rating]').each(function (i, e) {
+                        wireRatyStar(e);
+                    });
                     jQuery("abbr.timeago").timeago();
                     return false;
                 }
@@ -902,7 +910,7 @@ function dashboard_onReady() {
                         $('.dashboard-nomore').hide();
                         $('.dashboard-nomorerecipes').show();
                     }
-
+                    $('div.commenttext').linkify();
                     $('#tab-tab-2 .CommentText').autosize();
 
                     $('.spinner-recipe .dashboard-more').hide();
@@ -925,7 +933,7 @@ function dashboard_onReady() {
                         $('.dashboard-nomore').hide();
                         $('.dashboard-nomorebrewsessions').show();
                     }
-
+                    $('div.commenttext').linkify();
                     $('#tab-tab-3 .CommentText').autosize();
 
                     $('.spinner-sessions .dashboard-more').hide();

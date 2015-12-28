@@ -2,15 +2,15 @@
 
 @if (!string.IsNullOrWhiteSpace(Model))
 {
-	if (Model.IndexOf(Environment.NewLine) > -1)
-	{
-		foreach (var part in Model.Split(new[] {Environment.NewLine}, StringSplitOptions.None))
-		{
-			@part<br />
-		}
-	}
-	else
-	{
-		@Model
-	}
+    if (Model.IndexOf(Environment.NewLine, StringComparison.Ordinal) > -1)
+    {
+        foreach (var part in Model.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
+        {
+            @part<br />
+        }
+    }
+    else
+    {
+        @Model
+    }
 }

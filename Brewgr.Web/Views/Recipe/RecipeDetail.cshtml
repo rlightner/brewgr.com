@@ -130,8 +130,12 @@
 
             // set up the style chart
             var targetStyle = StyleChart.GetStyle('@Model.RecipeViewModel.StyleId');
+
             StyleChart.create(targetStyle, recipe, $('#selected-style-chart'));
+
+            $("div.comment, div.recipe-desc").linkify();
         });
+
     </script>
 }
 
